@@ -32,7 +32,7 @@
         radial-gradient(ellipse at 90% 100%, rgba(24,139,246,0.07) 0%, transparent 50%);
     }
 
-    /* ‚îÄ‚îÄ Header ‚îÄ‚îÄ */
+    /* -- Header -- */
     header {
       background: rgba(13,16,53,0.95);
       backdrop-filter: blur(12px);
@@ -125,7 +125,7 @@
     }
     #refresh-btn:hover { border-color: var(--lime); color: var(--lime); }
 
-    /* ‚îÄ‚îÄ Main ‚îÄ‚îÄ */
+    /* -- Main -- */
     main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
     #last-updated { font-size: 0.68rem; color: var(--muted); text-align: right; margin-bottom: 1rem; letter-spacing: 0.04em; }
 
@@ -136,7 +136,7 @@
     }
     @media (max-width: 900px) { .pipelines-grid { grid-template-columns: 1fr; } }
 
-    /* ‚îÄ‚îÄ Pipeline card ‚îÄ‚îÄ */
+    /* -- Pipeline card -- */
     .pipeline-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -175,7 +175,7 @@
     }
     .summary-pill strong { color: var(--lime); }
 
-    /* ‚îÄ‚îÄ Stage rows ‚îÄ‚îÄ */
+    /* -- Stage rows -- */
     .stage-row { border-bottom: 1px solid rgba(30,37,96,0.6); transition: background 0.1s; }
     .stage-row:last-child { border-bottom: none; }
     .stage-header {
@@ -219,7 +219,7 @@
     }
     .stage-row.open .stage-chevron { transform: rotate(90deg); color: var(--lime); }
 
-    /* ‚îÄ‚îÄ Opportunities list ‚îÄ‚îÄ */
+    /* -- Opportunities list -- */
     .opps-list { display: none; background: rgba(0,3,33,0.5); }
     .stage-row.open .opps-list { display: block; }
 
@@ -265,7 +265,7 @@
       font-style: italic;
     }
 
-    /* ‚îÄ‚îÄ Pipeline footer ‚îÄ‚îÄ */
+    /* -- Pipeline footer -- */
     .pipeline-footer {
       padding: 0.8rem 1.25rem;
       border-top: 1px solid var(--border);
@@ -279,7 +279,7 @@
     .pipeline-footer .value { color: var(--lime); font-weight: 800; font-size: 0.9rem; }
     .footer-stat { text-align: center; }
 
-    /* ‚îÄ‚îÄ Skeleton ‚îÄ‚îÄ */
+    /* -- Skeleton -- */
     .skeleton {
       background: linear-gradient(90deg, var(--card) 25%, var(--surface) 50%, var(--card) 75%);
       background-size: 200% 100%;
@@ -290,7 +290,7 @@
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     .skeleton-pipeline { height: 320px; }
 
-    /* ‚îÄ‚îÄ Tasks modal ‚îÄ‚îÄ */
+    /* -- Tasks modal -- */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -365,7 +365,7 @@
       <button class="period-tab" data-period="week">This Week</button>
       <button class="period-tab" data-period="today">Today</button>
     </div>
-    <button id="refresh-btn" onclick="loadData()">‚Üª Refresh</button>
+    <button id="refresh-btn" onclick="loadData()"> Refresh</button>
   </div>
 </header>
 
@@ -381,10 +381,10 @@
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title" id="modal-contact-name">Pending Tasks</div>
-      <button class="modal-close" onclick="closeModal()">‚úï</button>
+      <button class="modal-close" onclick="closeModal()"></button>
     </div>
     <div class="modal-body" id="modal-body">
-      <div class="no-tasks">Loading‚Ä¶</div>
+      <div class="no-tasks">Loading</div>
     </div>
   </div>
 </div>
@@ -410,7 +410,7 @@
   });
 
   function fmt(val) {
-    if (!val) return '‚Äî';
+    if (!val) return '--';
     if (val >= 1000000) return '$' + (val / 1000000).toFixed(1) + 'M';
     if (val >= 1000) return '$' + (val / 1000).toFixed(0) + 'K';
     return '$' + Number(val).toLocaleString();
@@ -451,7 +451,7 @@
             <span class="stage-name">${escHtml(stage.name)}</span>
             <span class="stage-count">${stage.count}</span>
             <span class="stage-value">${fmt(stage.total_value)}</span>
-            <span class="stage-chevron">‚ñ∂</span>
+            <span class="stage-chevron"></span>
           </div>
           <div class="opps-list">${oppsHTML}</div>
         </div>`;
@@ -502,7 +502,7 @@
 
   async function showTasks(contactId, name) {
     document.getElementById('modal-contact-name').textContent = name || 'Pending Tasks';
-    document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Loading‚Ä¶</div>';
+    document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Loading</div>';
     document.getElementById('tasks-modal').classList.add('open');
 
     try {
