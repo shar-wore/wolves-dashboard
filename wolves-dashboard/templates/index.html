@@ -4,21 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pipeline Dashboard | Wolves of Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0b0e1a;
-      color: #e2e8f0;
-      min-height: 100vh;
+    :root {
+      --bg:        #000321;
+      --surface:   #0d1035;
+      --card:      #111638;
+      --border:    #1e2560;
+      --lime:      #C2FF14;
+      --lime-dim:  #8fb30e;
+      --blue:      #188bf6;
+      --gold:      #cab072;
+      --white:     #ffffff;
+      --muted:     #6b7db3;
+      --text:      #d4deff;
     }
 
-    /* ── Header ── */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse at 10% 0%, rgba(194,255,20,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 100%, rgba(24,139,246,0.07) 0%, transparent 50%);
+    }
+
+    /* ‚îÄ‚îÄ Header ‚îÄ‚îÄ */
     header {
-      background: #111827;
-      border-bottom: 1px solid #1e2a3a;
-      padding: 1rem 1.5rem;
+      background: rgba(13,16,53,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -28,32 +47,87 @@
       top: 0;
       z-index: 100;
     }
-    .logo { display: flex; align-items: center; gap: 0.6rem; }
-    .logo-icon { font-size: 1.5rem; }
-    .logo h1 { font-size: 1.1rem; font-weight: 700; color: #f8fafc; letter-spacing: -0.01em; }
-    .logo span { font-size: 0.75rem; color: #64748b; display: block; font-weight: 400; }
 
-    .header-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    #clock { font-size: 0.8rem; color: #64748b; }
+    .logo { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: var(--lime);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .logo h1 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .logo span {
+      font-size: 0.65rem;
+      color: var(--lime);
+      display: block;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
 
-    /* Period tabs */
-    .period-tabs { display: flex; background: #1e2a3a; border-radius: 8px; padding: 3px; gap: 2px; }
+    .header-right { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    #clock {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .period-tabs {
+      display: flex;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+    }
     .period-tab {
-      padding: 0.35rem 0.85rem;
+      padding: 0.35rem 0.9rem;
       border-radius: 6px;
       border: none;
       background: transparent;
-      color: #64748b;
-      font-size: 0.8rem;
-      font-weight: 500;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
       cursor: pointer;
       transition: all 0.15s;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .period-tab.active { background: #1e40af; color: #fff; }
-    .period-tab:hover:not(.active) { color: #cbd5e1; }
+    .period-tab.active {
+      background: var(--lime);
+      color: #000;
+    }
+    .period-tab:hover:not(.active) { color: var(--white); }
 
-    /* ── Main layout ── */
+    #refresh-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      padding: 0.38rem 0.8rem;
+      font-size: 0.72rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      transition: all 0.15s;
+    }
+    #refresh-btn:hover { border-color: var(--lime); color: var(--lime); }
+
+    /* ‚îÄ‚îÄ Main ‚îÄ‚îÄ */
     main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+    #last-updated { font-size: 0.68rem; color: var(--muted); text-align: right; margin-bottom: 1rem; letter-spacing: 0.04em; }
 
     .pipelines-grid {
       display: grid;
@@ -62,63 +136,91 @@
     }
     @media (max-width: 900px) { .pipelines-grid { grid-template-columns: 1fr; } }
 
-    /* ── Pipeline card ── */
+    /* ‚îÄ‚îÄ Pipeline card ‚îÄ‚îÄ */
     .pipeline-card {
-      background: #111827;
-      border: 1px solid #1e2a3a;
-      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
     }
+
     .pipeline-header {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid #1e2a3a;
+      padding: 1.1rem 1.25rem;
+      background: linear-gradient(135deg, rgba(194,255,20,0.08) 0%, transparent 60%);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
-    .pipeline-name { font-size: 0.95rem; font-weight: 700; color: #f1f5f9; }
-    .pipeline-summary { display: flex; gap: 1rem; }
+    .pipeline-name {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .pipeline-summary { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .summary-pill {
-      background: #1e2a3a;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 0.2rem 0.65rem;
-      font-size: 0.75rem;
-      color: #94a3b8;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
     }
-    .summary-pill strong { color: #38bdf8; }
+    .summary-pill strong { color: var(--lime); }
 
-    /* ── Stage rows ── */
-    .stage-row {
-      border-bottom: 1px solid #1a2234;
-      transition: background 0.1s;
-    }
+    /* ‚îÄ‚îÄ Stage rows ‚îÄ‚îÄ */
+    .stage-row { border-bottom: 1px solid rgba(30,37,96,0.6); transition: background 0.1s; }
     .stage-row:last-child { border-bottom: none; }
     .stage-header {
       display: grid;
       grid-template-columns: 1fr auto auto auto;
       align-items: center;
       gap: 1rem;
-      padding: 0.75rem 1.25rem;
+      padding: 0.8rem 1.25rem;
       cursor: pointer;
       user-select: none;
     }
-    .stage-header:hover { background: #151f2e; }
-    .stage-name { font-size: 0.85rem; font-weight: 500; color: #cbd5e1; }
-    .stage-count {
-      font-size: 0.75rem;
-      background: #1e293b;
-      color: #7dd3fc;
-      border-radius: 12px;
-      padding: 0.15rem 0.55rem;
+    .stage-header:hover { background: rgba(194,255,20,0.04); }
+    .stage-row.open .stage-header { background: rgba(194,255,20,0.05); }
+
+    .stage-name {
+      font-size: 0.8rem;
       font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .stage-count {
+      font-size: 0.7rem;
+      background: rgba(194,255,20,0.12);
+      color: var(--lime);
+      border: 1px solid rgba(194,255,20,0.25);
+      border-radius: 20px;
+      padding: 0.15rem 0.6rem;
+      font-weight: 700;
       white-space: nowrap;
     }
-    .stage-value { font-size: 0.8rem; color: #34d399; font-weight: 600; white-space: nowrap; }
-    .stage-chevron { color: #475569; font-size: 0.7rem; transition: transform 0.2s; }
-    .stage-row.open .stage-chevron { transform: rotate(90deg); }
+    .stage-value {
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .stage-chevron {
+      color: var(--muted);
+      font-size: 0.65rem;
+      transition: transform 0.2s;
+    }
+    .stage-row.open .stage-chevron { transform: rotate(90deg); color: var(--lime); }
 
-    /* ── Opportunities list ── */
-    .opps-list { display: none; background: #0d1425; }
+    /* ‚îÄ‚îÄ Opportunities list ‚îÄ‚îÄ */
+    .opps-list { display: none; background: rgba(0,3,33,0.5); }
     .stage-row.open .opps-list { display: block; }
 
     .opp-row {
@@ -126,52 +228,75 @@
       grid-template-columns: 1fr auto auto;
       align-items: center;
       gap: 0.75rem;
-      padding: 0.6rem 1.5rem;
-      border-top: 1px solid #141d2e;
-      font-size: 0.8rem;
+      padding: 0.65rem 1.5rem;
+      border-top: 1px solid rgba(30,37,96,0.4);
+      font-size: 0.78rem;
+      transition: background 0.1s;
     }
-    .opp-row:hover { background: #111827; }
-    .opp-name { color: #e2e8f0; font-weight: 500; }
-    .opp-phone { color: #64748b; font-size: 0.72rem; margin-top: 1px; }
-    .opp-value { color: #34d399; font-weight: 600; white-space: nowrap; text-align: right; }
-    .opp-date { color: #475569; font-size: 0.7rem; white-space: nowrap; text-align: right; }
+    .opp-row:hover { background: rgba(194,255,20,0.03); }
+    .opp-name { color: var(--white); font-weight: 600; }
+    .opp-phone { color: var(--muted); font-size: 0.68rem; margin-top: 2px; }
+    .opp-value { color: var(--gold); font-weight: 700; white-space: nowrap; text-align: right; }
+    .opp-date { color: var(--muted); font-size: 0.66rem; white-space: nowrap; text-align: right; }
+
     .tasks-btn {
-      background: #1e3a5f;
-      border: 1px solid #2563eb40;
-      color: #7dd3fc;
+      background: rgba(24,139,246,0.12);
+      border: 1px solid rgba(24,139,246,0.3);
+      color: var(--blue);
       border-radius: 6px;
-      padding: 0.25rem 0.6rem;
-      font-size: 0.72rem;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.68rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
-      transition: background 0.15s;
+      transition: all 0.15s;
+      letter-spacing: 0.04em;
     }
-    .tasks-btn:hover { background: #1d4ed8; color: #fff; }
-    .no-opps { padding: 0.75rem 1.5rem; color: #475569; font-size: 0.8rem; font-style: italic; }
+    .tasks-btn:hover {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+    .no-opps {
+      padding: 0.9rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-style: italic;
+    }
 
-    /* ── Pipeline footer ── */
+    /* ‚îÄ‚îÄ Pipeline footer ‚îÄ‚îÄ */
     .pipeline-footer {
-      padding: 0.75rem 1.25rem;
-      border-top: 1px solid #1e2a3a;
+      padding: 0.8rem 1.25rem;
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
-      color: #64748b;
-      background: #0f1824;
+      align-items: center;
+      font-size: 0.75rem;
+      background: rgba(194,255,20,0.03);
     }
-    .pipeline-footer strong { color: #f1f5f9; }
+    .pipeline-footer .label { color: var(--muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.65rem; }
+    .pipeline-footer .value { color: var(--lime); font-weight: 800; font-size: 0.9rem; }
+    .footer-stat { text-align: center; }
 
-    /* ── Loading skeleton ── */
-    .skeleton { background: #1e2a3a; border-radius: 6px; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-    .skeleton-pipeline { height: 300px; }
+    /* ‚îÄ‚îÄ Skeleton ‚îÄ‚îÄ */
+    .skeleton {
+      background: linear-gradient(90deg, var(--card) 25%, var(--surface) 50%, var(--card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-pipeline { height: 320px; }
 
-    /* ── Tasks modal ── */
+    /* ‚îÄ‚îÄ Tasks modal ‚îÄ‚îÄ */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,3,33,0.85);
+      backdrop-filter: blur(6px);
       z-index: 200;
       align-items: center;
       justify-content: center;
@@ -179,59 +304,55 @@
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: #111827;
-      border: 1px solid #1e2a3a;
-      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       width: 100%;
       max-width: 520px;
       max-height: 80vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
     }
     .modal-header {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid #1e2a3a;
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: linear-gradient(135deg, rgba(194,255,20,0.07) 0%, transparent 60%);
     }
-    .modal-title { font-size: 0.95rem; font-weight: 700; }
+    .modal-title { font-size: 0.9rem; font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: 0.06em; }
     .modal-close {
-      background: none; border: none; color: #64748b;
-      font-size: 1.25rem; cursor: pointer; padding: 0 0.25rem;
+      background: none; border: none; color: var(--muted);
+      font-size: 1.1rem; cursor: pointer; padding: 0 0.25rem;
+      transition: color 0.15s;
     }
-    .modal-close:hover { color: #f1f5f9; }
+    .modal-close:hover { color: var(--lime); }
     .modal-body { padding: 1rem 1.25rem; overflow-y: auto; flex: 1; }
 
     .task-item {
-      background: #0d1425;
-      border: 1px solid #1e2a3a;
+      background: rgba(0,3,33,0.5);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--lime);
       border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 0.6rem;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.65rem;
     }
-    .task-title { font-size: 0.85rem; font-weight: 600; color: #e2e8f0; margin-bottom: 0.3rem; }
-    .task-meta { font-size: 0.75rem; color: #64748b; display: flex; gap: 1rem; flex-wrap: wrap; }
-    .task-due { color: #fbbf24; }
-    .task-due.overdue { color: #f87171; }
-    .no-tasks { color: #475569; font-size: 0.85rem; text-align: center; padding: 2rem 0; }
-
-    /* ── Error / refresh ── */
-    #refresh-btn {
-      background: #1e2a3a; border: 1px solid #2d3f55; color: #7dd3fc;
-      border-radius: 8px; padding: 0.35rem 0.8rem; font-size: 0.8rem;
-      cursor: pointer; transition: background 0.15s;
-    }
-    #refresh-btn:hover { background: #253347; }
-    .last-updated { font-size: 0.72rem; color: #475569; }
+    .task-title { font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .task-meta { font-size: 0.7rem; color: var(--muted); display: flex; gap: 1rem; flex-wrap: wrap; }
+    .task-due { color: #f0c060; font-weight: 600; }
+    .task-due.overdue { color: #ff5a5a; }
+    .no-tasks { color: var(--muted); font-size: 0.82rem; text-align: center; padding: 2.5rem 0; }
+    .no-tasks-icon { font-size: 2rem; margin-bottom: 0.5rem; }
   </style>
 </head>
 <body>
 
 <header>
   <div class="logo">
-    <span class="logo-icon">🐺</span>
+    <div class="logo-icon">üê∫</div>
     <div>
       <h1>Wolves of Real Estate</h1>
       <span>Pipeline Dashboard</span>
@@ -244,27 +365,26 @@
       <button class="period-tab" data-period="week">This Week</button>
       <button class="period-tab" data-period="today">Today</button>
     </div>
-    <button id="refresh-btn" onclick="loadData()">↻ Refresh</button>
+    <button id="refresh-btn" onclick="loadData()">‚Üª Refresh</button>
   </div>
 </header>
 
 <main>
-  <div id="last-updated" class="last-updated" style="margin-bottom:1rem;text-align:right;"></div>
+  <div id="last-updated"></div>
   <div class="pipelines-grid" id="pipelines-grid">
     <div class="skeleton skeleton-pipeline"></div>
     <div class="skeleton skeleton-pipeline"></div>
   </div>
 </main>
 
-<!-- Tasks modal -->
 <div class="modal-overlay" id="tasks-modal">
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title" id="modal-contact-name">Pending Tasks</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal()">‚úï</button>
     </div>
     <div class="modal-body" id="modal-body">
-      <div class="no-tasks">Loading tasks…</div>
+      <div class="no-tasks">Loading‚Ä¶</div>
     </div>
   </div>
 </div>
@@ -272,7 +392,6 @@
 <script>
   let activePeriod = 'all';
 
-  // Clock
   function updateClock() {
     const now = new Date();
     document.getElementById('clock').textContent =
@@ -281,7 +400,6 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // Period tabs
   document.querySelectorAll('.period-tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.period-tab').forEach(b => b.classList.remove('active'));
@@ -292,13 +410,19 @@
   });
 
   function fmt(val) {
-    if (!val) return '—';
-    return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 0 });
+    if (!val) return '‚Äî';
+    if (val >= 1000000) return '$' + (val / 1000000).toFixed(1) + 'M';
+    if (val >= 1000) return '$' + (val / 1000).toFixed(0) + 'K';
+    return '$' + Number(val).toLocaleString();
   }
 
   function fmtDate(iso) {
     if (!iso) return '';
     return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
   function buildPipelineHTML(key, data) {
@@ -316,7 +440,7 @@
                 <div class="opp-date">${fmtDate(o.created_at)}</div>
               </div>
               ${o.contact_id
-                ? `<button class="tasks-btn" onclick="showTasks('${o.contact_id}','${escHtml(o.name || o.contact_name || '')}')">📋 Tasks</button>`
+                ? `<button class="tasks-btn" onclick="showTasks('${o.contact_id}','${escHtml(o.name || o.contact_name || '')}')">üìã Tasks</button>`
                 : '<div></div>'
               }
             </div>`).join('');
@@ -327,7 +451,7 @@
             <span class="stage-name">${escHtml(stage.name)}</span>
             <span class="stage-count">${stage.count}</span>
             <span class="stage-value">${fmt(stage.total_value)}</span>
-            <span class="stage-chevron">▶</span>
+            <span class="stage-chevron">‚ñ∂</span>
           </div>
           <div class="opps-list">${oppsHTML}</div>
         </div>`;
@@ -344,23 +468,20 @@
         </div>
         ${stagesHTML}
         <div class="pipeline-footer">
-          <span>Total Deals: <strong>${data.total_count}</strong></span>
-          <span>Total Value: <strong>${fmt(data.total_value)}</strong></span>
+          <div class="footer-stat">
+            <div class="label">Total Deals</div>
+            <div class="value">${data.total_count}</div>
+          </div>
+          <div class="footer-stat">
+            <div class="label">Pipeline Value</div>
+            <div class="value">${fmt(data.total_value)}</div>
+          </div>
         </div>
       </div>`;
   }
 
   function toggleStage(key, idx) {
-    const row = document.getElementById(`${key}-stage-${idx}`);
-    row.classList.toggle('open');
-  }
-
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+    document.getElementById(`${key}-stage-${idx}`).classList.toggle('open');
   }
 
   async function loadData() {
@@ -370,21 +491,18 @@
     try {
       const res = await fetch(`/api/pipeline-data?period=${activePeriod}`);
       const data = await res.json();
-
       const order = ['acquisition', 'lending'];
       grid.innerHTML = order.map(key => buildPipelineHTML(key, data[key])).join('');
-
       const now = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
       document.getElementById('last-updated').textContent = `Last updated: ${now}`;
     } catch (e) {
-      grid.innerHTML = `<div style="color:#f87171;padding:1rem">Failed to load data. Check console.</div>`;
-      console.error(e);
+      grid.innerHTML = `<div style="color:#ff5a5a;padding:1rem;font-family:Montserrat">Failed to load data.</div>`;
     }
   }
 
   async function showTasks(contactId, name) {
     document.getElementById('modal-contact-name').textContent = name || 'Pending Tasks';
-    document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Loading…</div>';
+    document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Loading‚Ä¶</div>';
     document.getElementById('tasks-modal').classList.add('open');
 
     try {
@@ -393,7 +511,8 @@
       const tasks = data.tasks || [];
 
       if (tasks.length === 0) {
-        document.getElementById('modal-body').innerHTML = '<div class="no-tasks">✅ No pending tasks for this contact.</div>';
+        document.getElementById('modal-body').innerHTML =
+          '<div class="no-tasks"><div class="no-tasks-icon">‚úÖ</div>No pending tasks for this contact.</div>';
         return;
       }
 
@@ -406,7 +525,7 @@
           <div class="task-item">
             <div class="task-title">${escHtml(t.title || 'Untitled Task')}</div>
             <div class="task-meta">
-              <span class="task-due ${overdue ? 'overdue' : ''}">${overdue ? '⚠ Overdue · ' : '📅 '}${dueStr}</span>
+              <span class="task-due ${overdue ? 'overdue' : ''}">${overdue ? '‚ö† Overdue ¬∑ ' : 'üìÖ '}${dueStr}</span>
               ${t.assignedTo ? `<span>Assigned: ${escHtml(t.assignedTo)}</span>` : ''}
             </div>
           </div>`;
@@ -424,9 +543,7 @@
     if (e.target === document.getElementById('tasks-modal')) closeModal();
   });
 
-  // Auto-refresh every 5 minutes
   setInterval(loadData, 300000);
-
   loadData();
 </script>
 </body>
