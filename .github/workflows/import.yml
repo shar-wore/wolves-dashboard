@@ -1,0 +1,42 @@
+name: GHL Contact Import
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests gspread google-auth google-auth-oauthlib python-dotenv pytz
+
+      - name: Run import
+        env:
+          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
+          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          SHEET_GID: ${{ secrets.SHEET_GID }}
+          MONIQUE_PHONE: ${{ secrets.MONIQUE_PHONE }}
+          GOOGLE_TOKEN_JSON: ${{ secrets.GOOGLE_TOKEN_JSON }}
+        run: python import_contacts.py
+
+      - name: Save last row
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add last_row.txt
+          git diff --staged --quiet || git commit -m "update last row"
+          git push
