@@ -213,11 +213,14 @@
       white-space: nowrap;
     }
     .stage-chevron {
-      color: var(--muted);
-      font-size: 0.65rem;
-      transition: transform 0.2s;
+      width: 0; height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid var(--muted);
+      transition: transform 0.2s, border-left-color 0.2s;
+      flex-shrink: 0;
     }
-    .stage-row.open .stage-chevron { transform: rotate(90deg); color: var(--lime); }
+    .stage-row.open .stage-chevron { transform: rotate(90deg); border-left-color: var(--lime); }
 
     /* -- Opportunities list -- */
     .opps-list { display: none; background: rgba(0,3,33,0.5); }
