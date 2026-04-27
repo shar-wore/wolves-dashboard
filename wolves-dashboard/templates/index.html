@@ -352,7 +352,7 @@
 
 <header>
   <div class="logo">
-    <div class="logo-icon">üê∫</div>
+    <div class="logo-icon">W</div>
     <div>
       <h1>Wolves of Real Estate</h1>
       <span>Pipeline Dashboard</span>
@@ -440,7 +440,7 @@
                 <div class="opp-date">${fmtDate(o.created_at)}</div>
               </div>
               ${o.contact_id
-                ? `<button class="tasks-btn" onclick="showTasks('${o.contact_id}','${escHtml(o.name || o.contact_name || '')}')">üìã Tasks</button>`
+                ? `<button class="tasks-btn" onclick="showTasks('${o.contact_id}','${escHtml(o.name || o.contact_name || '')}')">Tasks</button>`
                 : '<div></div>'
               }
             </div>`).join('');
@@ -512,7 +512,7 @@
 
       if (tasks.length === 0) {
         document.getElementById('modal-body').innerHTML =
-          '<div class="no-tasks"><div class="no-tasks-icon">‚úÖ</div>No pending tasks for this contact.</div>';
+          '<div class="no-tasks"><div class="no-tasks-icon">--</div>No pending tasks for this contact.</div>';
         return;
       }
 
@@ -525,7 +525,7 @@
           <div class="task-item">
             <div class="task-title">${escHtml(t.title || 'Untitled Task')}</div>
             <div class="task-meta">
-              <span class="task-due ${overdue ? 'overdue' : ''}">${overdue ? '‚ö† Overdue ¬∑ ' : 'üìÖ '}${dueStr}</span>
+              <span class="task-due ${overdue ? 'overdue' : ''}">${overdue ? 'OVERDUE - ' : 'Due: '}${dueStr}</span>
               ${t.assignedTo ? `<span>Assigned: ${escHtml(t.assignedTo)}</span>` : ''}
             </div>
           </div>`;
