@@ -7,26 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:        #000321;
-      --surface:   #0d1035;
-      --card:      #111638;
-      --border:    #1e2560;
-      --lime:      #C2FF14;
-      --lime-dim:  #8fb30e;
-      --blue:      #188bf6;
-      --gold:      #cab072;
-      --white:     #ffffff;
-      --muted:     #6b7db3;
-      --text:      #d4deff;
+      --bg: #000321; --surface: #0d1035; --card: #111638; --border: #1e2560;
+      --lime: #C2FF14; --blue: #188bf6; --gold: #cab072;
+      --white: #ffffff; --muted: #6b7db3; --text: #d4deff;
+      --red: #f87171; --yellow: #fbbf24; --green: #4ade80;
     }
-
     body {
       font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
+      background: var(--bg); color: var(--text); min-height: 100vh;
       background-image:
         radial-gradient(ellipse at 10% 0%, rgba(194,255,20,0.06) 0%, transparent 50%),
         radial-gradient(ellipse at 90% 100%, rgba(24,139,246,0.07) 0%, transparent 50%);
@@ -34,321 +23,154 @@
 
     /* -- Header -- */
     header {
-      background: rgba(13,16,53,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0.9rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: rgba(13,16,53,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0.9rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.75rem; position: sticky; top: 0; z-index: 100;
     }
-
     .logo { display: flex; align-items: center; gap: 0.75rem; }
     .logo-icon {
-      width: 42px; height: 42px;
-      background: var(--lime);
-      border-radius: 10px;
+      width: 42px; height: 42px; background: var(--lime); border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
+      font-size: 1.1rem; font-weight: 900; color: #000; flex-shrink: 0;
     }
-    .logo h1 {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-    .logo span {
-      font-size: 0.65rem;
-      color: var(--lime);
-      display: block;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-top: 1px;
-    }
-
+    .logo h1 { font-size: 1rem; font-weight: 800; color: var(--white); letter-spacing: 0.02em; text-transform: uppercase; }
+    .logo span { font-size: 0.65rem; color: var(--lime); display: block; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 1px; }
     .header-right { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-    #clock {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-    }
-
-    .period-tabs {
-      display: flex;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 3px;
-      gap: 2px;
-    }
-    .period-tab {
-      padding: 0.35rem 0.9rem;
-      border-radius: 6px;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      font-size: 0.72rem;
-      font-weight: 600;
-      font-family: 'Montserrat', sans-serif;
-      cursor: pointer;
-      transition: all 0.15s;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .period-tab.active {
-      background: var(--lime);
-      color: #000;
-    }
+    #clock { font-size: 0.75rem; color: var(--muted); font-weight: 500; letter-spacing: 0.04em; }
+    .period-tabs { display: flex; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 3px; gap: 2px; }
+    .period-tab { padding: 0.35rem 0.9rem; border-radius: 6px; border: none; background: transparent; color: var(--muted); font-size: 0.72rem; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: all 0.15s; letter-spacing: 0.06em; text-transform: uppercase; }
+    .period-tab.active { background: var(--lime); color: #000; }
     .period-tab:hover:not(.active) { color: var(--white); }
-
-    #refresh-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      padding: 0.38rem 0.8rem;
-      font-size: 0.72rem;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      cursor: pointer;
-      letter-spacing: 0.06em;
-      transition: all 0.15s;
-    }
+    #refresh-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: 0.38rem 0.8rem; font-size: 0.72rem; font-family: 'Montserrat', sans-serif; font-weight: 600; cursor: pointer; letter-spacing: 0.06em; transition: all 0.15s; }
     #refresh-btn:hover { border-color: var(--lime); color: var(--lime); }
 
-    /* -- Main -- */
+    /* -- Layout -- */
     main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
     #last-updated { font-size: 0.68rem; color: var(--muted); text-align: right; margin-bottom: 1rem; letter-spacing: 0.04em; }
-
-    .pipelines-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-    }
+    .pipelines-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     @media (max-width: 900px) { .pipelines-grid { grid-template-columns: 1fr; } }
 
     /* -- Pipeline card -- */
-    .pipeline-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-    }
-
-    .pipeline-header {
-      padding: 1.1rem 1.25rem;
-      background: linear-gradient(135deg, rgba(194,255,20,0.08) 0%, transparent 60%);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-    .pipeline-name {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--white);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
+    .pipeline-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    .pipeline-header { padding: 1.1rem 1.25rem; background: linear-gradient(135deg, rgba(194,255,20,0.08) 0%, transparent 60%); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+    .pipeline-name { font-size: 0.85rem; font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: 0.08em; }
     .pipeline-summary { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .summary-pill {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
+    .summary-pill { background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 20px; padding: 0.2rem 0.7rem; font-size: 0.7rem; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; }
     .summary-pill strong { color: var(--lime); }
 
-    /* -- Stage rows -- */
+    /* -- Stages -- */
     .stage-row { border-bottom: 1px solid rgba(30,37,96,0.6); transition: background 0.1s; }
     .stage-row:last-child { border-bottom: none; }
-    .stage-header {
-      display: grid;
-      grid-template-columns: 1fr auto auto auto;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.8rem 1.25rem;
-      cursor: pointer;
-      user-select: none;
-    }
+    .stage-header { display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 1rem; padding: 0.8rem 1.25rem; cursor: pointer; user-select: none; }
     .stage-header:hover { background: rgba(194,255,20,0.04); }
     .stage-row.open .stage-header { background: rgba(194,255,20,0.05); }
-
-    .stage-name {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: 0.02em;
-    }
-    .stage-count {
-      font-size: 0.7rem;
-      background: rgba(194,255,20,0.12);
-      color: var(--lime);
-      border: 1px solid rgba(194,255,20,0.25);
-      border-radius: 20px;
-      padding: 0.15rem 0.6rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .stage-value {
-      font-size: 0.78rem;
-      color: var(--gold);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .stage-chevron {
-      width: 0; height: 0;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 7px solid var(--muted);
-      transition: transform 0.2s, border-left-color 0.2s;
-      flex-shrink: 0;
-    }
+    .stage-name { font-size: 0.8rem; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+    .stage-count { font-size: 0.7rem; background: rgba(194,255,20,0.12); color: var(--lime); border: 1px solid rgba(194,255,20,0.25); border-radius: 20px; padding: 0.15rem 0.6rem; font-weight: 700; white-space: nowrap; }
+    .stage-value { font-size: 0.78rem; color: var(--gold); font-weight: 700; white-space: nowrap; }
+    .stage-chevron { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid var(--muted); transition: transform 0.2s, border-left-color 0.2s; flex-shrink: 0; }
     .stage-row.open .stage-chevron { transform: rotate(90deg); border-left-color: var(--lime); }
 
-    /* -- Opportunities list -- */
+    /* -- Opportunities -- */
     .opps-list { display: none; background: rgba(0,3,33,0.5); }
     .stage-row.open .opps-list { display: block; }
-
-    .opp-row {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.65rem 1.5rem;
-      border-top: 1px solid rgba(30,37,96,0.4);
-      font-size: 0.78rem;
-      transition: background 0.1s;
-    }
+    .opp-row { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 0.75rem; padding: 0.7rem 1.5rem; border-top: 1px solid rgba(30,37,96,0.4); transition: background 0.1s; }
     .opp-row:hover { background: rgba(194,255,20,0.03); }
-    .opp-name { color: var(--white); font-weight: 600; }
+    .opp-left { min-width: 0; }
+    .opp-name { color: var(--white); font-weight: 600; font-size: 0.8rem; }
     .opp-phone { color: var(--muted); font-size: 0.68rem; margin-top: 2px; }
-    .opp-value { color: var(--gold); font-weight: 700; white-space: nowrap; text-align: right; }
-    .opp-date { color: var(--muted); font-size: 0.66rem; white-space: nowrap; text-align: right; }
+    .opp-meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.35rem; flex-wrap: wrap; }
+    .opp-value { color: var(--gold); font-weight: 700; font-size: 0.75rem; }
+    .opp-date { color: var(--muted); font-size: 0.66rem; }
 
-    .tasks-btn {
-      background: rgba(24,139,246,0.12);
-      border: 1px solid rgba(24,139,246,0.3);
-      color: var(--blue);
-      border-radius: 6px;
-      padding: 0.25rem 0.65rem;
-      font-size: 0.68rem;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s;
-      letter-spacing: 0.04em;
-    }
-    .tasks-btn:hover {
-      background: var(--blue);
-      color: #fff;
-      border-color: var(--blue);
-    }
-    .no-opps {
-      padding: 0.9rem 1.5rem;
-      color: var(--muted);
-      font-size: 0.75rem;
-      font-style: italic;
-    }
+    /* -- Deal age badge -- */
+    .age-badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 10px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.04em; border: 1px solid; }
+    .age-fresh { color: var(--green); border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.08); }
+    .age-warm { color: var(--yellow); border-color: rgba(251,191,36,0.35); background: rgba(251,191,36,0.08); }
+    .age-old { color: var(--red); border-color: rgba(248,113,113,0.35); background: rgba(248,113,113,0.08); }
+
+    /* -- Action buttons -- */
+    .opp-actions { display: flex; gap: 0.4rem; flex-shrink: 0; padding-top: 0.1rem; }
+    .action-btn { border-radius: 6px; padding: 0.25rem 0.6rem; font-size: 0.68rem; font-family: 'Montserrat', sans-serif; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.15s; letter-spacing: 0.04em; border: 1px solid; }
+    .btn-tasks { background: rgba(24,139,246,0.12); border-color: rgba(24,139,246,0.3); color: var(--blue); }
+    .btn-tasks:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .btn-payouts { background: rgba(202,176,114,0.12); border-color: rgba(202,176,114,0.3); color: var(--gold); }
+    .btn-payouts:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+    .btn-payouts.has-data { background: rgba(202,176,114,0.2); }
+
+    .no-opps { padding: 0.9rem 1.5rem; color: var(--muted); font-size: 0.75rem; font-style: italic; }
 
     /* -- Pipeline footer -- */
-    .pipeline-footer {
-      padding: 0.8rem 1.25rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      background: rgba(194,255,20,0.03);
-    }
-    .pipeline-footer .label { color: var(--muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.65rem; }
-    .pipeline-footer .value { color: var(--lime); font-weight: 800; font-size: 0.9rem; }
+    .pipeline-footer { padding: 0.8rem 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: rgba(194,255,20,0.03); }
     .footer-stat { text-align: center; }
+    .footer-stat .label { color: var(--muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.65rem; }
+    .footer-stat .value { color: var(--lime); font-weight: 800; font-size: 0.9rem; }
 
     /* -- Skeleton -- */
-    .skeleton {
-      background: linear-gradient(90deg, var(--card) 25%, var(--surface) 50%, var(--card) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-    }
+    .skeleton { background: linear-gradient(90deg, var(--card) 25%, var(--surface) 50%, var(--card) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 16px; border: 1px solid var(--border); }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     .skeleton-pipeline { height: 320px; }
 
-    /* -- Tasks modal -- */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,3,33,0.85);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
+    /* -- Modals shared -- */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,3,33,0.85); backdrop-filter: blur(6px); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
     .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      width: 100%;
-      max-width: 520px;
-      max-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    }
-    .modal-header {
-      padding: 1.1rem 1.25rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(135deg, rgba(194,255,20,0.07) 0%, transparent 60%);
-    }
+    .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+    .modal-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, rgba(194,255,20,0.07) 0%, transparent 60%); flex-shrink: 0; }
     .modal-title { font-size: 0.9rem; font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: 0.06em; }
-    .modal-close {
-      background: none; border: none; color: var(--muted);
-      font-size: 1.1rem; cursor: pointer; padding: 0 0.25rem;
-      transition: color 0.15s;
-    }
+    .modal-subtitle { font-size: 0.72rem; color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; margin-top: 2px; }
+    .modal-close { background: none; border: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; padding: 0 0.25rem; transition: color 0.15s; }
     .modal-close:hover { color: var(--lime); }
     .modal-body { padding: 1rem 1.25rem; overflow-y: auto; flex: 1; }
 
-    .task-item {
-      background: rgba(0,3,33,0.5);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--lime);
-      border-radius: 8px;
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.65rem;
-    }
+    /* -- Tasks modal -- */
+    #tasks-modal .modal { max-width: 520px; }
+    .task-item { background: rgba(0,3,33,0.5); border: 1px solid var(--border); border-left: 3px solid var(--lime); border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 0.65rem; }
     .task-title { font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
     .task-meta { font-size: 0.7rem; color: var(--muted); display: flex; gap: 1rem; flex-wrap: wrap; }
     .task-due { color: #f0c060; font-weight: 600; }
-    .task-due.overdue { color: #ff5a5a; }
+    .task-due.overdue { color: var(--red); }
     .no-tasks { color: var(--muted); font-size: 0.82rem; text-align: center; padding: 2.5rem 0; }
-    .no-tasks-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+    /* -- Payouts modal -- */
+    #payouts-modal .modal { max-width: 640px; }
+    .deal-total-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .deal-total-row label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+    .deal-total-input { background: rgba(0,3,33,0.6); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 0.75rem; color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700; width: 160px; outline: none; }
+    .deal-total-input:focus { border-color: var(--gold); }
+
+    .stakeholders-header { display: grid; grid-template-columns: 1fr 130px 100px 90px 32px; gap: 0.5rem; padding: 0 0 0.5rem 0; margin-bottom: 0.5rem; border-bottom: 1px solid rgba(30,37,96,0.6); }
+    .sh-col { font-size: 0.65rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .stakeholder-row { display: grid; grid-template-columns: 1fr 130px 100px 90px 32px; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
+    .sh-input { background: rgba(0,3,33,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.6rem; color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 500; outline: none; width: 100%; }
+    .sh-input:focus { border-color: rgba(194,255,20,0.4); }
+    .sh-select { background: rgba(0,3,33,0.8); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.5rem; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 500; outline: none; width: 100%; cursor: pointer; }
+    .sh-select:focus { border-color: rgba(194,255,20,0.4); }
+    .sh-amount { font-size: 0.78rem; font-weight: 700; color: var(--gold); text-align: right; padding-right: 0.25rem; }
+    .sh-remove { background: none; border: 1px solid rgba(248,113,113,0.2); border-radius: 6px; color: var(--red); cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.15s; }
+    .sh-remove:hover { background: rgba(248,113,113,0.15); border-color: var(--red); }
+
+    .add-row-btn { background: rgba(194,255,20,0.07); border: 1px dashed rgba(194,255,20,0.3); border-radius: 8px; color: var(--lime); padding: 0.5rem; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 600; cursor: pointer; width: 100%; margin-top: 0.5rem; letter-spacing: 0.04em; transition: all 0.15s; }
+    .add-row-btn:hover { background: rgba(194,255,20,0.12); border-style: solid; }
+
+    .payout-summary { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 0.5rem; }
+    .payout-stat { text-align: center; }
+    .payout-stat .ps-label { font-size: 0.65rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .payout-stat .ps-value { font-size: 0.95rem; font-weight: 800; color: var(--lime); margin-top: 2px; }
+    .payout-stat .ps-value.ps-remaining { color: var(--gold); }
+    .payout-stat .ps-value.ps-negative { color: var(--red); }
+
+    .modal-footer { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 0.6rem; flex-shrink: 0; background: rgba(0,3,33,0.3); }
+    .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: 0.45rem 1rem; font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+    .btn-cancel:hover { border-color: var(--muted); color: var(--white); }
+    .btn-save { background: var(--lime); border: none; color: #000; border-radius: 8px; padding: 0.45rem 1.25rem; font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 800; cursor: pointer; transition: all 0.15s; letter-spacing: 0.04em; }
+    .btn-save:hover { background: #a8e00f; }
+    .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    @media (max-width: 600px) {
+      .stakeholders-header, .stakeholder-row { grid-template-columns: 1fr 1fr 70px 28px; }
+      .sh-col:nth-child(3), .stakeholder-row > *:nth-child(3) { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -368,7 +190,7 @@
       <button class="period-tab" data-period="week">This Week</button>
       <button class="period-tab" data-period="today">Today</button>
     </div>
-    <button id="refresh-btn" onclick="loadData()"> Refresh</button>
+    <button id="refresh-btn" onclick="loadData()">Refresh</button>
   </div>
 </header>
 
@@ -380,29 +202,79 @@
   </div>
 </main>
 
+<!-- Tasks modal -->
 <div class="modal-overlay" id="tasks-modal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title" id="modal-contact-name">Pending Tasks</div>
-      <button class="modal-close" onclick="closeModal()"></button>
+      <div>
+        <div class="modal-title" id="modal-tasks-title">Pending Tasks</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('tasks-modal')">x</button>
     </div>
-    <div class="modal-body" id="modal-body">
-      <div class="no-tasks">Loading</div>
+    <div class="modal-body" id="tasks-modal-body"></div>
+  </div>
+</div>
+
+<!-- Payouts modal -->
+<div class="modal-overlay" id="payouts-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Payout Breakdown</div>
+        <div class="modal-subtitle" id="payouts-deal-name"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal('payouts-modal')">x</button>
+    </div>
+    <div class="modal-body">
+      <div class="deal-total-row">
+        <label>Deal Total ($)</label>
+        <input class="deal-total-input" id="deal-total-input" type="number" placeholder="0" oninput="recalc()">
+      </div>
+      <div class="stakeholders-header">
+        <div class="sh-col">Stakeholder</div>
+        <div class="sh-col">Type</div>
+        <div class="sh-col">Value</div>
+        <div class="sh-col" style="text-align:right">Amount</div>
+        <div></div>
+      </div>
+      <div id="stakeholders-list"></div>
+      <button class="add-row-btn" onclick="addRow()">+ Add Stakeholder</button>
+      <div class="payout-summary">
+        <div class="payout-stat">
+          <div class="ps-label">Deal Total</div>
+          <div class="ps-value" id="ps-total">$0</div>
+        </div>
+        <div class="payout-stat">
+          <div class="ps-label">Allocated</div>
+          <div class="ps-value" id="ps-allocated">$0</div>
+        </div>
+        <div class="payout-stat">
+          <div class="ps-label">Remaining</div>
+          <div class="ps-value ps-remaining" id="ps-remaining">$0</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('payouts-modal')">Cancel</button>
+      <button class="btn-save" id="save-payouts-btn" onclick="savePayouts()">Save</button>
     </div>
   </div>
 </div>
 
 <script>
   let activePeriod = 'all';
+  let currentPayoutsContactId = null;
+  let currentPayoutsOppValue = 0;
 
+  // Clock
   function updateClock() {
     const now = new Date();
     document.getElementById('clock').textContent =
       now.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' EST';
   }
-  setInterval(updateClock, 1000);
-  updateClock();
+  setInterval(updateClock, 1000); updateClock();
 
+  // Period tabs
   document.querySelectorAll('.period-tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.period-tab').forEach(b => b.classList.remove('active'));
@@ -413,15 +285,27 @@
   });
 
   function fmt(val) {
-    if (!val) return '--';
-    if (val >= 1000000) return '$' + (val / 1000000).toFixed(1) + 'M';
+    if (!val && val !== 0) return '--';
+    if (val >= 1000000) return '$' + (val / 1000000).toFixed(2) + 'M';
     if (val >= 1000) return '$' + (val / 1000).toFixed(0) + 'K';
-    return '$' + Number(val).toLocaleString();
+    return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   }
 
   function fmtDate(iso) {
     if (!iso) return '';
     return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+  }
+
+  function daysAgo(iso) {
+    if (!iso) return null;
+    return Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  }
+
+  function ageBadge(stageChangedAt) {
+    const days = daysAgo(stageChangedAt);
+    if (days === null) return '';
+    let cls = days <= 14 ? 'age-fresh' : days <= 30 ? 'age-warm' : 'age-old';
+    return `<span class="age-badge ${cls}">${days}d</span>`;
   }
 
   function escHtml(str) {
@@ -431,22 +315,25 @@
   function buildPipelineHTML(key, data) {
     const stagesHTML = data.stages.map((stage, idx) => {
       const oppsHTML = stage.count === 0
-        ? `<div class="no-opps">No opportunities in this stage</div>`
+        ? '<div class="no-opps">No opportunities in this stage</div>'
         : stage.opportunities.map(o => `
-            <div class="opp-row">
-              <div>
-                <div class="opp-name">${escHtml(o.name || o.contact_name || 'Unnamed')}</div>
-                <div class="opp-phone">${escHtml(o.contact_phone || '')}</div>
+          <div class="opp-row">
+            <div class="opp-left">
+              <div class="opp-name">${escHtml(o.name || o.contact_name || 'Unnamed')}</div>
+              <div class="opp-phone">${escHtml(o.contact_phone || '')}</div>
+              <div class="opp-meta">
+                <span class="opp-value">${fmt(o.value)}</span>
+                <span class="opp-date">${fmtDate(o.created_at)}</span>
+                ${ageBadge(o.stage_changed_at)}
               </div>
-              <div style="text-align:right">
-                <div class="opp-value">${fmt(o.value)}</div>
-                <div class="opp-date">${fmtDate(o.created_at)}</div>
-              </div>
-              ${o.contact_id
-                ? `<button class="tasks-btn" onclick="showTasks('${o.contact_id}','${escHtml(o.name || o.contact_name || '')}')">Tasks</button>`
-                : '<div></div>'
-              }
-            </div>`).join('');
+            </div>
+            <div class="opp-actions">
+              ${o.contact_id ? `
+                <button class="action-btn btn-tasks" onclick="showTasks('${o.contact_id}','${escHtml(o.name || o.contact_name || '')}')">Tasks</button>
+                <button class="action-btn btn-payouts" id="pb-${o.contact_id}" onclick="showPayouts('${o.contact_id}','${escHtml(o.name || '')}',${o.value || 0})">Payouts</button>
+              ` : ''}
+            </div>
+          </div>`).join('');
 
       return `
         <div class="stage-row" id="${key}-stage-${idx}">
@@ -471,14 +358,8 @@
         </div>
         ${stagesHTML}
         <div class="pipeline-footer">
-          <div class="footer-stat">
-            <div class="label">Total Deals</div>
-            <div class="value">${data.total_count}</div>
-          </div>
-          <div class="footer-stat">
-            <div class="label">Pipeline Value</div>
-            <div class="value">${fmt(data.total_value)}</div>
-          </div>
+          <div class="footer-stat"><div class="label">Total Deals</div><div class="value">${data.total_count}</div></div>
+          <div class="footer-stat"><div class="label">Pipeline Value</div><div class="value">${fmt(data.total_value)}</div></div>
         </div>
       </div>`;
   }
@@ -490,60 +371,159 @@
   async function loadData() {
     const grid = document.getElementById('pipelines-grid');
     grid.innerHTML = '<div class="skeleton skeleton-pipeline"></div><div class="skeleton skeleton-pipeline"></div>';
-
     try {
       const res = await fetch(`/api/pipeline-data?period=${activePeriod}`);
       const data = await res.json();
-      const order = ['acquisition', 'lending'];
-      grid.innerHTML = order.map(key => buildPipelineHTML(key, data[key])).join('');
-      const now = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-      document.getElementById('last-updated').textContent = `Last updated: ${now}`;
-    } catch (e) {
-      grid.innerHTML = `<div style="color:#ff5a5a;padding:1rem;font-family:Montserrat">Failed to load data.</div>`;
+      grid.innerHTML = ['acquisition','lending'].map(k => buildPipelineHTML(k, data[k])).join('');
+      document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    } catch(e) {
+      grid.innerHTML = '<div style="color:var(--red);padding:1rem">Failed to load data.</div>';
     }
   }
 
+  // -- Tasks --
   async function showTasks(contactId, name) {
-    document.getElementById('modal-contact-name').textContent = name || 'Pending Tasks';
-    document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Loading</div>';
+    document.getElementById('modal-tasks-title').textContent = name || 'Pending Tasks';
+    document.getElementById('tasks-modal-body').innerHTML = '<div class="no-tasks">Loading...</div>';
     document.getElementById('tasks-modal').classList.add('open');
-
     try {
       const res = await fetch(`/api/tasks/${contactId}`);
       const data = await res.json();
       const tasks = data.tasks || [];
-
-      if (tasks.length === 0) {
-        document.getElementById('modal-body').innerHTML =
-          '<div class="no-tasks"><div class="no-tasks-icon">--</div>No pending tasks for this contact.</div>';
+      if (!tasks.length) {
+        document.getElementById('tasks-modal-body').innerHTML = '<div class="no-tasks">No pending tasks.</div>';
         return;
       }
-
       const now = new Date();
-      document.getElementById('modal-body').innerHTML = tasks.map(t => {
+      document.getElementById('tasks-modal-body').innerHTML = tasks.map(t => {
         const due = t.dueDate ? new Date(t.dueDate) : null;
         const overdue = due && due < now;
         const dueStr = due ? due.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'No due date';
-        return `
-          <div class="task-item">
-            <div class="task-title">${escHtml(t.title || 'Untitled Task')}</div>
-            <div class="task-meta">
-              <span class="task-due ${overdue ? 'overdue' : ''}">${overdue ? 'OVERDUE - ' : 'Due: '}${dueStr}</span>
-              ${t.assignedTo ? `<span>Assigned: ${escHtml(t.assignedTo)}</span>` : ''}
-            </div>
-          </div>`;
+        return `<div class="task-item">
+          <div class="task-title">${escHtml(t.title || 'Untitled')}</div>
+          <div class="task-meta"><span class="task-due ${overdue ? 'overdue' : ''}">${overdue ? 'OVERDUE - ' : 'Due: '}${dueStr}</span></div>
+        </div>`;
       }).join('');
-    } catch (e) {
-      document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Error loading tasks.</div>';
+    } catch(e) {
+      document.getElementById('tasks-modal-body').innerHTML = '<div class="no-tasks">Error loading tasks.</div>';
     }
   }
 
-  function closeModal() {
-    document.getElementById('tasks-modal').classList.remove('open');
+  // -- Payouts --
+  async function showPayouts(contactId, name, oppValue) {
+    currentPayoutsContactId = contactId;
+    currentPayoutsOppValue = oppValue || 0;
+    document.getElementById('payouts-deal-name').textContent = name;
+    document.getElementById('deal-total-input').value = oppValue || '';
+    document.getElementById('stakeholders-list').innerHTML = '';
+    document.getElementById('save-payouts-btn').disabled = false;
+    document.getElementById('payouts-modal').classList.add('open');
+    recalc();
+
+    try {
+      const res = await fetch(`/api/payouts/${contactId}`);
+      const data = await res.json();
+      if (data.found && data.data.stakeholders) {
+        document.getElementById('deal-total-input').value = data.data.deal_total || oppValue || '';
+        document.getElementById('stakeholders-list').innerHTML = '';
+        data.data.stakeholders.forEach(s => addRow(s.name, s.type, s.value));
+        recalc();
+        document.getElementById(`pb-${contactId}`) && document.getElementById(`pb-${contactId}`).classList.add('has-data');
+      }
+    } catch(e) {}
   }
 
-  document.getElementById('tasks-modal').addEventListener('click', e => {
-    if (e.target === document.getElementById('tasks-modal')) closeModal();
+  let rowId = 0;
+  function addRow(name='', type='fixed', value='') {
+    const id = rowId++;
+    const div = document.createElement('div');
+    div.className = 'stakeholder-row';
+    div.id = `sh-row-${id}`;
+    div.innerHTML = `
+      <input class="sh-input" placeholder="Name" value="${escHtml(name)}" oninput="recalc()">
+      <select class="sh-select" onchange="recalc()">
+        <option value="fixed" ${type==='fixed'?'selected':''}>$ Fixed</option>
+        <option value="pct_total" ${type==='pct_total'?'selected':''}>% of Total</option>
+        <option value="pct_remaining" ${type==='pct_remaining'?'selected':''}>% of Remaining</option>
+      </select>
+      <input class="sh-input" placeholder="0" type="number" value="${escHtml(String(value))}" oninput="recalc()">
+      <div class="sh-amount" id="sh-amt-${id}">--</div>
+      <button class="sh-remove" onclick="removeRow(${id})">x</button>`;
+    document.getElementById('stakeholders-list').appendChild(div);
+    recalc();
+  }
+
+  function removeRow(id) {
+    const el = document.getElementById(`sh-row-${id}`);
+    if (el) el.remove();
+    recalc();
+  }
+
+  function recalc() {
+    const dealTotal = parseFloat(document.getElementById('deal-total-input').value) || 0;
+    let remaining = dealTotal;
+    let allocated = 0;
+
+    document.querySelectorAll('#stakeholders-list .stakeholder-row').forEach((row, i) => {
+      const type = row.querySelector('select').value;
+      const val = parseFloat(row.querySelectorAll('input')[1].value) || 0;
+      const amtEl = row.querySelector('.sh-amount');
+      let amount = 0;
+      if (type === 'fixed') amount = val;
+      else if (type === 'pct_total') amount = dealTotal * val / 100;
+      else if (type === 'pct_remaining') amount = remaining * val / 100;
+      amount = Math.round(amount * 100) / 100;
+      allocated += amount;
+      remaining = dealTotal - allocated;
+      amtEl.textContent = '$' + amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+    });
+
+    const leftover = dealTotal - allocated;
+    document.getElementById('ps-total').textContent = fmt(dealTotal);
+    document.getElementById('ps-allocated').textContent = fmt(allocated);
+    const remEl = document.getElementById('ps-remaining');
+    remEl.textContent = fmt(leftover);
+    remEl.className = 'ps-value ' + (leftover < 0 ? 'ps-negative' : 'ps-remaining');
+  }
+
+  async function savePayouts() {
+    const btn = document.getElementById('save-payouts-btn');
+    btn.disabled = true; btn.textContent = 'Saving...';
+    const dealTotal = parseFloat(document.getElementById('deal-total-input').value) || 0;
+    const stakeholders = [];
+    document.querySelectorAll('#stakeholders-list .stakeholder-row').forEach(row => {
+      const inputs = row.querySelectorAll('input');
+      stakeholders.push({
+        name: inputs[0].value.trim(),
+        type: row.querySelector('select').value,
+        value: parseFloat(inputs[1].value) || 0
+      });
+    });
+    try {
+      const res = await fetch(`/api/payouts/${currentPayoutsContactId}`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ deal_total: dealTotal, stakeholders })
+      });
+      const data = await res.json();
+      if (data.success) {
+        const pbBtn = document.getElementById(`pb-${currentPayoutsContactId}`);
+        if (pbBtn) pbBtn.classList.add('has-data');
+        closeModal('payouts-modal');
+      } else {
+        btn.textContent = 'Error - retry';
+        btn.disabled = false;
+      }
+    } catch(e) {
+      btn.textContent = 'Error - retry'; btn.disabled = false;
+    }
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  document.querySelectorAll('.modal-overlay').forEach(el => {
+    el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
   });
 
   setInterval(loadData, 300000);
