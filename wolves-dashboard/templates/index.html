@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Dashboard | Wolves of Real Estate</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0b0e1a;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #111827;
+      border-bottom: 1px solid #1e2a3a;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 0.6rem; }
+    .logo-icon { font-size: 1.5rem; }
+    .logo h1 { font-size: 1.1rem; font-weight: 700; color: #f8fafc; letter-spacing: -0.01em; }
+    .logo span { font-size: 0.75rem; color: #64748b; display: block; font-weight: 400; }
+
+    .header-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    #clock { font-size: 0.8rem; color: #64748b; }
+
+    /* Period tabs */
+    .period-tabs { display: flex; background: #1e2a3a; border-radius: 8px; padding: 3px; gap: 2px; }
+    .period-tab {
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .period-tab.active { background: #1e40af; color: #fff; }
+    .period-tab:hover:not(.active) { color: #cbd5e1; }
+
+    /* ── Main layout ── */
+    main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+
+    .pipelines-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 900px) { .pipelines-grid { grid-template-columns: 1fr; } }
+
+    /* ── Pipeline card ── */
+    .pipeline-card {
+      background: #111827;
+      border: 1px solid #1e2a3a;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .pipeline-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #1e2a3a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pipeline-name { font-size: 0.95rem; font-weight: 700; color: #f1f5f9; }
+    .pipeline-summary { display: flex; gap: 1rem; }
+    .summary-pill {
+      background: #1e2a3a;
+      border-radius: 20px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    .summary-pill strong { color: #38bdf8; }
+
+    /* ── Stage rows ── */
+    .stage-row {
+      border-bottom: 1px solid #1a2234;
+      transition: background 0.1s;
+    }
+    .stage-row:last-child { border-bottom: none; }
+    .stage-header {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .stage-header:hover { background: #151f2e; }
+    .stage-name { font-size: 0.85rem; font-weight: 500; color: #cbd5e1; }
+    .stage-count {
+      font-size: 0.75rem;
+      background: #1e293b;
+      color: #7dd3fc;
+      border-radius: 12px;
+      padding: 0.15rem 0.55rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .stage-value { font-size: 0.8rem; color: #34d399; font-weight: 600; white-space: nowrap; }
+    .stage-chevron { color: #475569; font-size: 0.7rem; transition: transform 0.2s; }
+    .stage-row.open .stage-chevron { transform: rotate(90deg); }
+
+    /* ── Opportunities list ── */
+    .opps-list { display: none; background: #0d1425; }
+    .stage-row.open .opps-list { display: block; }
+
+    .opp-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1.5rem;
+      border-top: 1px solid #141d2e;
+      font-size: 0.8rem;
+    }
+    .opp-row:hover { background: #111827; }
+    .opp-name { color: #e2e8f0; font-weight: 500; }
+    .opp-phone { color: #64748b; font-size: 0.72rem; margin-top: 1px; }
+    .opp-value { color: #34d399; font-weight: 600; white-space: nowrap; text-align: right; }
+    .opp-date { color: #475569; font-size: 0.7rem; white-space: nowrap; text-align: right; }
+    .tasks-btn {
+      background: #1e3a5f;
+      border: 1px solid #2563eb40;
+      color: #7dd3fc;
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.72rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .tasks-btn:hover { background: #1d4ed8; color: #fff; }
+    .no-opps { padding: 0.75rem 1.5rem; color: #475569; font-size: 0.8rem; font-style: italic; }
+
+    /* ── Pipeline footer ── */
+    .pipeline-footer {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid #1e2a3a;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #64748b;
+      background: #0f1824;
+    }
+    .pipeline-footer strong { color: #f1f5f9; }
+
+    /* ── Loading skeleton ── */
+    .skeleton { background: #1e2a3a; border-radius: 6px; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .skeleton-pipeline { height: 300px; }
+
+    /* ── Tasks modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #111827;
+      border: 1px solid #1e2a3a;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #1e2a3a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-title { font-size: 0.95rem; font-weight: 700; }
+    .modal-close {
+      background: none; border: none; color: #64748b;
+      font-size: 1.25rem; cursor: pointer; padding: 0 0.25rem;
+    }
+    .modal-close:hover { color: #f1f5f9; }
+    .modal-body { padding: 1rem 1.25rem; overflow-y: auto; flex: 1; }
+
+    .task-item {
+      background: #0d1425;
+      border: 1px solid #1e2a3a;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .task-title { font-size: 0.85rem; font-weight: 600; color: #e2e8f0; margin-bottom: 0.3rem; }
+    .task-meta { font-size: 0.75rem; color: #64748b; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .task-due { color: #fbbf24; }
+    .task-due.overdue { color: #f87171; }
+    .no-tasks { color: #475569; font-size: 0.85rem; text-align: center; padding: 2rem 0; }
+
+    /* ── Error / refresh ── */
+    #refresh-btn {
+      background: #1e2a3a; border: 1px solid #2d3f55; color: #7dd3fc;
+      border-radius: 8px; padding: 0.35rem 0.8rem; font-size: 0.8rem;
+      cursor: pointer; transition: background 0.15s;
+    }
+    #refresh-btn:hover { background: #253347; }
+    .last-updated { font-size: 0.72rem; color: #475569; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-icon">🐺</span>
+    <div>
+      <h1>Wolves of Real Estate</h1>
+      <span>Pipeline Dashboard</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <div id="clock"></div>
+    <div class="period-tabs">
+      <button class="period-tab active" data-period="all">All Time</button>
+      <button class="period-tab" data-period="week">This Week</button>
+      <button class="period-tab" data-period="today">Today</button>
+    </div>
+    <button id="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  </div>
+</header>
+
+<main>
+  <div id="last-updated" class="last-updated" style="margin-bottom:1rem;text-align:right;"></div>
+  <div class="pipelines-grid" id="pipelines-grid">
+    <div class="skeleton skeleton-pipeline"></div>
+    <div class="skeleton skeleton-pipeline"></div>
+  </div>
+</main>
+
+<!-- Tasks modal -->
+<div class="modal-overlay" id="tasks-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-contact-name">Pending Tasks</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <div class="no-tasks">Loading tasks…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let activePeriod = 'all';
+
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    document.getElementById('clock').textContent =
+      now.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' EST';
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // Period tabs
+  document.querySelectorAll('.period-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.period-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activePeriod = btn.dataset.period;
+      loadData();
+    });
+  });
+
+  function fmt(val) {
+    if (!val) return '—';
+    return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 0 });
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+  }
+
+  function buildPipelineHTML(key, data) {
+    const stagesHTML = data.stages.map((stage, idx) => {
+      const oppsHTML = stage.count === 0
+        ? `<div class="no-opps">No opportunities in this stage</div>`
+        : stage.opportunities.map(o => `
+            <div class="opp-row">
+              <div>
+                <div class="opp-name">${escHtml(o.name || o.contact_name || 'Unnamed')}</div>
+                <div class="opp-phone">${escHtml(o.contact_phone || '')}</div>
+              </div>
+              <div style="text-align:right">
+                <div class="opp-value">${fmt(o.value)}</div>
+                <div class="opp-date">${fmtDate(o.created_at)}</div>
+              </div>
+              ${o.contact_id
+                ? `<button class="tasks-btn" onclick="showTasks('${o.contact_id}','${escHtml(o.name || o.contact_name || '')}')">📋 Tasks</button>`
+                : '<div></div>'
+              }
+            </div>`).join('');
+
+      return `
+        <div class="stage-row" id="${key}-stage-${idx}">
+          <div class="stage-header" onclick="toggleStage('${key}',${idx})">
+            <span class="stage-name">${escHtml(stage.name)}</span>
+            <span class="stage-count">${stage.count}</span>
+            <span class="stage-value">${fmt(stage.total_value)}</span>
+            <span class="stage-chevron">▶</span>
+          </div>
+          <div class="opps-list">${oppsHTML}</div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="pipeline-card">
+        <div class="pipeline-header">
+          <div class="pipeline-name">${escHtml(data.name)}</div>
+          <div class="pipeline-summary">
+            <div class="summary-pill"><strong>${data.total_count}</strong> deals</div>
+            <div class="summary-pill"><strong>${fmt(data.total_value)}</strong></div>
+          </div>
+        </div>
+        ${stagesHTML}
+        <div class="pipeline-footer">
+          <span>Total Deals: <strong>${data.total_count}</strong></span>
+          <span>Total Value: <strong>${fmt(data.total_value)}</strong></span>
+        </div>
+      </div>`;
+  }
+
+  function toggleStage(key, idx) {
+    const row = document.getElementById(`${key}-stage-${idx}`);
+    row.classList.toggle('open');
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  async function loadData() {
+    const grid = document.getElementById('pipelines-grid');
+    grid.innerHTML = '<div class="skeleton skeleton-pipeline"></div><div class="skeleton skeleton-pipeline"></div>';
+
+    try {
+      const res = await fetch(`/api/pipeline-data?period=${activePeriod}`);
+      const data = await res.json();
+
+      const order = ['acquisition', 'lending'];
+      grid.innerHTML = order.map(key => buildPipelineHTML(key, data[key])).join('');
+
+      const now = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('last-updated').textContent = `Last updated: ${now}`;
+    } catch (e) {
+      grid.innerHTML = `<div style="color:#f87171;padding:1rem">Failed to load data. Check console.</div>`;
+      console.error(e);
+    }
+  }
+
+  async function showTasks(contactId, name) {
+    document.getElementById('modal-contact-name').textContent = name || 'Pending Tasks';
+    document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Loading…</div>';
+    document.getElementById('tasks-modal').classList.add('open');
+
+    try {
+      const res = await fetch(`/api/tasks/${contactId}`);
+      const data = await res.json();
+      const tasks = data.tasks || [];
+
+      if (tasks.length === 0) {
+        document.getElementById('modal-body').innerHTML = '<div class="no-tasks">✅ No pending tasks for this contact.</div>';
+        return;
+      }
+
+      const now = new Date();
+      document.getElementById('modal-body').innerHTML = tasks.map(t => {
+        const due = t.dueDate ? new Date(t.dueDate) : null;
+        const overdue = due && due < now;
+        const dueStr = due ? due.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'No due date';
+        return `
+          <div class="task-item">
+            <div class="task-title">${escHtml(t.title || 'Untitled Task')}</div>
+            <div class="task-meta">
+              <span class="task-due ${overdue ? 'overdue' : ''}">${overdue ? '⚠ Overdue · ' : '📅 '}${dueStr}</span>
+              ${t.assignedTo ? `<span>Assigned: ${escHtml(t.assignedTo)}</span>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+    } catch (e) {
+      document.getElementById('modal-body').innerHTML = '<div class="no-tasks">Error loading tasks.</div>';
+    }
+  }
+
+  function closeModal() {
+    document.getElementById('tasks-modal').classList.remove('open');
+  }
+
+  document.getElementById('tasks-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('tasks-modal')) closeModal();
+  });
+
+  // Auto-refresh every 5 minutes
+  setInterval(loadData, 300000);
+
+  loadData();
+</script>
+</body>
+</html>
