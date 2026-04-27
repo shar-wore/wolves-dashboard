@@ -9,8 +9,7 @@ import pytz
 
 load_dotenv()
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-app = Flask(__name__, template_folder=os.path.join(BASE_DIR, 'templates'))
+app = Flask(__name__)
 
 GHL_API_KEY = os.environ['GHL_API_KEY']
 GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID']
@@ -30,10 +29,10 @@ PIPELINES = {
     },
     'lending': {
         'id': 'tRpdCAqIvepdvcUr18Oq',
-        'name': 'T/C – Lending',
+        'name': 'T/C - Lending',
         'stages': [
             {'id': '2a4c89dc-2ec4-4b67-83a2-83773483e793', 'name': 'New Lead / Buyer'},
-            {'id': 'fbd81873-08e4-47cb-a1dd-5693a94b59e8', 'name': 'Terms – Collect Docs'},
+            {'id': 'fbd81873-08e4-47cb-a1dd-5693a94b59e8', 'name': 'Terms - Collect Docs'},
             {'id': 'ff254e5f-08b4-4924-9110-78fb4b68d377', 'name': 'Application Submitted'},
             {'id': 'd3a923e1-4945-420c-b960-3c6ffc03433a', 'name': 'Appraisal Ordered'},
             {'id': '90aa4217-3e59-4639-9e63-22d50ceb041c', 'name': 'Waiting for C2C'},
