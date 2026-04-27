@@ -1,18 +1,19 @@
 import os
+import json
 import time
 import requests
 from datetime import datetime, timedelta
-from functools import lru_cache
 from flask import Flask, render_template, jsonify, request
 from dotenv import load_dotenv
 import pytz
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
 
 GHL_API_KEY = os.environ['GHL_API_KEY']
 GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID']
+GHL_DEFAULT_USER_ID = 'gQmITDjMwei1qjyhHyfo'
 EST = pytz.timezone('America/New_York')
 
 PIPELINES = {
@@ -44,6 +45,7 @@ PIPELINES = {
 
 _cache = {}
 CACHE_TTL = 120
+PAYOUT_MARKER = '__WORE_PAYOUTS__'
 
 
 def ghl_headers():
@@ -99,11 +101,9 @@ def period_start(period):
 
 def build_pipeline_data(period):
     cutoff = period_start(period)
-
     result = {}
     for key, info in PIPELINES.items():
         opps = cached(f'opps_{key}', lambda pid=info['id']: fetch_opportunities(pid))
-
         if cutoff:
             opps = [o for o in opps if o.get('createdAt', '') >= cutoff.isoformat()]
 
@@ -130,7 +130,7 @@ def build_pipeline_data(period):
                 'contact_name': (opp.get('contact') or {}).get('name', ''),
                 'contact_phone': (opp.get('contact') or {}).get('phone', ''),
                 'created_at': opp.get('createdAt', ''),
-                'updated_at': opp.get('updatedAt', ''),
+                'stage_changed_at': opp.get('lastStageChangeAt') or opp.get('createdAt', ''),
             })
 
         stages = list(stage_index.values())
@@ -140,7 +140,6 @@ def build_pipeline_data(period):
             'total_value': sum(s['total_value'] for s in stages),
             'total_count': sum(s['count'] for s in stages),
         }
-
     return result
 
 
@@ -165,6 +164,49 @@ def get_tasks(contact_id):
     tasks = r.json().get('tasks', [])
     pending = [t for t in tasks if not t.get('completed', False)]
     return jsonify({'tasks': pending})
+
+
+@app.route('/api/payouts/<contact_id>', methods=['GET'])
+def get_payouts(contact_id):
+    r = requests.get(
+        f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
+        headers=ghl_headers(),
+    )
+    notes = r.json().get('notes', [])
+    for note in notes:
+        body = note.get('body', '')
+        if body.startswith(PAYOUT_MARKER):
+            try:
+                data = json.loads(body[len(PAYOUT_MARKER):].strip())
+                return jsonify({'found': True, 'data': data, 'note_id': note['id']})
+            except Exception:
+                pass
+    return jsonify({'found': False})
+
+
+@app.route('/api/payouts/<contact_id>', methods=['POST'])
+def save_payouts(contact_id):
+    payload = request.json
+
+    # Delete any existing payout note
+    r = requests.get(
+        f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
+        headers=ghl_headers(),
+    )
+    for note in r.json().get('notes', []):
+        if note.get('body', '').startswith(PAYOUT_MARKER):
+            requests.delete(
+                f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes/{note["id"]}',
+                headers=ghl_headers(),
+            )
+
+    note_body = PAYOUT_MARKER + '\n' + json.dumps(payload)
+    r2 = requests.post(
+        f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
+        headers=ghl_headers(),
+        json={'body': note_body, 'userId': GHL_DEFAULT_USER_ID},
+    )
+    return jsonify({'success': r2.status_code in (200, 201)})
 
 
 if __name__ == '__main__':
