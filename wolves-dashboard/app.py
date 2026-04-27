@@ -9,7 +9,8 @@ import pytz
 
 load_dotenv()
 
-app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, template_folder=os.path.join(BASE_DIR, 'templates'))
 
 GHL_API_KEY = os.environ['GHL_API_KEY']
 GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID']
