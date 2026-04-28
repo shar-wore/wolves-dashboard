@@ -5,26 +5,42 @@
       "street_name": "Goddard",
       "street_type": "St",
       "address": "17840 Goddard St",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "OToVqsHUSv0aVwTUt9Ps",
       "label_id": "Label_1",
       "discovered_at": "2026-04-28T08:58:49.445928-04:00",
-      "last_email_subject": "Re: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
-      "last_email_date": "2026-04-28T08:27:51-04:00",
+      "last_email_subject": "WORE Transactions - Apr 28, 2026 04:52 PM EST",
+      "last_email_date": "2026-04-28T16:52:22-04:00",
       "recent_emails": [
         {
-          "subject": "Re: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
-          "date_str": "Apr 27, 2026",
-          "sender": "Christine Lee <clee@bchhinc.com>"
+          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
+          "date_str": "Apr 28, 2026",
+          "sender": "shar@wolvesofrealestate.org"
         },
         {
-          "subject": "Re: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
+          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
           "date_str": "Apr 28, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
+        {
+          "subject": "RE: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
+          "date_str": "Apr 28, 2026",
+          "sender": "Wolves of RE <wolvesofre@bchhinc.com>"
+        },
+        {
+          "subject": "Transaction Tracker Summary",
+          "date_str": "Apr 28, 2026",
+          "sender": "shar@wolvesofrealestate.org"
+        },
+        {
+          "subject": "WORE Transactions - Apr 28, 2026 04:52 PM EST",
+          "date_str": "Apr 28, 2026",
+          "sender": "shar@wolvesofrealestate.org"
         }
       ],
       "synced_tasks": [
-        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI"
+        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
+        "send over the Termination copy"
       ],
       "active": true
     },
@@ -33,13 +49,28 @@
       "street_name": "Montour Run",
       "street_type": "Road",
       "address": "181 Montour Run Road",
-      "stage": "Closed / Funded",
+      "stage": "Dead",
       "ghl_contact_id": "MEXcAiZhBgYAOaO4jg73",
       "label_id": "Label_2",
       "discovered_at": "2026-04-28T08:58:52.746739-04:00",
-      "last_email_subject": "Re: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
-      "last_email_date": "2026-04-28T08:27:51-04:00",
+      "last_email_subject": "RE: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
+      "last_email_date": "2026-04-28T13:57:06-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: [External] Fwd: Fw: Deeds // 1510 HURLBUT ST, DETROIT, MI 48214",
+          "date_str": "Apr 28, 2026",
+          "sender": "Marilyn Blair <mblair@bchhinc.com>"
+        },
+        {
+          "subject": "Re: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
+          "date_str": "Apr 28, 2026",
+          "sender": "Christine Lee <clee@bchhinc.com>"
+        },
+        {
+          "subject": "RE: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
+          "date_str": "Apr 28, 2026",
+          "sender": "Wolves of RE <wolvesofre@bchhinc.com>"
+        },
         {
           "subject": "RE: [External] New File Request -- 2807 George Owen Rd",
           "date_str": "Apr 21, 2026",
@@ -49,28 +80,14 @@
           "subject": "Re: [External] New File Request -- 2807 George Owen Rd",
           "date_str": "Apr 21, 2026",
           "sender": "Chris Lemay <chris@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "2807 George Owen Rd",
-          "date_str": "Apr 22, 2026",
-          "sender": "Wolves of RE <wolvesofre@bchhinc.com>"
-        },
-        {
-          "subject": "Re: 2807 George Owen Rd",
-          "date_str": "Apr 22, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "Re: [External] New File Request -- 2807 George Owen Rd",
-          "date_str": "Apr 22, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
         }
       ],
       "synced_tasks": [
         "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
         "send me the Operating Agreement for Ange",
         "sign standard",
-        "sign standard closing documents"
+        "sign standard closing documents",
+        "send over the Termination copy"
       ],
       "active": true
     },
@@ -79,13 +96,18 @@
       "street_name": "MAPLESHADE",
       "street_type": "ST",
       "address": "3075 MAPLESHADE ST",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "5asFTXZrnjWKMfaevRM5",
       "label_id": "Label_3",
       "discovered_at": "2026-04-28T08:58:57.247100-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
+        {
+          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
+          "date_str": "Apr 28, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
         {
           "subject": "Transaction Tracker Summary",
           "date_str": "Apr 28, 2026",
@@ -100,12 +122,12 @@
       "street_name": "Wakefield",
       "street_type": "Ave",
       "address": "5903 Wakefield Ave",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "tC7Hpa6Ny1rYbJsxCHms",
       "label_id": "Label_4",
       "discovered_at": "2026-04-28T08:58:57.990833-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
         {
           "subject": "Transaction Tracker Summary",
@@ -121,12 +143,12 @@
       "street_name": "E MOHAWK",
       "street_type": "AVE",
       "address": "1421 E MOHAWK AVE",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "yB9DosabbMhwLTf3sU1F",
       "label_id": "Label_5",
       "discovered_at": "2026-04-28T08:58:59.271973-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
         {
           "subject": "Re: Transaction Status Update / 1421 E Mohawk Ave / DB-26-137",
@@ -152,12 +174,12 @@
       "street_name": "TYLER",
       "street_type": "ST",
       "address": "4328 TYLER ST",
-      "stage": "Closed / Funded",
+      "stage": "Dead",
       "ghl_contact_id": "YF7idNO9x8ubVYV7FqIB",
       "label_id": "Label_6",
       "discovered_at": "2026-04-28T08:59:00.207469-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
         {
           "subject": "Re: 4328 Tyler St, Detroit, MI: JM-26-68828",
@@ -191,13 +213,18 @@
       "street_name": "SACKETT",
       "street_type": "AVE",
       "address": "4116 SACKETT AVE",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "iIK8m1w0REaTHAUJDn5Q",
       "label_id": "Label_7",
       "discovered_at": "2026-04-28T08:59:00.971238-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
+        {
+          "subject": "Transaction Tracker Summary",
+          "date_str": "Apr 28, 2026",
+          "sender": "shar@wolvesofrealestate.org"
+        },
         {
           "subject": "FW: File # 26195968-WOL/ 4116 Sackett Avenue, Cleveland, Ohio 44109/ FINAL WIRE ",
           "date_str": "Apr 22, 2026",
@@ -217,11 +244,6 @@
           "subject": "4116 Sackett Avenue Cleveland OH",
           "date_str": "Apr 24, 2026",
           "sender": "Alberto <firmfoundationres@gmail.com>"
-        },
-        {
-          "subject": "RE: [External] 4116 Sackett Avenue Cleveland OH",
-          "date_str": "Apr 24, 2026",
-          "sender": "Kelley Wood <KWood@bchhinc.com>"
         }
       ],
       "synced_tasks": [
@@ -234,20 +256,30 @@
       "street_name": "Tangelo",
       "street_type": "Ave",
       "address": "722 Tangelo Ave",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "DqD9s2RJ3Iw7GE2oHEJc",
       "label_id": "Label_8",
       "discovered_at": "2026-04-28T08:59:01.772426-04:00",
-      "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_subject": "Re: Title Request - 2500834 - 722 Tangelo Ave - Oldjohn",
+      "last_email_date": "2026-04-28T15:41:16-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: Title Request - 2500834 - 722 Tangelo Ave - Oldjohn",
+          "date_str": "Apr 28, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
         {
           "subject": "Transaction Tracker Summary",
           "date_str": "Apr 28, 2026",
           "sender": "shar@wolvesofrealestate.org"
         }
       ],
-      "synced_tasks": [],
+      "synced_tasks": [
+        "confirm receipt of this email",
+        "email postclose@eastcoasttitlefl",
+        "email team@eastcoasttitlefl",
+        "confirm receipt of this email correspond"
+      ],
       "active": true
     },
     {
@@ -255,13 +287,18 @@
       "street_name": "Denison",
       "street_type": "Ave",
       "address": "4711 Denison Ave",
-      "stage": "Loan Process Begun",
+      "stage": "Dead",
       "ghl_contact_id": "BfBEpQO6VhCAxMlejTv7",
       "label_id": "Label_9",
       "discovered_at": "2026-04-28T08:59:02.566923-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
+        {
+          "subject": "Transaction Tracker Summary",
+          "date_str": "Apr 28, 2026",
+          "sender": "shar@wolvesofrealestate.org"
+        },
         {
           "subject": "4711 DENISON AVE",
           "date_str": "Apr 23, 2026",
@@ -281,11 +318,6 @@
           "subject": "Re: Approval Items Needed: 4711 Denison",
           "date_str": "Apr 27, 2026",
           "sender": "Justin Arvie <justin.arvie@yahoo.com>"
-        },
-        {
-          "subject": "RE: Approval Items Needed: 4711 Denison",
-          "date_str": "Apr 27, 2026",
-          "sender": "Jennifer Evans <jenn@carmichaelintl.com>"
         }
       ],
       "synced_tasks": [
@@ -298,12 +330,12 @@
       "street_name": "S JARDIN",
       "street_type": "ST",
       "address": "335 S JARDIN ST",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "g2t2C0tn9gvmWKnOwyDy",
       "label_id": "Label_10",
       "discovered_at": "2026-04-28T08:59:03.717413-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
         {
           "subject": "Transaction Tracker Summary",
@@ -387,13 +419,18 @@
       "street_name": "MCDOUGALL",
       "street_type": "ST",
       "address": "2517 MCDOUGALL ST",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "3eyw4DztAAq6KoAYEYYm",
       "label_id": "Label_14",
       "discovered_at": "2026-04-28T08:59:11.102793-04:00",
-      "last_email_subject": "Re: Denison Addendum",
-      "last_email_date": "2026-04-27T16:50:13-04:00",
+      "last_email_subject": "Transaction Tracker Summary",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
+        {
+          "subject": "Transaction Tracker Summary",
+          "date_str": "Apr 28, 2026",
+          "sender": "shar@wolvesofrealestate.org"
+        },
         {
           "subject": "Re: Denison Addendum",
           "date_str": "Apr 27, 2026",
@@ -471,13 +508,23 @@
       "street_name": "Hurlbut",
       "street_type": "St",
       "address": "1510 Hurlbut St",
-      "stage": null,
+      "stage": "Dead",
       "ghl_contact_id": "wbu7kSv09aCV9oTF0UF7",
       "label_id": "Label_16",
       "discovered_at": "2026-04-28T08:59:14.647696-04:00",
-      "last_email_subject": "Re: [External] New File Request-- 1510 Hurlbut St",
-      "last_email_date": "2026-04-27T13:46:31-04:00",
+      "last_email_subject": "Transaction Tracker Summary",
+      "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: [External] Fwd: Fw: Deeds // 1510 HURLBUT ST, DETROIT, MI 48214",
+          "date_str": "Apr 28, 2026",
+          "sender": "Marilyn Blair <mblair@bchhinc.com>"
+        },
+        {
+          "subject": "Transaction Tracker Summary",
+          "date_str": "Apr 28, 2026",
+          "sender": "shar@wolvesofrealestate.org"
+        },
         {
           "subject": "Re: Intro to Lending 1510 Hurlbut St",
           "date_str": "Apr 21, 2026",
@@ -492,16 +539,6 @@
           "subject": "RE: Intro to Lending 1510 Hurlbut St",
           "date_str": "Apr 23, 2026",
           "sender": "Jennifer Evans <jenn@carmichaelintl.com>"
-        },
-        {
-          "subject": "Re: Intro to Lending 1510 Hurlbut St",
-          "date_str": "Apr 23, 2026",
-          "sender": "Jennifer Evans <jenn@carmichaelintl.com>"
-        },
-        {
-          "subject": "Re: [External] New File Request-- 1510 Hurlbut St",
-          "date_str": "Apr 27, 2026",
-          "sender": "Marilyn Blair <mblair@bchhinc.com>"
         }
       ],
       "synced_tasks": [
@@ -569,9 +606,14 @@
       "ghl_contact_id": null,
       "label_id": "Label_19",
       "discovered_at": "2026-04-28T08:59:53.719520-04:00",
-      "last_email_subject": "Re: Transaction Status Update / 1421 E Mohawk Ave / DB-26-137",
-      "last_email_date": "2026-04-24T17:06:43-04:00",
+      "last_email_subject": "Re: Title Request - 2500834 - 722 Tangelo Ave - Oldjohn",
+      "last_email_date": "2026-04-28T15:41:16-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: Title Request - 2500834 - 722 Tangelo Ave - Oldjohn",
+          "date_str": "Apr 28, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
         {
           "subject": "Re: Transaction Status Update / 1421 E Mohawk Ave / DB-26-137",
           "date_str": "Apr 24, 2026",
@@ -582,7 +624,9 @@
         "complete the FinCEN questionnaire in Qua",
         "COMPLETE IN QUALIA",
         "email postclose@eastcoasttitlefl",
-        "email team@eastcoasttitlefl"
+        "email team@eastcoasttitlefl",
+        "confirm receipt of this email",
+        "confirm receipt of this email correspond"
       ],
       "active": true
     },
@@ -591,7 +635,7 @@
       "street_name": "Hazel",
       "street_type": "Rd",
       "address": "15815 Hazel Rd",
-      "stage": "Title / Escrow Open",
+      "stage": "File Open / In Process",
       "ghl_contact_id": "zPuEFxaYDMRZY1W1qL3j",
       "label_id": "Label_20",
       "discovered_at": "2026-04-28T09:00:03.940819-04:00",
@@ -617,7 +661,7 @@
       "street_name": "Morse",
       "street_type": "Rd",
       "address": "4605 Morse Rd",
-      "stage": "Title / Escrow Open",
+      "stage": "File Open / In Process",
       "ghl_contact_id": null,
       "label_id": "Label_21",
       "discovered_at": "2026-04-28T09:00:04.717377-04:00",
@@ -672,5 +716,6 @@
       ],
       "active": true
     }
-  ]
+  ],
+  "_labels_migrated": true
 }
