@@ -201,6 +201,55 @@
     .sf-stat strong { color: var(--gold); font-size: 0.95rem; }
     .summary-loading { padding: 2rem; text-align: center; color: var(--muted); font-size: 0.82rem; }
     .summary-empty { padding: 2rem; text-align: center; color: var(--muted); font-size: 0.82rem; font-style: italic; }
+
+    /* -- View toggle -- */
+    .view-toggle { display: flex; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 3px; gap: 2px; }
+    .view-tab-btn { padding: 0.35rem 0.9rem; border-radius: 6px; border: none; background: transparent; color: var(--muted); font-size: 0.72rem; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: all 0.15s; letter-spacing: 0.06em; text-transform: uppercase; }
+    .view-tab-btn.active { background: var(--blue); color: #fff; }
+    .view-tab-btn:hover:not(.active) { color: var(--white); }
+
+    /* -- Transactions section -- */
+    .txn-section { margin-top: 1.5rem; display: none; }
+    .txn-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem; }
+    .txn-section-title { font-size: 0.85rem; font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: 0.08em; }
+    .txn-filters { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .txn-filter-btn { padding: 0.3rem 0.75rem; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 0.7rem; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: all 0.15s; letter-spacing: 0.05em; text-transform: uppercase; }
+    .txn-filter-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .txn-filter-btn:hover:not(.active) { color: var(--white); border-color: var(--muted); }
+
+    .txn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+    .txn-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.15s; }
+    .txn-card:hover { border-color: rgba(24,139,246,0.4); }
+    .txn-card-header { padding: 1rem 1.1rem 0.75rem; }
+    .txn-address { font-size: 0.92rem; font-weight: 800; color: var(--white); margin-bottom: 0.55rem; letter-spacing: 0.01em; }
+    .txn-stage-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .stage-pill { display: inline-block; padding: 0.18rem 0.65rem; border-radius: 20px; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid; }
+    .stage-contract { color: var(--blue); border-color: rgba(24,139,246,0.35); background: rgba(24,139,246,0.1); }
+    .stage-open { color: var(--gold); border-color: rgba(202,176,114,0.35); background: rgba(202,176,114,0.1); }
+    .stage-ctc { color: #000; border-color: var(--lime); background: var(--lime); }
+    .stage-funded { color: var(--green); border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.1); }
+    .stage-dead { color: var(--red); border-color: rgba(248,113,113,0.35); background: rgba(248,113,113,0.08); }
+    .stage-none { color: var(--muted); border-color: rgba(107,125,179,0.3); background: rgba(107,125,179,0.08); }
+    .txn-email-age { font-size: 0.68rem; white-space: nowrap; font-weight: 600; }
+    .txn-email-age.recent { color: var(--green); }
+    .txn-email-age.warm { color: var(--yellow); }
+    .txn-email-age.old { color: var(--red); }
+    .txn-last-email { padding: 0.6rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); background: rgba(0,3,33,0.3); }
+    .txn-last-subject { font-size: 0.75rem; color: var(--text); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.2rem; }
+    .txn-last-sender { font-size: 0.67rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .txn-card-footer { padding: 0.65rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .txn-ghl-link { background: rgba(194,255,20,0.08); border: 1px solid rgba(194,255,20,0.2); color: var(--lime); border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.68rem; font-weight: 700; text-decoration: none; letter-spacing: 0.05em; transition: all 0.15s; }
+    .txn-ghl-link:hover { background: var(--lime); color: #000; }
+    .txn-no-ghl { font-size: 0.68rem; color: var(--muted); font-style: italic; }
+    .txn-emails-toggle { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--muted); border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.68rem; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; letter-spacing: 0.04em; transition: all 0.15s; }
+    .txn-emails-toggle:hover { color: var(--white); border-color: var(--muted); }
+    .txn-emails-list { border-top: 1px solid rgba(30,37,96,0.5); display: none; }
+    .txn-email-item { padding: 0.55rem 1.1rem; border-bottom: 1px solid rgba(30,37,96,0.3); }
+    .txn-email-item:last-child { border-bottom: none; }
+    .txn-email-item-subject { font-size: 0.72rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .txn-email-item-meta { font-size: 0.65rem; color: var(--muted); display: flex; justify-content: space-between; gap: 0.5rem; }
+    .txn-empty { padding: 3rem; text-align: center; color: var(--muted); font-size: 0.82rem; font-style: italic; grid-column: 1 / -1; }
+    .txn-count { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
     .view-deals-btn { background: transparent; border: 1px solid rgba(202,176,114,0.35); color: var(--gold); border-radius: 6px; padding: 0.3rem 0.8rem; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.15s; letter-spacing: 0.04em; }
     .view-deals-btn:hover { background: rgba(202,176,114,0.12); }
 
@@ -228,12 +277,16 @@
   </div>
   <div class="header-right">
     <div id="clock"></div>
-    <div class="period-tabs">
+    <div class="view-toggle">
+      <button class="view-tab-btn active" onclick="switchView('pipeline')">Pipeline</button>
+      <button class="view-tab-btn" onclick="switchView('transactions')">Transactions</button>
+    </div>
+    <div class="period-tabs" id="period-tabs">
       <button class="period-tab active" data-period="all">All Time</button>
       <button class="period-tab" data-period="week">This Week</button>
       <button class="period-tab" data-period="today">Today</button>
     </div>
-    <button id="refresh-btn" onclick="loadData()">Refresh</button>
+    <button id="refresh-btn" onclick="refreshCurrent()">Refresh</button>
   </div>
 </header>
 
@@ -272,6 +325,24 @@
       <div class="sf-stat"><span>Deals with payout data: </span><strong id="sf-deals">0</strong></div>
       <div class="sf-stat"><span>Total Paid Out: </span><strong id="sf-total">$0</strong></div>
       <button class="view-deals-btn" onclick="showDealsModal()">View Deals</button>
+    </div>
+  </div>
+  <!-- Transactions section -->
+  <div class="txn-section" id="txn-section">
+    <div class="txn-section-header">
+      <div>
+        <div class="txn-section-title">Active Transactions</div>
+        <div class="txn-count" id="txn-count"></div>
+      </div>
+      <div class="txn-filters">
+        <button class="txn-filter-btn active" data-filter="active" onclick="setTxnFilter('active')">Active</button>
+        <button class="txn-filter-btn" data-filter="closed" onclick="setTxnFilter('closed')">Closed</button>
+        <button class="txn-filter-btn" data-filter="dead" onclick="setTxnFilter('dead')">Dead</button>
+        <button class="txn-filter-btn" data-filter="all" onclick="setTxnFilter('all')">All</button>
+      </div>
+    </div>
+    <div class="txn-grid" id="txn-grid">
+      <div class="txn-empty">Loading transactions...</div>
     </div>
   </div>
 </main>
@@ -613,6 +684,128 @@
   document.querySelectorAll('.modal-overlay').forEach(el => {
     el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
   });
+
+  let currentView = 'pipeline';
+  let allTransactions = [];
+  let activeTxnFilter = 'active';
+
+  function switchView(view) {
+    currentView = view;
+    document.querySelectorAll('.view-tab-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === view));
+    const isPipeline = view === 'pipeline';
+    document.getElementById('pipelines-grid').style.display = isPipeline ? '' : 'none';
+    document.querySelector('.summary-section').style.display = isPipeline ? '' : 'none';
+    document.getElementById('period-tabs').style.display = isPipeline ? '' : 'none';
+    document.getElementById('last-updated').style.display = isPipeline ? '' : 'none';
+    document.getElementById('txn-section').style.display = isPipeline ? 'none' : '';
+    if (view === 'transactions') loadTransactions();
+  }
+
+  function refreshCurrent() {
+    if (currentView === 'pipeline') loadData();
+    else loadTransactions();
+  }
+
+  function txnStageClass(stage) {
+    if (!stage) return 'stage-none';
+    if (stage === 'Buyer Under Contract') return 'stage-contract';
+    if (stage === 'File Open / In Process') return 'stage-open';
+    if (stage === 'Clear to Close') return 'stage-ctc';
+    if (stage === 'Closed / Funded') return 'stage-funded';
+    if (stage === 'Dead') return 'stage-dead';
+    return 'stage-none';
+  }
+
+  function emailAgeCls(dateStr) {
+    if (!dateStr) return '';
+    const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+    return days <= 3 ? 'recent' : days <= 10 ? 'warm' : 'old';
+  }
+
+  function emailAgeLabel(dateStr) {
+    if (!dateStr) return 'No emails';
+    const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+    return days === 0 ? 'Today' : days === 1 ? '1d ago' : `${days}d ago`;
+  }
+
+  function buildTxnCard(t) {
+    const ghlUrl = t.ghl_contact_id
+      ? `https://app.gohighlevel.com/v2/location/xdxH9vtl3elSaTTxhhix/contacts/detail/${t.ghl_contact_id}`
+      : null;
+    const ageCls = emailAgeCls(t.last_email_date);
+    const ageLabel = emailAgeLabel(t.last_email_date);
+    const emails = t.recent_emails || [];
+
+    const emailsHtml = emails.length ? emails.map(e => `
+      <div class="txn-email-item">
+        <div class="txn-email-item-subject">${escHtml(e.subject)}</div>
+        <div class="txn-email-item-meta">
+          <span>${escHtml(e.sender)}</span>
+          <span>${escHtml(e.date_str)}</span>
+        </div>
+      </div>`).join('') : '<div class="txn-email-item" style="color:var(--muted);font-size:0.75rem">No recent emails</div>';
+
+    return `<div class="txn-card">
+      <div class="txn-card-header">
+        <div class="txn-address">${escHtml(t.address)}</div>
+        <div class="txn-stage-row">
+          <span class="stage-pill ${txnStageClass(t.stage)}">${escHtml(t.stage || 'No Stage')}</span>
+          <span class="txn-email-age ${ageCls}">${ageLabel}</span>
+        </div>
+      </div>
+      ${t.last_email_subject ? `
+      <div class="txn-last-email">
+        <div class="txn-last-subject">${escHtml(t.last_email_subject)}</div>
+        <div class="txn-last-sender">${escHtml((t.recent_emails || [])[0]?.sender || '')}</div>
+      </div>` : ''}
+      <div class="txn-card-footer">
+        ${ghlUrl ? `<a class="txn-ghl-link" href="${ghlUrl}" target="_blank">View in GHL</a>` : '<span class="txn-no-ghl">No GHL contact</span>'}
+        ${emails.length ? `<button class="txn-emails-toggle" onclick="toggleEmails(this)">Emails (${emails.length})</button>` : ''}
+      </div>
+      <div class="txn-emails-list">${emailsHtml}</div>
+    </div>`;
+  }
+
+  function filterTxns(txns, filter) {
+    if (filter === 'active') return txns.filter(t => t.active !== false && t.stage !== 'Closed / Funded' && t.stage !== 'Dead');
+    if (filter === 'closed') return txns.filter(t => t.stage === 'Closed / Funded');
+    if (filter === 'dead') return txns.filter(t => t.stage === 'Dead' || t.active === false);
+    return txns;
+  }
+
+  function renderTransactions() {
+    const filtered = filterTxns(allTransactions, activeTxnFilter);
+    const grid = document.getElementById('txn-grid');
+    const titles = { active: 'Active Transactions', closed: 'Closed Transactions', dead: 'Dead Deals', all: 'All Transactions' };
+    document.querySelector('.txn-section-title').textContent = titles[activeTxnFilter];
+    document.getElementById('txn-count').textContent = filtered.length + ' transaction' + (filtered.length !== 1 ? 's' : '');
+    grid.innerHTML = filtered.length ? filtered.map(buildTxnCard).join('') : '<div class="txn-empty">No transactions in this category.</div>';
+  }
+
+  async function loadTransactions() {
+    document.getElementById('txn-grid').innerHTML = '<div class="txn-empty">Loading...</div>';
+    try {
+      const res = await fetch('/api/transactions');
+      const data = await res.json();
+      allTransactions = data.transactions || [];
+      renderTransactions();
+    } catch(e) {
+      document.getElementById('txn-grid').innerHTML = '<div class="txn-empty">Error loading transactions.</div>';
+    }
+  }
+
+  function setTxnFilter(filter) {
+    activeTxnFilter = filter;
+    document.querySelectorAll('.txn-filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+    renderTransactions();
+  }
+
+  function toggleEmails(btn) {
+    const list = btn.closest('.txn-card').querySelector('.txn-emails-list');
+    const open = list.style.display === 'block';
+    list.style.display = open ? 'none' : 'block';
+    btn.textContent = open ? btn.textContent.replace('‚ñ¥', '‚ñæ') : btn.textContent.replace('‚ñæ', '‚ñ¥');
+  }
 
   setInterval(loadData, 300000);
   loadData();
