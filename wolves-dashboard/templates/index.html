@@ -171,6 +171,36 @@
       .stakeholders-header, .stakeholder-row { grid-template-columns: 1fr 1fr 70px 28px; }
       .sh-col:nth-child(3), .stakeholder-row > *:nth-child(3) { display: none; }
     }
+
+    /* -- Financial Summary -- */
+    .summary-section { margin-top: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    .summary-section-header { padding: 1rem 1.25rem; background: linear-gradient(135deg, rgba(202,176,114,0.1) 0%, transparent 60%); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+    .summary-section-title { font-size: 0.85rem; font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: 0.08em; }
+    .summary-period-controls { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .summary-tab { padding: 0.3rem 0.75rem; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 0.7rem; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: all 0.15s; letter-spacing: 0.05em; text-transform: uppercase; }
+    .summary-tab.active { background: var(--gold); color: #000; border-color: var(--gold); }
+    .summary-tab:hover:not(.active) { color: var(--white); border-color: var(--muted); }
+    .summary-selects { display: flex; gap: 0.4rem; }
+    .summary-select { background: rgba(0,3,33,0.8); border: 1px solid var(--border); border-radius: 6px; padding: 0.3rem 0.5rem; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 500; outline: none; cursor: pointer; }
+    .summary-select:focus { border-color: var(--gold); }
+
+    .summary-table-wrap { overflow-x: auto; }
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table th { padding: 0.65rem 1.25rem; text-align: left; font-size: 0.65rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); background: rgba(0,3,33,0.3); }
+    .summary-table th.right { text-align: right; }
+    .summary-table td { padding: 0.7rem 1.25rem; font-size: 0.82rem; border-bottom: 1px solid rgba(30,37,96,0.4); }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table tr:hover td { background: rgba(202,176,114,0.04); }
+    .td-name { color: var(--white); font-weight: 700; }
+    .td-total { color: var(--gold); font-weight: 800; text-align: right; }
+    .td-deals { color: var(--lime); font-weight: 600; text-align: right; }
+    .td-avg { color: var(--muted); font-weight: 500; text-align: right; }
+    .summary-footer { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: rgba(202,176,114,0.04); flex-wrap: wrap; gap: 0.5rem; }
+    .sf-stat { font-size: 0.78rem; }
+    .sf-stat span { color: var(--muted); }
+    .sf-stat strong { color: var(--gold); font-size: 0.95rem; }
+    .summary-loading { padding: 2rem; text-align: center; color: var(--muted); font-size: 0.82rem; }
+    .summary-empty { padding: 2rem; text-align: center; color: var(--muted); font-size: 0.82rem; font-style: italic; }
   </style>
 </head>
 <body>
@@ -199,6 +229,36 @@
   <div class="pipelines-grid" id="pipelines-grid">
     <div class="skeleton skeleton-pipeline"></div>
     <div class="skeleton skeleton-pipeline"></div>
+  </div>
+
+  <!-- Financial Summary -->
+  <div class="summary-section">
+    <div class="summary-section-header">
+      <div class="summary-section-title">Financial Summary - Acquisition Pipeline</div>
+      <div class="summary-period-controls">
+        <button class="summary-tab active" data-speriod="all">All Time</button>
+        <button class="summary-tab" data-speriod="ytd">YTD</button>
+        <button class="summary-tab" data-speriod="month">Month</button>
+        <div class="summary-selects" id="month-pickers" style="display:none">
+          <select class="summary-select" id="summary-month">
+            <option value="1">Jan</option><option value="2">Feb</option>
+            <option value="3">Mar</option><option value="4">Apr</option>
+            <option value="5">May</option><option value="6">Jun</option>
+            <option value="7">Jul</option><option value="8">Aug</option>
+            <option value="9">Sep</option><option value="10">Oct</option>
+            <option value="11">Nov</option><option value="12">Dec</option>
+          </select>
+          <select class="summary-select" id="summary-year"></select>
+        </div>
+      </div>
+    </div>
+    <div class="summary-table-wrap">
+      <div id="summary-content" class="summary-loading">Loading financial data...</div>
+    </div>
+    <div class="summary-footer" id="summary-footer" style="display:none">
+      <div class="sf-stat"><span>Deals with payout data: </span><strong id="sf-deals">0</strong></div>
+      <div class="sf-stat"><span>Total Paid Out: </span><strong id="sf-total">$0</strong></div>
+    </div>
   </div>
 </main>
 
@@ -528,6 +588,81 @@
 
   setInterval(loadData, 300000);
   loadData();
+
+  // -- Financial Summary --
+  let activeSummaryPeriod = 'all';
+  const nowEST = new Date();
+
+  // Populate year dropdown
+  (function() {
+    const sel = document.getElementById('summary-year');
+    for (let y = nowEST.getFullYear(); y >= 2024; y--) {
+      const o = document.createElement('option');
+      o.value = y; o.textContent = y;
+      sel.appendChild(o);
+    }
+    document.getElementById('summary-month').value = nowEST.getMonth() + 1;
+  })();
+
+  document.querySelectorAll('.summary-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.summary-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeSummaryPeriod = btn.dataset.speriod;
+      document.getElementById('month-pickers').style.display = activeSummaryPeriod === 'month' ? 'flex' : 'none';
+      loadSummary();
+    });
+  });
+
+  document.getElementById('summary-month').addEventListener('change', loadSummary);
+  document.getElementById('summary-year').addEventListener('change', loadSummary);
+
+  async function loadSummary() {
+    document.getElementById('summary-content').innerHTML = '<div class="summary-loading">Loading financial data...</div>';
+    document.getElementById('summary-footer').style.display = 'none';
+
+    const month = document.getElementById('summary-month').value;
+    const year = document.getElementById('summary-year').value;
+    const url = `/api/payout-summary?period=${activeSummaryPeriod}&month=${month}&year=${year}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!data.rows || !data.rows.length) {
+        document.getElementById('summary-content').innerHTML = '<div class="summary-empty">No payout data found for this period. Add payouts to deals using the Payouts button.</div>';
+        return;
+      }
+
+      let html = '<table class="summary-table"><thead><tr>' +
+        '<th>Stakeholder</th>' +
+        '<th class="right">Total Earned</th>' +
+        '<th class="right">Deals</th>' +
+        '<th class="right">Avg / Deal</th>' +
+        '</tr></thead><tbody>';
+
+      data.rows.forEach(row => {
+        html += `<tr>
+          <td class="td-name">${escHtml(row.name)}</td>
+          <td class="td-total">${fmt(row.total)}</td>
+          <td class="td-deals">${row.deals}</td>
+          <td class="td-avg">${fmt(row.avg)}</td>
+        </tr>`;
+      });
+
+      html += '</tbody></table>';
+      document.getElementById('summary-content').innerHTML = html;
+
+      document.getElementById('sf-deals').textContent = data.deal_count;
+      document.getElementById('sf-total').textContent = fmt(data.total_paid);
+      document.getElementById('summary-footer').style.display = 'flex';
+
+    } catch(e) {
+      document.getElementById('summary-content').innerHTML = '<div class="summary-empty">Error loading data.</div>';
+    }
+  }
+
+  loadSummary();
 </script>
 </body>
 </html>
