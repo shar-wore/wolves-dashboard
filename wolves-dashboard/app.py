@@ -253,6 +253,7 @@ def payout_summary():
     opps = cached('opps_acquisition', lambda: fetch_opportunities(PIPELINES['acquisition']['id']))
 
     stakeholder_totals = {}
+    deals_list = []
     deal_count = 0
     total_paid = 0
 
@@ -277,6 +278,16 @@ def payout_summary():
         deal_count += 1
         total_paid += deal_total
 
+        deal_date_str = deal_date.strftime('%b %d, %Y') if deal_date else ''
+        deals_list.append({
+            'name': opp.get('name', ''),
+            'deal_total': deal_total,
+            'date': deal_date_str,
+            'contact_id': contact_id,
+            'opp_id': opp.get('id', ''),
+            'stakeholders': [{'name': s.get('name', ''), 'amount': s['amount']} for s in calculated],
+        })
+
         for s in calculated:
             name = (s.get('name') or 'Unknown').strip()
             if not name:
@@ -293,7 +304,8 @@ def payout_summary():
         key=lambda x: x['total'], reverse=True
     )
 
-    return jsonify({'rows': rows, 'deal_count': deal_count, 'total_paid': total_paid})
+    deals_list.sort(key=lambda x: x['date'], reverse=True)
+    return jsonify({'rows': rows, 'deal_count': deal_count, 'total_paid': total_paid, 'deals': deals_list})
 
 
 if __name__ == '__main__':
