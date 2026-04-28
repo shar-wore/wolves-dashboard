@@ -15,6 +15,12 @@ load_dotenv()
 
 app = Flask(__name__, template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
 
+# On Render, scripts (gmail_transactions.py etc) live at the repo root, one level
+# above wolves-dashboard/app.py. Locally they share the same folder as app.py.
+_app_dir = os.path.dirname(os.path.abspath(__file__))
+_parent_dir = os.path.dirname(_app_dir)
+SCRIPTS_DIR = _app_dir if os.path.exists(os.path.join(_app_dir, 'gmail_transactions.py')) else _parent_dir
+
 GHL_API_KEY = os.environ['GHL_API_KEY']
 GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID']
 GHL_DEFAULT_USER_ID = 'gQmITDjMwei1qjyhHyfo'
@@ -311,7 +317,7 @@ def payout_summary():
     return jsonify({'rows': rows, 'deal_count': deal_count, 'total_paid': total_paid, 'deals': deals_list})
 
 
-TRANSACTIONS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'transactions.json')
+TRANSACTIONS_FILE = os.path.join(SCRIPTS_DIR, 'transactions.json')
 
 
 @app.route('/api/transactions')
@@ -334,7 +340,7 @@ def _run_script(script, lock):
     try:
         subprocess.run(
             [sys.executable, script],
-            cwd=os.path.dirname(os.path.abspath(__file__)),
+            cwd=SCRIPTS_DIR,
             timeout=180
         )
     finally:
