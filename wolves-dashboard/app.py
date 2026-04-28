@@ -3,6 +3,7 @@ import json
 import time
 import requests
 from datetime import datetime, timedelta
+from calendar import monthrange
 from flask import Flask, render_template, jsonify, request
 from dotenv import load_dotenv
 import pytz
@@ -45,6 +46,8 @@ PIPELINES = {
 
 _cache = {}
 CACHE_TTL = 120
+_payout_cache = {}
+PAYOUT_CACHE_TTL = 300
 PAYOUT_MARKER = '__WORE_PAYOUTS__'
 
 
@@ -67,19 +70,11 @@ def cached(key, fn):
 
 def fetch_opportunities(pipeline_id):
     all_opps = []
-    params = {
-        'location_id': GHL_LOCATION_ID,
-        'pipeline_id': pipeline_id,
-        'limit': 100,
-    }
+    params = {'location_id': GHL_LOCATION_ID, 'pipeline_id': pipeline_id, 'limit': 100}
     while True:
-        r = requests.get(
-            'https://services.leadconnectorhq.com/opportunities/search',
-            headers=ghl_headers(),
-            params=params,
-        )
-        data = r.json()
-        opps = data.get('opportunities', [])
+        r = requests.get('https://services.leadconnectorhq.com/opportunities/search',
+                         headers=ghl_headers(), params=params)
+        opps = r.json().get('opportunities', [])
         all_opps.extend(opps)
         if len(opps) < 100:
             break
@@ -106,14 +101,8 @@ def build_pipeline_data(period):
         opps = cached(f'opps_{key}', lambda pid=info['id']: fetch_opportunities(pid))
         if cutoff:
             opps = [o for o in opps if o.get('createdAt', '') >= cutoff.isoformat()]
-
-        stage_index = {s['id']: {
-            'name': s['name'],
-            'count': 0,
-            'total_value': 0,
-            'opportunities': [],
-        } for s in info['stages']}
-
+        stage_index = {s['id']: {'name': s['name'], 'count': 0, 'total_value': 0, 'opportunities': []}
+                       for s in info['stages']}
         for opp in opps:
             sid = opp.get('pipelineStageId', '')
             if sid not in stage_index:
@@ -132,7 +121,6 @@ def build_pipeline_data(period):
                 'created_at': opp.get('createdAt', ''),
                 'stage_changed_at': opp.get('lastStageChangeAt') or opp.get('createdAt', ''),
             })
-
         stages = list(stage_index.values())
         result[key] = {
             'name': info['name'],
@@ -143,6 +131,58 @@ def build_pipeline_data(period):
     return result
 
 
+def get_payout_data(contact_id):
+    entry = _payout_cache.get(contact_id)
+    if entry and time.time() - entry['ts'] < PAYOUT_CACHE_TTL:
+        return entry['data']
+    try:
+        r = requests.get(f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
+                         headers=ghl_headers())
+        for note in r.json().get('notes', []):
+            body = note.get('body', '')
+            if body.startswith(PAYOUT_MARKER):
+                data = json.loads(body[len(PAYOUT_MARKER):].strip())
+                _payout_cache[contact_id] = {'data': data, 'ts': time.time()}
+                return data
+    except Exception:
+        pass
+    _payout_cache[contact_id] = {'data': None, 'ts': time.time()}
+    return None
+
+
+def calc_amounts(deal_total, stakeholders):
+    remaining = deal_total
+    allocated = 0
+    results = []
+    for s in stakeholders:
+        t = s.get('type', 'fixed')
+        v = float(s.get('value', 0))
+        if t == 'fixed':
+            amount = v
+        elif t == 'pct_total':
+            amount = deal_total * v / 100
+        elif t == 'pct_remaining':
+            amount = remaining * v / 100
+        else:
+            amount = 0
+        amount = round(amount * 100) / 100
+        allocated += amount
+        remaining = deal_total - allocated
+        results.append({**s, 'amount': amount})
+    return results
+
+
+def parse_deal_date(payout_data, opp):
+    date_str = payout_data.get('saved_at') or opp.get('lastStageChangeAt') or opp.get('createdAt', '')
+    if not date_str:
+        return None
+    try:
+        dt = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+        return dt.astimezone(EST)
+    except Exception:
+        return None
+
+
 @app.route('/')
 def dashboard():
     return render_template('index.html')
@@ -150,63 +190,110 @@ def dashboard():
 
 @app.route('/api/pipeline-data')
 def pipeline_data():
-    period = request.args.get('period', 'all')
-    data = build_pipeline_data(period)
-    return jsonify(data)
+    return jsonify(build_pipeline_data(request.args.get('period', 'all')))
 
 
 @app.route('/api/tasks/<contact_id>')
 def get_tasks(contact_id):
-    r = requests.get(
-        f'https://services.leadconnectorhq.com/contacts/{contact_id}/tasks',
-        headers=ghl_headers(),
-    )
-    tasks = r.json().get('tasks', [])
-    pending = [t for t in tasks if not t.get('completed', False)]
+    r = requests.get(f'https://services.leadconnectorhq.com/contacts/{contact_id}/tasks',
+                     headers=ghl_headers())
+    pending = [t for t in r.json().get('tasks', []) if not t.get('completed', False)]
     return jsonify({'tasks': pending})
 
 
 @app.route('/api/payouts/<contact_id>', methods=['GET'])
 def get_payouts(contact_id):
-    r = requests.get(
-        f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
-        headers=ghl_headers(),
-    )
-    notes = r.json().get('notes', [])
-    for note in notes:
-        body = note.get('body', '')
-        if body.startswith(PAYOUT_MARKER):
-            try:
-                data = json.loads(body[len(PAYOUT_MARKER):].strip())
-                return jsonify({'found': True, 'data': data, 'note_id': note['id']})
-            except Exception:
-                pass
+    _payout_cache.pop(contact_id, None)
+    data = get_payout_data(contact_id)
+    if data:
+        return jsonify({'found': True, 'data': data})
     return jsonify({'found': False})
 
 
 @app.route('/api/payouts/<contact_id>', methods=['POST'])
 def save_payouts(contact_id):
     payload = request.json
+    payload['saved_at'] = datetime.now(EST).isoformat()
 
-    # Delete any existing payout note
-    r = requests.get(
-        f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
-        headers=ghl_headers(),
-    )
+    r = requests.get(f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
+                     headers=ghl_headers())
     for note in r.json().get('notes', []):
         if note.get('body', '').startswith(PAYOUT_MARKER):
             requests.delete(
                 f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes/{note["id"]}',
-                headers=ghl_headers(),
-            )
+                headers=ghl_headers())
 
-    note_body = PAYOUT_MARKER + '\n' + json.dumps(payload)
     r2 = requests.post(
         f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
         headers=ghl_headers(),
-        json={'body': note_body, 'userId': GHL_DEFAULT_USER_ID},
-    )
+        json={'body': PAYOUT_MARKER + '\n' + json.dumps(payload), 'userId': GHL_DEFAULT_USER_ID})
+
+    _payout_cache.pop(contact_id, None)
     return jsonify({'success': r2.status_code in (200, 201)})
+
+
+@app.route('/api/payout-summary')
+def payout_summary():
+    period = request.args.get('period', 'all')
+    year = int(request.args.get('year', datetime.now(EST).year))
+    month = int(request.args.get('month', datetime.now(EST).month))
+    now = datetime.now(EST)
+
+    if period == 'ytd':
+        start_dt = EST.localize(datetime(year, 1, 1))
+        end_dt = None
+    elif period == 'month':
+        start_dt = EST.localize(datetime(year, month, 1))
+        last_day = monthrange(year, month)[1]
+        end_dt = EST.localize(datetime(year, month, last_day, 23, 59, 59))
+    else:
+        start_dt = None
+        end_dt = None
+
+    opps = cached('opps_acquisition', lambda: fetch_opportunities(PIPELINES['acquisition']['id']))
+
+    stakeholder_totals = {}
+    deal_count = 0
+    total_paid = 0
+
+    for opp in opps:
+        contact_id = opp.get('contactId')
+        if not contact_id:
+            continue
+        payout_data = get_payout_data(contact_id)
+        if not payout_data:
+            continue
+
+        deal_date = parse_deal_date(payout_data, opp)
+        if start_dt and deal_date and deal_date < start_dt:
+            continue
+        if end_dt and deal_date and deal_date > end_dt:
+            continue
+
+        deal_total = float(payout_data.get('deal_total', 0))
+        stakeholders = payout_data.get('stakeholders', [])
+        calculated = calc_amounts(deal_total, stakeholders)
+
+        deal_count += 1
+        total_paid += deal_total
+
+        for s in calculated:
+            name = (s.get('name') or 'Unknown').strip()
+            if not name:
+                continue
+            if name not in stakeholder_totals:
+                stakeholder_totals[name] = {'total': 0, 'deals': 0}
+            stakeholder_totals[name]['total'] = round(stakeholder_totals[name]['total'] + s['amount'], 2)
+            stakeholder_totals[name]['deals'] += 1
+
+    rows = sorted(
+        [{'name': k, 'total': v['total'], 'deals': v['deals'],
+          'avg': round(v['total'] / v['deals'], 2) if v['deals'] else 0}
+         for k, v in stakeholder_totals.items()],
+        key=lambda x: x['total'], reverse=True
+    )
+
+    return jsonify({'rows': rows, 'deal_count': deal_count, 'total_paid': total_paid})
 
 
 if __name__ == '__main__':
