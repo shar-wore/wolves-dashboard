@@ -48,9 +48,9 @@ STAGE_MIGRATION = {
 
 STAGE_KEYWORDS = {
     'Dead': [
-        'deal fell through', 'terminated', 'termination', 'cancellation',
-        'deal dead', 'contract cancelled', 'deal cancelled', 'file closed',
-        'withdrawn', 'deal fell apart',
+        'deal fell through', 'deal is dead', 'deal fell apart',
+        'contract cancelled', 'deal cancelled', 'contract terminated',
+        'deal terminated', 'we are cancelling', 'we are terminating',
     ],
     'Closed / Funded': [
         'funded', 'closed and funded', 'disbursed', 'wire received',
@@ -101,7 +101,7 @@ PENDING_SIG_SECTION_RE = re.compile(
 
 # Detects where an email signature/footer begins
 SIGNATURE_RE = re.compile(
-    r'\n(?:--|—|_{2,})\s*\n'
+    r'\n(?:--|‚Äî|_{2,})\s*\n'
     r'|\n(?:best(?: regards?)?|sincerely|thanks?!?|warm regards?|kind regards?|cheers|regards?)[,.]?\s*\n'
     r'|(?:sent from (?:my )?(?:iphone|android|ipad|outlook|samsung)|get outlook for)'
     r'|(?:this (?:e-?mail|message) (?:and any|contains|is intended|is confidential))',
@@ -296,7 +296,7 @@ def migrate_old_labels(service, data):
                 service.users().labels().update(
                     userId='me', id=lbl['id'], body={'name': new_name}
                 ).execute()
-                print(f"  Renamed label: {lbl['name']} → {new_name}")
+                print(f"  Renamed label: {lbl['name']} ‚Üí {new_name}")
     except HttpError as e:
         print(f"  Label migration warning: {e}")
     data['_labels_migrated'] = True
@@ -437,7 +437,7 @@ def run():
                 apply_label(service, msg_ref['id'], txn['label_id'])
 
             stage = detect_stage(combined)
-            if stage:
+            if stage and stage != 'Dead':
                 current_idx = STAGES.index(txn['stage']) if txn.get('stage') in STAGES else -1
                 if STAGES.index(stage) >= current_idx:
                     txn['stage'] = stage
