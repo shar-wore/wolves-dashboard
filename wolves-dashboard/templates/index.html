@@ -250,6 +250,12 @@
     .txn-email-item-meta { font-size: 0.65rem; color: var(--muted); display: flex; justify-content: space-between; gap: 0.5rem; }
     .txn-empty { padding: 3rem; text-align: center; color: var(--muted); font-size: 0.82rem; font-style: italic; grid-column: 1 / -1; }
     .txn-count { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+    .btn-dead { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); color: var(--red); border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.68rem; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; letter-spacing: 0.04em; transition: all 0.15s; }
+    .btn-dead:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .txn-reactivate { display: flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); background: rgba(248,113,113,0.04); }
+    .txn-reactivate select { background: rgba(0,3,33,0.8); border: 1px solid var(--border); border-radius: 6px; padding: 0.3rem 0.5rem; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 0.72rem; outline: none; flex: 1; cursor: pointer; }
+    .btn-reactivate { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); color: var(--green); border-radius: 6px; padding: 0.25rem 0.8rem; font-size: 0.68rem; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; letter-spacing: 0.04em; transition: all 0.15s; white-space: nowrap; }
+    .btn-reactivate:hover { background: var(--green); color: #000; border-color: var(--green); }
     .view-deals-btn { background: transparent; border: 1px solid rgba(202,176,114,0.35); color: var(--gold); border-radius: 6px; padding: 0.3rem 0.8rem; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.15s; letter-spacing: 0.04em; }
     .view-deals-btn:hover { background: rgba(202,176,114,0.12); }
 
@@ -760,8 +766,21 @@
       </div>` : ''}
       <div class="txn-card-footer">
         ${ghlUrl ? `<a class="txn-ghl-link" href="${ghlUrl}" target="_blank">View in GHL</a>` : '<span class="txn-no-ghl">No GHL contact</span>'}
-        ${emails.length ? `<button class="txn-emails-toggle" onclick="toggleEmails(this)">Emails (${emails.length})</button>` : ''}
+        <div style="display:flex;gap:0.4rem;align-items:center">
+          ${emails.length ? `<button class="txn-emails-toggle" onclick="toggleEmails(this)">Emails (${emails.length})</button>` : ''}
+          ${t.stage !== 'Dead' ? `<button class="btn-dead" onclick="markDead('${escHtml(t.address)}')">Mark Dead</button>` : ''}
+        </div>
       </div>
+      ${t.stage === 'Dead' ? `
+      <div class="txn-reactivate">
+        <select id="reactivate-${escHtml(t.address).replace(/\s+/g,'-')}">
+          <option value="Buyer Under Contract">Buyer Under Contract</option>
+          <option value="File Open / In Process" selected>File Open / In Process</option>
+          <option value="Clear to Close">Clear to Close</option>
+          <option value="Closed / Funded">Closed / Funded</option>
+        </select>
+        <button class="btn-reactivate" onclick="reactivateDeal('${escHtml(t.address)}')">Reactivate</button>
+      </div>` : ''}
       <div class="txn-emails-list">${emailsHtml}</div>
     </div>`;
   }
@@ -798,6 +817,32 @@
     activeTxnFilter = filter;
     document.querySelectorAll('.txn-filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
     renderTransactions();
+  }
+
+  async function updateStage(address, stage) {
+    try {
+      const res = await fetch('/api/transactions/update-stage', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({address, stage})
+      });
+      const data = await res.json();
+      if (data.success) await loadTransactions();
+      else alert('Could not update stage: ' + (data.error || 'unknown error'));
+    } catch(e) {
+      alert('Error updating stage.');
+    }
+  }
+
+  function markDead(address) {
+    if (!confirm(`Mark "${address}" as Dead?`)) return;
+    updateStage(address, 'Dead');
+  }
+
+  function reactivateDeal(address) {
+    const key = address.replace(/\s+/g, '-');
+    const sel = document.getElementById('reactivate-' + key);
+    if (sel) updateStage(address, sel.value);
   }
 
   function toggleEmails(btn) {
