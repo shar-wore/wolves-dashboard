@@ -113,22 +113,22 @@ def import_row(row, sheet_row_num):
 
     phone_e164 = normalize_phone(phone_raw.strip()) if phone_raw.strip() else None
     if not phone_e164:
-        print(f"  Row {sheet_row_num}: No valid phone number — skipped.")
+        print(f"  Row {sheet_row_num}: No valid phone number ‚Äî skipped.")
         return
 
     existing_id = search_contact_by_phone(phone_e164)
 
     if existing_id:
         ts_label = timestamp.strip() if timestamp.strip() else 'unknown time'
-        lines = [f"⚠️ Duplicate sheet submission [{ts_label}] — row {sheet_row_num}"]
+        lines = [f"‚ö†Ô∏è Duplicate sheet submission [{ts_label}] ‚Äî row {sheet_row_num}"]
         if convo_notes and convo_notes.strip():
-            lines.append(f"\n📋 Conversation Note [{ts_label}]\n\n{convo_notes.strip()}")
+            lines.append(f"\nüìã Conversation Note [{ts_label}]\n\n{convo_notes.strip()}")
         requests.post(
             f'https://services.leadconnectorhq.com/contacts/{existing_id}/notes',
             headers=ghl_headers(),
             json={'body': '\n'.join(lines), 'userId': GHL_DEFAULT_USER_ID},
         )
-        print(f"  Row {sheet_row_num}: Duplicate — note added to existing contact {existing_id} — {owner_name}")
+        print(f"  Row {sheet_row_num}: Duplicate ‚Äî note added to existing contact {existing_id} ‚Äî {owner_name}")
         return
 
     name_parts = owner_name.strip().rsplit(' ', 1) if owner_name.strip() else ['Unknown', '']
@@ -160,6 +160,7 @@ def import_row(row, sheet_row_num):
         'address1': address.strip(),
         'locationId': GHL_LOCATION_ID,
         'tags': ['t2ht'],
+        'source': 'T2HT',
         'customFields': custom_fields,
     }
 
@@ -169,11 +170,11 @@ def import_row(row, sheet_row_num):
         json=contact_payload,
     )
     if r.status_code not in (200, 201):
-        print(f"  Row {sheet_row_num}: Contact creation failed — {r.status_code} {r.text[:200]}")
+        print(f"  Row {sheet_row_num}: Contact creation failed ‚Äî {r.status_code} {r.text[:200]}")
         return
 
     contact_id = r.json()['contact']['id']
-    print(f"  Row {sheet_row_num}: Created contact {contact_id} — {owner_name}")
+    print(f"  Row {sheet_row_num}: Created contact {contact_id} ‚Äî {owner_name}")
 
     if convo_notes and convo_notes.strip():
         ts_label = timestamp.strip() if timestamp.strip() else 'unknown time'
@@ -294,7 +295,7 @@ def run_import():
             import_row(row, sheet_row_num)
             imported += 1
         except Exception as e:
-            print(f"  Row {sheet_row_num}: Unexpected error — {e}")
+            print(f"  Row {sheet_row_num}: Unexpected error ‚Äî {e}")
         time.sleep(0.4)
 
     save_last_row(last_row + len(new_rows))
