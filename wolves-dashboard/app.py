@@ -330,6 +330,31 @@ def get_transactions():
         return jsonify({'transactions': []})
 
 
+@app.route('/api/transactions/update-stage', methods=['POST'])
+def update_transaction_stage():
+    payload = request.json
+    address = (payload.get('address') or '').strip().lower()
+    new_stage = (payload.get('stage') or '').strip()
+    valid = ['Buyer Under Contract', 'File Open / In Process', 'Clear to Close', 'Closed / Funded', 'Dead']
+    if new_stage not in valid:
+        return jsonify({'error': 'invalid stage'}), 400
+    try:
+        with open(TRANSACTIONS_FILE) as f:
+            data = json.load(f)
+        for txn in data['transactions']:
+            if txn.get('address', '').strip().lower() == address:
+                txn['stage'] = new_stage
+                txn['active'] = new_stage != 'Dead'
+                break
+        else:
+            return jsonify({'error': 'not found'}), 404
+        with open(TRANSACTIONS_FILE, 'w') as f:
+            json.dump(data, f, indent=2)
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 _import_running = threading.Lock()
 _scan_running = threading.Lock()
 
