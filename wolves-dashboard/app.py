@@ -311,6 +311,19 @@ def payout_summary():
     return jsonify({'rows': rows, 'deal_count': deal_count, 'total_paid': total_paid, 'deals': deals_list})
 
 
+TRANSACTIONS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'transactions.json')
+
+
+@app.route('/api/transactions')
+def get_transactions():
+    try:
+        with open(TRANSACTIONS_FILE) as f:
+            data = json.load(f)
+        return jsonify({'transactions': data.get('transactions', [])})
+    except Exception:
+        return jsonify({'transactions': []})
+
+
 _import_running = threading.Lock()
 _scan_running = threading.Lock()
 
