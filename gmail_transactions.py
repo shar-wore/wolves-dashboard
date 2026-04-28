@@ -34,13 +34,24 @@ TOKEN_FILE = os.path.join(BASE_DIR, 'token.json')
 
 STAGES = [
     'Buyer Under Contract',
-    'Title / Escrow Open',
-    'Loan Process Begun',
+    'File Open / In Process',
     'Clear to Close',
     'Closed / Funded',
+    'Dead',
 ]
 
+# Old stage names mapped to new ones for backward compatibility
+STAGE_MIGRATION = {
+    'Title / Escrow Open': 'File Open / In Process',
+    'Loan Process Begun': 'File Open / In Process',
+}
+
 STAGE_KEYWORDS = {
+    'Dead': [
+        'deal fell through', 'terminated', 'termination', 'cancellation',
+        'deal dead', 'contract cancelled', 'deal cancelled', 'file closed',
+        'withdrawn', 'deal fell apart',
+    ],
     'Closed / Funded': [
         'funded', 'closed and funded', 'disbursed', 'wire received',
         'proceeds wired', 'hud', 'alta', 'settlement statement',
@@ -51,15 +62,13 @@ STAGE_KEYWORDS = {
         'closing scheduled', 'closing date confirmed', 'final walkthrough',
         'closing confirmed', 'clear for closing',
     ],
-    'Loan Process Begun': [
-        'loan application', 'underwriting', 'pre-approval', 'preapproval',
-        'appraisal ordered', 'appraisal', 'mortgage application',
-        'loan process', 'financing approved', 'loan commitment', 'loan submitted',
-    ],
-    'Title / Escrow Open': [
+    'File Open / In Process': [
         'title opened', 'escrow opened', 'title order', 'file opened',
         'title company', 'opened file', 'title search', 'preliminary title',
         'escrow instructions', 'title commitment', 'title has been opened',
+        'loan application', 'underwriting', 'pre-approval', 'preapproval',
+        'appraisal ordered', 'appraisal', 'mortgage application',
+        'loan process', 'financing approved', 'loan commitment', 'loan submitted',
     ],
     'Buyer Under Contract': [
         'purchase agreement', 'signed contract', 'buyer contract',
@@ -83,6 +92,48 @@ ADDRESS_RE = re.compile(
     r'Hwy|Highway|Terr?\.?|Terrace|Trail|Trl\.?)\b',
     re.IGNORECASE
 )
+
+# Strips the "Pending Signature Status" section from transaction report emails
+PENDING_SIG_SECTION_RE = re.compile(
+    r'pending signature status[\s\S]*?(?=\n[A-Z][^\n]{2,40}(?:status|summary|update|deals|notes)|\Z)',
+    re.IGNORECASE
+)
+
+# Detects where an email signature/footer begins
+SIGNATURE_RE = re.compile(
+    r'\n(?:--|—|_{2,})\s*\n'
+    r'|\n(?:best(?: regards?)?|sincerely|thanks?!?|warm regards?|kind regards?|cheers|regards?)[,.]?\s*\n'
+    r'|(?:sent from (?:my )?(?:iphone|android|ipad|outlook|samsung)|get outlook for)'
+    r'|(?:this (?:e-?mail|message) (?:and any|contains|is intended|is confidential))',
+    re.IGNORECASE
+)
+
+# Keywords that indicate the address belongs to a real estate transaction
+TRANSACTION_WORDS = re.compile(
+    r'propert(?:y|ies)|purchas|clos(?:ing|ed|e\b)|for sale|listed|listing|sold\b|'
+    r'contract|escrow|title(?:\s+compan(?:y|ies))?|buyer|seller|wholesal|'
+    r'deal\b|offer\b|inspect|settlement|earnest|emd\b|'
+    r'subject property|under contract|real estate|acquisition|deed|convey',
+    re.IGNORECASE
+)
+
+
+def strip_signature(text):
+    m = SIGNATURE_RE.search(text)
+    return text[:m.start()] if m else text
+
+
+def strip_pending_signature_section(text):
+    return PENDING_SIG_SECTION_RE.sub('', text)
+
+
+def is_transaction_address(combined, match_start, match_end, subject):
+    """Return True only if the address appears in a genuine transaction context."""
+    if ADDRESS_RE.search(subject):
+        return True
+    window = 600
+    nearby = combined[max(0, match_start - window): min(len(combined), match_end + window)]
+    return bool(TRANSACTION_WORDS.search(nearby))
 
 
 def get_creds():
@@ -167,6 +218,15 @@ def find_transaction(transactions, num, name, type_):
     return None
 
 
+def is_excluded(data, num, name, type_):
+    for e in data.get('excluded_addresses', []):
+        if addresses_match(num, name, type_,
+                           e.get('street_num', ''), e.get('street_name', ''),
+                           e.get('street_type', '')):
+            return True
+    return False
+
+
 def extract_body_text(payload):
     mime = payload.get('mimeType', '')
     if mime == 'text/plain':
@@ -224,8 +284,26 @@ def extract_tasks(text):
     return tasks[:5]
 
 
+def migrate_old_labels(service, data):
+    """One-time rename of 'Transactions/xxx' labels to just 'xxx'."""
+    if data.get('_labels_migrated'):
+        return
+    try:
+        result = service.users().labels().list(userId='me').execute()
+        for lbl in result.get('labels', []):
+            if lbl['name'].startswith('Transactions/'):
+                new_name = lbl['name'][len('Transactions/'):]
+                service.users().labels().update(
+                    userId='me', id=lbl['id'], body={'name': new_name}
+                ).execute()
+                print(f"  Renamed label: {lbl['name']} → {new_name}")
+    except HttpError as e:
+        print(f"  Label migration warning: {e}")
+    data['_labels_migrated'] = True
+
+
 def get_or_create_label(service, address_str):
-    label_name = 'Transactions/' + address_str
+    label_name = address_str
     try:
         result = service.users().labels().list(userId='me').execute()
         for lbl in result.get('labels', []):
@@ -289,9 +367,17 @@ def sync_to_ghl(contact_id, task_title, email_subject, email_date_str):
     )
 
 
+def migrate_stages(data):
+    for txn in data['transactions']:
+        if txn.get('stage') in STAGE_MIGRATION:
+            txn['stage'] = STAGE_MIGRATION[txn['stage']]
+
+
 def run():
     data = load_transactions()
+    migrate_stages(data)
     service = get_gmail()
+    migrate_old_labels(service, data)
     after_ts = get_last_scanned() - 300  # 5-min overlap
 
     print(f"Scanning emails since {datetime.fromtimestamp(after_ts, tz=EST).strftime('%b %d %H:%M EST')}")
@@ -309,11 +395,20 @@ def run():
         if not details:
             continue
 
-        combined = details['subject'] + ' ' + details['body']
-        found = ADDRESS_RE.findall(combined)
+        body_clean = strip_pending_signature_section(strip_signature(details['body']))
+        combined = details['subject'] + '\n' + body_clean
 
-        for num, name, type_ in found:
-            num, name, type_ = num.strip(), name.strip(), type_.strip()
+        for match in ADDRESS_RE.finditer(combined):
+            num = match.group(1).strip()
+            name = match.group(2).strip()
+            type_ = match.group(3).strip()
+
+            if not is_transaction_address(combined, match.start(), match.end(), details['subject']):
+                continue
+
+            if is_excluded(data, num, name, type_):
+                continue
+
             txn = find_transaction(data['transactions'], num, name, type_)
 
             if not txn:
