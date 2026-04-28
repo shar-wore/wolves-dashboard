@@ -201,6 +201,19 @@
     .sf-stat strong { color: var(--gold); font-size: 0.95rem; }
     .summary-loading { padding: 2rem; text-align: center; color: var(--muted); font-size: 0.82rem; }
     .summary-empty { padding: 2rem; text-align: center; color: var(--muted); font-size: 0.82rem; font-style: italic; }
+    .view-deals-btn { background: transparent; border: 1px solid rgba(202,176,114,0.35); color: var(--gold); border-radius: 6px; padding: 0.3rem 0.8rem; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.15s; letter-spacing: 0.04em; }
+    .view-deals-btn:hover { background: rgba(202,176,114,0.12); }
+
+    /* -- Deals list modal -- */
+    #deals-modal .modal { max-width: 680px; }
+    .deal-card { background: rgba(0,3,33,0.5); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1rem; margin-bottom: 0.75rem; }
+    .deal-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; gap: 0.5rem; }
+    .deal-card-name { font-size: 0.82rem; font-weight: 700; color: var(--white); }
+    .deal-card-date { font-size: 0.68rem; color: var(--muted); white-space: nowrap; }
+    .deal-card-total { font-size: 0.82rem; font-weight: 800; color: var(--gold); white-space: nowrap; }
+    .deal-card-stakeholders { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .sh-chip { background: rgba(194,255,20,0.07); border: 1px solid rgba(194,255,20,0.15); border-radius: 20px; padding: 0.15rem 0.6rem; font-size: 0.68rem; font-weight: 600; color: var(--text); }
+    .sh-chip span { color: var(--gold); }
   </style>
 </head>
 <body>
@@ -258,6 +271,7 @@
     <div class="summary-footer" id="summary-footer" style="display:none">
       <div class="sf-stat"><span>Deals with payout data: </span><strong id="sf-deals">0</strong></div>
       <div class="sf-stat"><span>Total Paid Out: </span><strong id="sf-total">$0</strong></div>
+      <button class="view-deals-btn" onclick="showDealsModal()">View Deals</button>
     </div>
   </div>
 </main>
@@ -272,6 +286,20 @@
       <button class="modal-close" onclick="closeModal('tasks-modal')">x</button>
     </div>
     <div class="modal-body" id="tasks-modal-body"></div>
+  </div>
+</div>
+
+<!-- Deals list modal -->
+<div class="modal-overlay" id="deals-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Deals in Financial Summary</div>
+        <div class="modal-subtitle" id="deals-modal-subtitle"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal('deals-modal')">x</button>
+    </div>
+    <div class="modal-body" id="deals-modal-body"></div>
   </div>
 </div>
 
@@ -591,6 +619,7 @@
 
   // -- Financial Summary --
   let activeSummaryPeriod = 'all';
+  let currentDeals = [];
   const nowEST = new Date();
 
   // Populate year dropdown
@@ -653,6 +682,7 @@
       html += '</tbody></table>';
       document.getElementById('summary-content').innerHTML = html;
 
+      currentDeals = data.deals || [];
       document.getElementById('sf-deals').textContent = data.deal_count;
       document.getElementById('sf-total').textContent = fmt(data.total_paid);
       document.getElementById('summary-footer').style.display = 'flex';
@@ -663,6 +693,33 @@
   }
 
   loadSummary();
+
+  function showDealsModal() {
+    const subtitle = document.getElementById('summary-tab') || '';
+    document.getElementById('deals-modal-subtitle').textContent = currentDeals.length + ' deal(s) in current period';
+    const body = document.getElementById('deals-modal-body');
+    if (!currentDeals.length) {
+      body.innerHTML = '<div class="no-tasks">No deals found for this period.</div>';
+      document.getElementById('deals-modal').classList.add('open');
+      return;
+    }
+    body.innerHTML = currentDeals.map(d => {
+      const chips = (d.stakeholders || []).map(s =>
+        `<div class="sh-chip">${escHtml(s.name)} <span>${fmt(s.amount)}</span></div>`
+      ).join('');
+      return `<div class="deal-card">
+        <div class="deal-card-header">
+          <div>
+            <div class="deal-card-name">${escHtml(d.name)}</div>
+            <div class="deal-card-date">${escHtml(d.date)}</div>
+          </div>
+          <div class="deal-card-total">${fmt(d.deal_total)}</div>
+        </div>
+        <div class="deal-card-stakeholders">${chips}</div>
+      </div>`;
+    }).join('');
+    document.getElementById('deals-modal').classList.add('open');
+  }
 </script>
 </body>
 </html>
