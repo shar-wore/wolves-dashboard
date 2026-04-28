@@ -1,6 +1,9 @@
 import os
 import json
+import sys
 import time
+import threading
+import subprocess
 import requests
 from datetime import datetime, timedelta
 from calendar import monthrange
@@ -306,6 +309,39 @@ def payout_summary():
 
     deals_list.sort(key=lambda x: x['date'], reverse=True)
     return jsonify({'rows': rows, 'deal_count': deal_count, 'total_paid': total_paid, 'deals': deals_list})
+
+
+_import_running = threading.Lock()
+_scan_running = threading.Lock()
+
+
+def _run_script(script, lock):
+    if not lock.acquire(blocking=False):
+        return
+    try:
+        subprocess.run(
+            [sys.executable, script],
+            cwd=os.path.dirname(os.path.abspath(__file__)),
+            timeout=180
+        )
+    finally:
+        lock.release()
+
+
+@app.route('/trigger-import')
+def trigger_import():
+    if request.args.get('key') != os.environ.get('CRON_SECRET', ''):
+        return jsonify({'error': 'unauthorized'}), 401
+    threading.Thread(target=_run_script, args=('import_contacts.py', _import_running), daemon=True).start()
+    return jsonify({'status': 'started', 'script': 'import_contacts.py', 'time': datetime.now(EST).isoformat()})
+
+
+@app.route('/trigger-scan')
+def trigger_scan():
+    if request.args.get('key') != os.environ.get('CRON_SECRET', ''):
+        return jsonify({'error': 'unauthorized'}), 401
+    threading.Thread(target=_run_script, args=('gmail_transactions.py', _scan_running), daemon=True).start()
+    return jsonify({'status': 'started', 'script': 'gmail_transactions.py', 'time': datetime.now(EST).isoformat()})
 
 
 if __name__ == '__main__':
