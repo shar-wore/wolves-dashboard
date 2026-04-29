@@ -62,10 +62,6 @@ def txn_html(t, loc_id):
         url = f'https://app.gohighlevel.com/v2/location/{loc_id}/contacts/detail/{ghl_id}'
         ghl_link = f'<a href="{url}" style="font-size:11px;color:#1565c0;text-decoration:none;">View in GHL &rarr;</a>'
 
-    # Filter out our own report emails from recent list
-    recent = [e for e in t.get('recent_emails', []) if not OWN_REPORT_RE.search(e.get('subject', ''))]
-
-    # Status notes ‚Äî the best content
     status_notes = t.get('status_notes', [])
     if status_notes:
         items = ''.join(
@@ -78,20 +74,7 @@ def txn_html(t, loc_id):
             f'<ul style="margin:0;padding-left:16px;">{items}</ul>'
         )
     else:
-        # Fallback: recent email subjects if no status notes yet
-        if recent:
-            items = ''.join(
-                f'<li style="margin:3px 0;color:#555;font-size:12px;">'
-                f'<span style="color:#888;">{e["date_str"]}</span> &mdash; {e["subject"][:70]}</li>'
-                for e in recent[:3]
-            )
-            status_html = (
-                f'<p style="margin:10px 0 3px;font-size:11px;font-weight:bold;'
-                f'color:#888;text-transform:uppercase;letter-spacing:.5px;">Recent Emails</p>'
-                f'<ul style="margin:0;padding-left:16px;">{items}</ul>'
-            )
-        else:
-            status_html = '<p style="color:#aaa;font-size:12px;font-style:italic;">No activity found yet.</p>'
+        status_html = '<p style="color:#aaa;font-size:12px;font-style:italic;">No status data yet ‚Äî will update on next scan.</p>'
 
     last_date = t.get('last_email_date', '')
     if last_date:
