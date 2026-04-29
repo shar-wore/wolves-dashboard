@@ -195,9 +195,24 @@
       "ghl_contact_id": "iIK8m1w0REaTHAUJDn5Q",
       "label_id": "Label_7",
       "discovered_at": "2026-04-28T08:59:00.971238-04:00",
-      "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T15:01:44-04:00",
+      "last_email_subject": "RE: [External] Re: 26195968-WOL / 4116 SACKETT AVENUE, OH - FORM REQUIRED",
+      "last_email_date": "2026-04-29T14:22:33-04:00",
       "recent_emails": [
+        {
+          "subject": "Fwd: 26195968-WOL / 4116 SACKETT AVENUE, OH - FORM REQUIRED",
+          "date_str": "Apr 29, 2026",
+          "sender": "Chris Lemay <chris@wolvesofrealestate.org>"
+        },
+        {
+          "subject": "Re: 26195968-WOL / 4116 SACKETT AVENUE, OH - FORM REQUIRED",
+          "date_str": "Apr 29, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
+        {
+          "subject": "RE: [External] Re: 26195968-WOL / 4116 SACKETT AVENUE, OH - FORM REQUIRED",
+          "date_str": "Apr 29, 2026",
+          "sender": "Rob Newman <rnewman@bchhinc.com>"
+        },
         {
           "subject": "Transaction Tracker Summary",
           "date_str": "Apr 28, 2026",
@@ -207,27 +222,21 @@
           "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
           "date_str": "Apr 28, 2026",
           "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "FW: File # 26195968-WOL/ 4116 Sackett Avenue, Cleveland, Ohio 44109/ FINAL WIRE ",
-          "date_str": "Apr 22, 2026",
-          "sender": "\"rbutler bchhinc.com\" <DoNotReply@prod-zix.stewart"
-        },
-        {
-          "subject": "RE: File # 26195968-WOL/ 4116 Sackett Avenue, Cleveland, Ohio 44109/ FINAL WIRE ",
-          "date_str": "Apr 22, 2026",
-          "sender": "\"kwood bchhinc.com\" <DoNotReply@prod-zix.stewart.c"
         }
       ],
       "synced_tasks": [
-        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI"
+        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
+        "complete the below items",
+        "sign the form and email it back to me"
       ],
-      "active": true
+      "active": true,
+      "status_notes": [
+        "Please see the signed document attached.",
+        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
+        "Let us know if you need anything else."
+      ]
     },
     {
       "street_num": "722",
@@ -284,9 +293,14 @@
       "ghl_contact_id": "BfBEpQO6VhCAxMlejTv7",
       "label_id": "Label_9",
       "discovered_at": "2026-04-28T08:59:02.566923-04:00",
-      "last_email_subject": "RE: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
-      "last_email_date": "2026-04-29T11:29:20-04:00",
+      "last_email_subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+      "last_email_date": "2026-04-29T14:56:52-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+          "date_str": "Apr 29, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
         {
           "subject": "File: 26196353-WOL3  4711 DENISON AVE, CLEVELAND, OH 44102",
           "date_str": "Apr 29, 2026",
@@ -306,26 +320,23 @@
           "subject": "WORE Transactions - Apr 28, 2026 08:09 PM EST",
           "date_str": "Apr 28, 2026",
           "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 08:55 PM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
         }
       ],
       "synced_tasks": [
         "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
         "send HUDs over in the meantime",
         "provide me with a time and location to m",
-        "provide me with"
+        "provide me with",
+        "confirm, thank you"
       ],
       "active": true,
       "status_notes": [
-        "Could you send HUDs over in the meantime?",
-        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
-        "I\u2019m still waiting for the lease because this property is tenant occupied."
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN",
+        ">> RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        ">> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "I\u2019m still waiting for the lease because this property is",
+        "Please adjust HUD appropriately.",
+        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT."
       ]
     },
     {
@@ -333,13 +344,23 @@
       "street_name": "S JARDIN",
       "street_type": "ST",
       "address": "335 S JARDIN ST",
-      "stage": "File Open / In Process",
+      "stage": "Closed / Funded",
       "ghl_contact_id": "g2t2C0tn9gvmWKnOwyDy",
       "label_id": "Label_10",
       "discovered_at": "2026-04-28T08:59:03.717413-04:00",
-      "last_email_subject": "Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
-      "last_email_date": "2026-04-29T08:59:11-04:00",
+      "last_email_subject": "RE: [External] Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
+      "last_email_date": "2026-04-29T13:33:51-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: [External] Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
+          "date_str": "Apr 29, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
+        {
+          "subject": "RE: [External] Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
+          "date_str": "Apr 29, 2026",
+          "sender": "Lisa Lane <LLane@bchhinc.com>"
+        },
         {
           "subject": "Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
           "date_str": "Apr 29, 2026",
@@ -354,11 +375,6 @@
           "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
           "date_str": "Apr 28, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
         }
       ],
       "synced_tasks": [
@@ -367,10 +383,12 @@
       ],
       "active": true,
       "status_notes": [
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
+        "Final I need clarification regarding lease transfer.",
         "IF YOU HAVE RECEIVED THIS E-MAIL IN",
-        ">> Final I need clarification regarding lease transfer.",
-        ">> I need to confirm if the Buyer will be paying a Sales price of $",
-        ">> We need clarification regarding the JV Agreement,"
+        "Do you have HUDs prepared for review?",
+        "> I need to confirm if the Buyer will be paying a Sales price of $ 70,000.00",
+        "> We need clarification regarding the JV Agreement,"
       ]
     },
     {
@@ -430,7 +448,7 @@
       "label_id": "Label_15",
       "discovered_at": "2026-04-28T08:59:13.591489-04:00",
       "last_email_subject": "Re: -External-Re: 2807 George Owen Rd",
-      "last_email_date": "2026-04-29T10:29:38-04:00",
+      "last_email_date": "2026-04-29T13:38:10-04:00",
       "recent_emails": [
         {
           "subject": "Re: -External-Re: 2807 George Owen Rd",
@@ -483,6 +501,7 @@
       ],
       "active": true,
       "status_notes": [
+        "This is being assigned to WORE USA and then sold to end buyer.",
         "LENDER NOTICE: In order to provide the best possible service to our customers and ensure closing occurs on time, we require the following:",
         "The contracts do not match , we will need corrections.",
         "Borrower\u2019s loan package must be received by our office NO LATER than 2:00PM the day prior to closings scheduled between the hours of 9:00AM and 12:00PM;"
@@ -497,9 +516,14 @@
       "ghl_contact_id": "wbu7kSv09aCV9oTF0UF7",
       "label_id": "Label_16",
       "discovered_at": "2026-04-28T08:59:14.647696-04:00",
-      "last_email_subject": "Re: Intro to Lending 1510 Hurlbut St",
-      "last_email_date": "2026-04-28T19:27:34-04:00",
+      "last_email_subject": "RE: Intro to Lending 1510 Hurlbut St",
+      "last_email_date": "2026-04-29T14:10:27-04:00",
       "recent_emails": [
+        {
+          "subject": "RE: Intro to Lending 1510 Hurlbut St",
+          "date_str": "Apr 29, 2026",
+          "sender": "Jennifer Evans <jenn@carmichaelintl.com>"
+        },
         {
           "subject": "Re: Intro to Lending 1510 Hurlbut St",
           "date_str": "Apr 28, 2026",
@@ -519,11 +543,6 @@
           "subject": "Re: [External] Fwd: Fw: Deeds // 1510 HURLBUT ST, DETROIT, MI 48214",
           "date_str": "Apr 28, 2026",
           "sender": "Marilyn Blair <mblair@bchhinc.com>"
-        },
-        {
-          "subject": "Re: Intro to Lending 1510 Hurlbut St",
-          "date_str": "Apr 21, 2026",
-          "sender": "Derek Carmichael <derek@carmichaelintl.com>"
         }
       ],
       "synced_tasks": [
@@ -561,6 +580,39 @@
       ],
       "synced_tasks": [],
       "active": true
+    },
+    {
+      "street_num": "505",
+      "street_name": "Deltona",
+      "street_type": "Blvd",
+      "address": "505 Deltona Blvd",
+      "stage": "Closed / Funded",
+      "ghl_contact_id": null,
+      "label_id": "Label_23",
+      "discovered_at": "2026-04-29T16:05:35.819696-04:00",
+      "last_email_subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+      "last_email_date": "2026-04-29T14:56:52-04:00",
+      "recent_emails": [
+        {
+          "subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+          "date_str": "Apr 29, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        }
+      ],
+      "synced_tasks": [
+        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
+        "confirm, thank you",
+        "send HUDs over in the meantime"
+      ],
+      "active": true,
+      "status_notes": [
+        ">> RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        ">> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "I\u2019m still waiting for the lease because this property is",
+        "> WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        "> VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN"
+      ]
     }
   ],
   "_labels_migrated": true,
