@@ -16,7 +16,8 @@
         "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
         "send over the Termination copy"
       ],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "3075",
@@ -31,7 +32,8 @@
       "last_email_date": "2026-04-29T07:04:30-04:00",
       "recent_emails": [],
       "synced_tasks": [],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "5903",
@@ -46,7 +48,8 @@
       "last_email_date": "2026-04-29T07:04:30-04:00",
       "recent_emails": [],
       "synced_tasks": [],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "1421",
@@ -72,7 +75,8 @@
         "email postclose@eastcoasttitlefl",
         "email team@eastcoasttitlefl"
       ],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "4328",
@@ -106,7 +110,8 @@
         "provide AB Contract (Owner",
         "provide  BC Contract (Assignment):Provid"
       ],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "4116",
@@ -142,14 +147,7 @@
         "sign the form and email it back to me"
       ],
       "active": true,
-      "status_notes": [
-        "Please see the signed document attached.",
-        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
-        "Let us know if you need anything else.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN"
-      ]
+      "status_notes": []
     },
     {
       "street_num": "722",
@@ -180,7 +178,8 @@
         "email team@eastcoasttitlefl",
         "confirm receipt of this email correspond"
       ],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "4711",
@@ -223,14 +222,7 @@
         "confirm, thank you"
       ],
       "active": true,
-      "status_notes": [
-        "Please adjust HUD appropriately.",
-        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
-        "Seller has already agreed to signing the addendum and is aware that we will need to adjust for the rent payment.",
-        "> WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT."
-      ]
+      "status_notes": []
     },
     {
       "street_num": "335",
@@ -241,8 +233,8 @@
       "ghl_contact_id": "g2t2C0tn9gvmWKnOwyDy",
       "label_id": "Label_10",
       "discovered_at": "2026-04-28T08:59:03.717413-04:00",
-      "last_email_subject": "RE: [External] Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
-      "last_email_date": "2026-04-29T13:33:51-04:00",
+      "last_email_subject": "Re: [External] Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
+      "last_email_date": "2026-04-29T17:16:06-04:00",
       "recent_emails": [
         {
           "subject": "Re: [External] Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
@@ -265,14 +257,7 @@
         "confirm if the Buyer will be paying a Sa"
       ],
       "active": true,
-      "status_notes": [
-        "I am also adding lender partners from MINO to this thread to follow up on",
-        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
-        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "MINO, just want to check-in and see what else is needed from Title and if we should close Wednesday.",
-        "Final I need clarification regarding lease transfer."
-      ]
+      "status_notes": []
     },
     {
       "street_num": "550",
@@ -287,7 +272,8 @@
       "last_email_date": "2026-04-28T07:04:30-04:00",
       "recent_emails": [],
       "synced_tasks": [],
-      "active": false
+      "active": false,
+      "status_notes": []
     },
     {
       "street_num": "2517",
@@ -308,7 +294,8 @@
         }
       ],
       "synced_tasks": [],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "2807",
@@ -372,12 +359,7 @@
         "sign standard closing documents"
       ],
       "active": true,
-      "status_notes": [
-        "This is being assigned to WORE USA and then sold to end buyer.",
-        "LENDER NOTICE: In order to provide the best possible service to our customers and ensure closing occurs on time, we require the following:",
-        "The contracts do not match , we will need corrections.",
-        "Borrower\u2019s loan package must be received by our office NO LATER than 2:00PM the day prior to closings scheduled between the hours of 9:00AM and 12:00PM;"
-      ]
+      "status_notes": []
     },
     {
       "street_num": "1510",
@@ -420,7 +402,8 @@
         "complete and sign the attached Non-Occup",
         "forward it to me"
       ],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "15815",
@@ -446,7 +429,8 @@
         }
       ],
       "synced_tasks": [],
-      "active": true
+      "active": true,
+      "status_notes": []
     },
     {
       "street_num": "505",
@@ -472,14 +456,7 @@
         "send HUDs over in the meantime"
       ],
       "active": true,
-      "status_notes": [
-        "> WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        "> VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "> will need to adjust for the rent payment.",
-        ">> RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        ">> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN"
-      ]
+      "status_notes": []
     }
   ],
   "_labels_migrated": true,
