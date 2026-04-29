@@ -280,13 +280,28 @@
       "street_name": "Denison",
       "street_type": "Ave",
       "address": "4711 Denison Ave",
-      "stage": "File Open / In Process",
+      "stage": "Closed / Funded",
       "ghl_contact_id": "BfBEpQO6VhCAxMlejTv7",
       "label_id": "Label_9",
       "discovered_at": "2026-04-28T08:59:02.566923-04:00",
-      "last_email_subject": "WORE Transactions - Apr 28, 2026 08:55 PM EST",
-      "last_email_date": "2026-04-28T20:55:16-04:00",
+      "last_email_subject": "RE: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+      "last_email_date": "2026-04-29T11:29:20-04:00",
       "recent_emails": [
+        {
+          "subject": "File: 26196353-WOL3  4711 DENISON AVE, CLEVELAND, OH 44102",
+          "date_str": "Apr 29, 2026",
+          "sender": "Kelley Wood <KWood@bchhinc.com>"
+        },
+        {
+          "subject": "Re: File: 26196353-WOL3  4711 DENISON AVE, CLEVELAND, OH 44102",
+          "date_str": "Apr 29, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
+        {
+          "subject": "RE: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+          "date_str": "Apr 29, 2026",
+          "sender": "Kelley Wood <KWood@bchhinc.com>"
+        },
         {
           "subject": "WORE Transactions - Apr 28, 2026 08:09 PM EST",
           "date_str": "Apr 28, 2026",
@@ -296,27 +311,22 @@
           "subject": "WORE Transactions - Apr 28, 2026 08:55 PM EST",
           "date_str": "Apr 28, 2026",
           "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
         }
       ],
       "synced_tasks": [
-        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI"
+        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
+        "send HUDs over in the meantime",
+        "provide me with a time and location to m",
+        "provide me with"
       ],
-      "active": true
+      "active": true,
+      "status_notes": [
+        "Could you send HUDs over in the meantime?",
+        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
+        "I\u2019m still waiting for the lease because this property is tenant occupied."
+      ]
     },
     {
       "street_num": "335",
@@ -327,9 +337,14 @@
       "ghl_contact_id": "g2t2C0tn9gvmWKnOwyDy",
       "label_id": "Label_10",
       "discovered_at": "2026-04-28T08:59:03.717413-04:00",
-      "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T15:01:44-04:00",
+      "last_email_subject": "Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
+      "last_email_date": "2026-04-29T08:59:11-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
+          "date_str": "Apr 29, 2026",
+          "sender": "Chris Lemay <chris@wolvesofrealestate.org>"
+        },
         {
           "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
           "date_str": "Apr 28, 2026",
@@ -346,8 +361,17 @@
           "sender": "shar@wolvesofrealestate.org"
         }
       ],
-      "synced_tasks": [],
-      "active": true
+      "synced_tasks": [
+        "confirm if the Buyer will be paying a Sa",
+        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI"
+      ],
+      "active": true,
+      "status_notes": [
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN",
+        ">> Final I need clarification regarding lease transfer.",
+        ">> I need to confirm if the Buyer will be paying a Sales price of $",
+        ">> We need clarification regarding the JV Agreement,"
+      ]
     },
     {
       "street_num": "550",
@@ -405,9 +429,14 @@
       "ghl_contact_id": null,
       "label_id": "Label_15",
       "discovered_at": "2026-04-28T08:59:13.591489-04:00",
-      "last_email_subject": "Appraisal payment request from HIS Capital Funding Corp",
-      "last_email_date": "2026-04-27T13:54:04-04:00",
+      "last_email_subject": "Re: -External-Re: 2807 George Owen Rd",
+      "last_email_date": "2026-04-29T10:29:38-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: -External-Re: 2807 George Owen Rd",
+          "date_str": "Apr 29, 2026",
+          "sender": "Lexi Gamester <lexi.gamester@hankinpacklaw.com>"
+        },
         {
           "subject": "2807 GEORGE OWEN RD FAYETTEVILLE NC 28306",
           "date_str": "Apr 20, 2026",
@@ -427,11 +456,6 @@
           "subject": "Fwd: 2807 GEORGE OWEN RD FAYETTEVILLE NC 28306",
           "date_str": "Apr 21, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "Re: 2807 GEORGE OWEN RD FAYETTEVILLE NC 28306",
-          "date_str": "Apr 21, 2026",
-          "sender": "Derek Carmichael <derek@carmichaelintl.com>"
         }
       ],
       "synced_tasks": [
@@ -457,7 +481,12 @@
         "sign standard",
         "sign standard closing documents"
       ],
-      "active": true
+      "active": true,
+      "status_notes": [
+        "LENDER NOTICE: In order to provide the best possible service to our customers and ensure closing occurs on time, we require the following:",
+        "The contracts do not match , we will need corrections.",
+        "Borrower\u2019s loan package must be received by our office NO LATER than 2:00PM the day prior to closings scheduled between the hours of 9:00AM and 12:00PM;"
+      ]
     },
     {
       "street_num": "1510",
