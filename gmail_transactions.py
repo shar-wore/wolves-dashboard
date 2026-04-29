@@ -513,11 +513,14 @@ def run():
 
             entry = {'subject': details['subject'][:80], 'date_str': details['date_str'],
                      'sender': details['sender'][:50]}
-            recent = txn.get('recent_emails', [])
-            if not any(e['subject'] == entry['subject'] and e['date_str'] == entry['date_str']
-                       for e in recent):
-                recent.insert(0, entry)
-                txn['recent_emails'] = recent[:5]
+            # Keep recent_emails clean ‚Äî strip own report emails (existing and new)
+            recent = [e for e in txn.get('recent_emails', [])
+                      if not OWN_REPORT_RE.search(e.get('subject', ''))]
+            if not OWN_REPORT_RE.search(details['subject']):
+                if not any(e['subject'] == entry['subject'] and e['date_str'] == entry['date_str']
+                           for e in recent):
+                    recent.insert(0, entry)
+            txn['recent_emails'] = recent[:5]
 
             # Extract meaningful status sentences and store them
             new_notes = extract_status_notes(body_clean)
