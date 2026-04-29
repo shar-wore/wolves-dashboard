@@ -779,16 +779,14 @@
       <div class="txn-activity">
         ${t.status_notes.slice(0,3).map(n => `
           <div class="txn-activity-item" style="grid-template-columns:1fr">
-            <span class="txn-activity-text" style="white-space:normal;line-height:1.4">¬∑ ${escHtml(n)}</span>
+            <span class="txn-activity-text" style="white-space:normal;line-height:1.45">¬∑ ${escHtml(n)}</span>
           </div>`).join('')}
-      </div>` : emails.length ? `
+      </div>` : `
       <div class="txn-activity">
-        ${emails.slice(0,3).map(e => `
-          <div class="txn-activity-item">
-            <span class="txn-activity-date">${escHtml(e.date_str.replace(/,\s*\d{4}/,''))}</span>
-            <span class="txn-activity-text" title="${escHtml(e.subject)}">${escHtml(cleanSubject(e.subject) || e.subject)} <span style="color:var(--muted);font-size:0.65rem">¬∑ ${escHtml(senderName(e.sender))}</span></span>
-          </div>`).join('')}
-      </div>` : ''}
+        <div class="txn-activity-item" style="grid-template-columns:1fr">
+          <span class="txn-activity-text" style="color:var(--muted);font-style:italic">No status data yet ‚Äî updating on next scan</span>
+        </div>
+      </div>`}
       <div class="txn-card-footer">
         ${ghlUrl ? `<a class="txn-ghl-link" href="${ghlUrl}" target="_blank">View in GHL</a>` : '<span class="txn-no-ghl">No GHL contact</span>'}
         <div style="display:flex;gap:0.4rem;align-items:center">
