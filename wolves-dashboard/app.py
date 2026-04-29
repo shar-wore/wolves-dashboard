@@ -23,7 +23,7 @@ SCRIPTS_DIR = _app_dir if os.path.exists(os.path.join(_app_dir, 'gmail_transacti
 
 GHL_API_KEY = os.environ['GHL_API_KEY']
 GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID']
-GHL_DEFAULT_USER_ID = 'gQmITDjMwei1qjyhHyfo'
+GHL_DEFAULT_USER_ID = 'fXfZmYEWPTgTPt26WUfJ'
 EST = pytz.timezone('America/New_York')
 
 PIPELINES = {
