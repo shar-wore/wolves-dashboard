@@ -1,12 +1,17 @@
 """
 Generates and emails a transaction status report to shar@wolvesofrealestate.org.
 """
-import os, json, base64
+import os, json, re, base64
 from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 import pytz
+
+OWN_REPORT_RE = re.compile(
+    r'wore transactions|transaction tracker summary|transaction status report',
+    re.IGNORECASE
+)
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
@@ -57,6 +62,9 @@ def txn_html(t, loc_id):
         url = f'https://app.gohighlevel.com/v2/location/{loc_id}/contacts/detail/{ghl_id}'
         ghl_link = f'<a href="{url}" style="font-size:11px;color:#1565c0;text-decoration:none;">View in GHL &rarr;</a>'
 
+    # Filter out our own report emails from recent list
+    recent = [e for e in t.get('recent_emails', []) if not OWN_REPORT_RE.search(e.get('subject', ''))]
+
     # Status notes ‚Äî the best content
     status_notes = t.get('status_notes', [])
     if status_notes:
@@ -71,7 +79,6 @@ def txn_html(t, loc_id):
         )
     else:
         # Fallback: recent email subjects if no status notes yet
-        recent = t.get('recent_emails', [])
         if recent:
             items = ''.join(
                 f'<li style="margin:3px 0;color:#555;font-size:12px;">'
