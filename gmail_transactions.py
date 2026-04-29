@@ -22,7 +22,7 @@ LAST_SCANNED_FILE = os.path.join(BASE_DIR, 'last_scanned.txt')
 
 GHL_API_KEY = os.environ.get('GHL_API_KEY', '')
 GHL_LOCATION_ID = os.environ.get('GHL_LOCATION_ID', '')
-GHL_DEFAULT_USER_ID = 'gQmITDjMwei1qjyhHyfo'
+GHL_DEFAULT_USER_ID = 'fXfZmYEWPTgTPt26WUfJ'
 
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets.readonly',
