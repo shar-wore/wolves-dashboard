@@ -9,35 +9,9 @@
       "ghl_contact_id": "OToVqsHUSv0aVwTUt9Ps",
       "label_id": "Label_1",
       "discovered_at": "2026-04-28T08:58:49.445928-04:00",
-      "last_email_subject": "WORE Transactions - Apr 28, 2026 08:55 PM EST",
-      "last_email_date": "2026-04-28T20:55:16-04:00",
-      "recent_emails": [
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 08:09 PM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 08:55 PM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 04:52 PM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "RE: [External] Re: 17840 Goddard St. Detroit MI / 26196229-WOL and WOL-2",
-          "date_str": "Apr 28, 2026",
-          "sender": "Wolves of RE <wolvesofre@bchhinc.com>"
-        }
-      ],
+      "last_email_subject": "Transaction Tracker Summary",
+      "last_email_date": "2026-04-29T07:04:30-04:00",
+      "recent_emails": [],
       "synced_tasks": [
         "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
         "send over the Termination copy"
@@ -54,24 +28,8 @@
       "label_id": "Label_3",
       "discovered_at": "2026-04-28T08:58:57.247100-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T15:01:44-04:00",
-      "recent_emails": [
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        }
-      ],
+      "last_email_date": "2026-04-29T07:04:30-04:00",
+      "recent_emails": [],
       "synced_tasks": [],
       "active": true
     },
@@ -85,24 +43,8 @@
       "label_id": "Label_4",
       "discovered_at": "2026-04-28T08:58:57.990833-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T15:01:44-04:00",
-      "recent_emails": [
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        }
-      ],
+      "last_email_date": "2026-04-29T07:04:30-04:00",
+      "recent_emails": [],
       "synced_tasks": [],
       "active": true
     },
@@ -116,27 +58,12 @@
       "label_id": "Label_5",
       "discovered_at": "2026-04-28T08:58:59.271973-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T15:01:44-04:00",
+      "last_email_date": "2026-04-29T07:04:30-04:00",
       "recent_emails": [
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
         {
           "subject": "Re: Transaction Status Update / 1421 E Mohawk Ave / DB-26-137",
           "date_str": "Apr 24, 2026",
           "sender": "\"Kimberly O'Kelley\" <kim@ectitlefl.com>"
-        },
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
         }
       ],
       "synced_tasks": [
@@ -157,7 +84,7 @@
       "label_id": "Label_6",
       "discovered_at": "2026-04-28T08:59:00.207469-04:00",
       "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T15:01:44-04:00",
+      "last_email_date": "2026-04-29T07:04:30-04:00",
       "recent_emails": [
         {
           "subject": "Re: 4328 Tyler St, Detroit, MI: JM-26-68828",
@@ -173,11 +100,6 @@
           "subject": "Re: 4328 Tyler St, Detroit, MI: JM-26-68828",
           "date_str": "Apr 21, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
         }
       ],
       "synced_tasks": [
@@ -199,11 +121,6 @@
       "last_email_date": "2026-04-29T14:22:33-04:00",
       "recent_emails": [
         {
-          "subject": "Fwd: 26195968-WOL / 4116 SACKETT AVENUE, OH - FORM REQUIRED",
-          "date_str": "Apr 29, 2026",
-          "sender": "Chris Lemay <chris@wolvesofrealestate.org>"
-        },
-        {
           "subject": "Re: 26195968-WOL / 4116 SACKETT AVENUE, OH - FORM REQUIRED",
           "date_str": "Apr 29, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
@@ -214,14 +131,9 @@
           "sender": "Rob Newman <rnewman@bchhinc.com>"
         },
         {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
+          "subject": "Fwd: 26195968-WOL / 4116 SACKETT AVENUE, OH - FORM REQUIRED",
+          "date_str": "Apr 29, 2026",
+          "sender": "Chris Lemay <chris@wolvesofrealestate.org>"
         }
       ],
       "synced_tasks": [
@@ -235,7 +147,8 @@
         "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
         "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
         "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
-        "Let us know if you need anything else."
+        "Let us know if you need anything else.",
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN"
       ]
     },
     {
@@ -247,19 +160,9 @@
       "ghl_contact_id": "DqD9s2RJ3Iw7GE2oHEJc",
       "label_id": "Label_8",
       "discovered_at": "2026-04-28T08:59:01.772426-04:00",
-      "last_email_subject": "WORE Transactions - Apr 28, 2026 08:55 PM EST",
-      "last_email_date": "2026-04-28T20:55:16-04:00",
+      "last_email_subject": "Transaction Tracker Summary",
+      "last_email_date": "2026-04-29T07:04:30-04:00",
       "recent_emails": [
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 08:09 PM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 08:55 PM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
         {
           "subject": "Re: Update--722 Tangelo Ave",
           "date_str": "Apr 28, 2026",
@@ -269,11 +172,6 @@
           "subject": "Re: Title Request - 2500834 - 722 Tangelo Ave - Oldjohn",
           "date_str": "Apr 28, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
         }
       ],
       "synced_tasks": [
@@ -315,11 +213,6 @@
           "subject": "RE: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
           "date_str": "Apr 29, 2026",
           "sender": "Kelley Wood <KWood@bchhinc.com>"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 08:09 PM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
         }
       ],
       "synced_tasks": [
@@ -331,12 +224,12 @@
       ],
       "active": true,
       "status_notes": [
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN",
-        ">> RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        ">> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "I\u2019m still waiting for the lease because this property is",
         "Please adjust HUD appropriately.",
-        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT."
+        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
+        "Seller has already agreed to signing the addendum and is aware that we will need to adjust for the rent payment.",
+        "> WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT."
       ]
     },
     {
@@ -364,31 +257,21 @@
         {
           "subject": "Re: 26196132-WOL/LL03260003 / 335 S JARDIN ST PA SHENANDOAH 17976",
           "date_str": "Apr 29, 2026",
-          "sender": "Chris Lemay <chris@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
-          "subject": "Fwd: WORE Transactions - Apr 28, 2026 09:03 AM EST",
-          "date_str": "Apr 28, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
         }
       ],
       "synced_tasks": [
-        "confirm if the Buyer will be paying a Sa",
-        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI"
+        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
+        "confirm if the Buyer will be paying a Sa"
       ],
       "active": true,
       "status_notes": [
+        "I am also adding lender partners from MINO to this thread to follow up on",
+        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
         "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
-        "Final I need clarification regarding lease transfer.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN",
-        "Do you have HUDs prepared for review?",
-        "> I need to confirm if the Buyer will be paying a Sales price of $ 70,000.00",
-        "> We need clarification regarding the JV Agreement,"
+        "PLEASE CALL YOUR ESCROW OFFICER IMMEDIATELY USING CONTACT INFORMATION FOUND FROM AN INDEPENDENT SOURCE, SUCH AS THE SALES CONTRACT OR INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "MINO, just want to check-in and see what else is needed from Title and if we should close Wednesday.",
+        "Final I need clarification regarding lease transfer."
       ]
     },
     {
@@ -402,13 +285,7 @@
       "discovered_at": "2026-04-28T08:59:04.556044-04:00",
       "last_email_subject": "Transaction Tracker Summary",
       "last_email_date": "2026-04-28T07:04:30-04:00",
-      "recent_emails": [
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        }
-      ],
+      "recent_emails": [],
       "synced_tasks": [],
       "active": false
     },
@@ -424,11 +301,6 @@
       "last_email_subject": "Transaction Tracker Summary",
       "last_email_date": "2026-04-28T15:01:44-04:00",
       "recent_emails": [
-        {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
         {
           "subject": "Re: Denison Addendum",
           "date_str": "Apr 27, 2026",
@@ -535,11 +407,6 @@
           "sender": "Jennifer Evans <jenn@carmichaelintl.com>"
         },
         {
-          "subject": "Transaction Tracker Summary",
-          "date_str": "Apr 28, 2026",
-          "sender": "shar@wolvesofrealestate.org"
-        },
-        {
           "subject": "Re: [External] Fwd: Fw: Deeds // 1510 HURLBUT ST, DETROIT, MI 48214",
           "date_str": "Apr 28, 2026",
           "sender": "Marilyn Blair <mblair@bchhinc.com>"
@@ -589,7 +456,7 @@
       "stage": "Closed / Funded",
       "ghl_contact_id": null,
       "label_id": "Label_23",
-      "discovered_at": "2026-04-29T16:05:35.819696-04:00",
+      "discovered_at": "2026-04-29T14:03:34.272186-04:00",
       "last_email_subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
       "last_email_date": "2026-04-29T14:56:52-04:00",
       "recent_emails": [
@@ -600,17 +467,17 @@
         }
       ],
       "synced_tasks": [
-        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
         "confirm, thank you",
+        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
         "send HUDs over in the meantime"
       ],
       "active": true,
       "status_notes": [
-        ">> RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        ">> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "I\u2019m still waiting for the lease because this property is",
         "> WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
         "> VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "> will need to adjust for the rent payment.",
+        ">> RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        ">> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
         "IF YOU HAVE RECEIVED THIS E-MAIL IN"
       ]
     }
