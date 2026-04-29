@@ -330,6 +330,41 @@ def get_transactions():
         return jsonify({'transactions': []})
 
 
+GHL_LOST_STAGE_ID = '240f7ae1-810d-4d84-8fe3-a97855a27c3a'
+GHL_ACQUISITION_PIPELINE_ID = 'Gtu5h0Rrc8FSp8P9cYWO'
+
+
+def ghl_mark_dead(contact_id, address):
+    """Add a Dead note to the contact and move opportunity to Lost in Space (if not already there)."""
+    try:
+        # Add note
+        requests.post(
+            f'https://services.leadconnectorhq.com/contacts/{contact_id}/notes',
+            headers=ghl_headers(),
+            json={
+                'body': f'Deal marked Dead via WORE Dashboard on {datetime.now(EST).strftime("%b %d, %Y %I:%M %p EST")}\nAddress: {address}',
+                'userId': GHL_DEFAULT_USER_ID,
+            }
+        )
+        # Find opportunity in Acquisition Pipeline
+        r = requests.get(
+            'https://services.leadconnectorhq.com/opportunities/search',
+            headers=ghl_headers(),
+            params={'location_id': GHL_LOCATION_ID, 'contact_id': contact_id,
+                    'pipeline_id': GHL_ACQUISITION_PIPELINE_ID}
+        )
+        for opp in r.json().get('opportunities', []):
+            if opp.get('pipelineStageId') == GHL_LOST_STAGE_ID:
+                continue  # already Lost in Space
+            requests.put(
+                f'https://services.leadconnectorhq.com/opportunities/{opp["id"]}',
+                headers=ghl_headers(),
+                json={'pipelineStageId': GHL_LOST_STAGE_ID}
+            )
+    except Exception:
+        pass
+
+
 @app.route('/api/transactions/update-stage', methods=['POST'])
 def update_transaction_stage():
     payload = request.json
@@ -341,15 +376,24 @@ def update_transaction_stage():
     try:
         with open(TRANSACTIONS_FILE) as f:
             data = json.load(f)
+        matched_txn = None
         for txn in data['transactions']:
             if txn.get('address', '').strip().lower() == address:
                 txn['stage'] = new_stage
                 txn['active'] = new_stage != 'Dead'
+                matched_txn = txn
                 break
         else:
             return jsonify({'error': 'not found'}), 404
         with open(TRANSACTIONS_FILE, 'w') as f:
             json.dump(data, f, indent=2)
+        # If marking Dead and contact exists in GHL, sync it
+        if new_stage == 'Dead' and matched_txn and matched_txn.get('ghl_contact_id'):
+            threading.Thread(
+                target=ghl_mark_dead,
+                args=(matched_txn['ghl_contact_id'], matched_txn.get('address', '')),
+                daemon=True
+            ).start()
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
