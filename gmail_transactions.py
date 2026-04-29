@@ -158,6 +158,20 @@ def strip_pending_signature_section(text):
     return PENDING_SIG_SECTION_RE.sub('', text)
 
 
+JUNK_SENTENCE_RE = re.compile(
+    r'wire fraud|verify.*wire|wire.*verify|criminals?|hackers?|cyber|phishing|'
+    r'never send.*wire|wire.*never send|always verify|call.*verify wire|'
+    r'confidential|privileged|intended recipient|if you received this|'
+    r'unsubscribe|privacy policy|terms of service|'
+    r'this (?:e-?mail|message|email) (?:is|may be|contains|and any)|'
+    r'disclaimer|do not rely on|electronic communication|'
+    r'call your escrow officer immediately|'
+    r'caution:.*external|this is an external email|'
+    r'virus|malware|scanned by|spam',
+    re.IGNORECASE
+)
+
+
 def extract_status_notes(body, max_notes=4):
     """Extract key deal-status sentences from an email body."""
     sentences = re.split(r'(?<=[.!?])\s+|\r?\n', body)
@@ -166,9 +180,11 @@ def extract_status_notes(body, max_notes=4):
     for sent in sentences:
         sent = re.sub(r'^[-‚Ä¢*¬∑]\s*', '', sent.strip())
         sent = re.sub(r'\s+', ' ', sent).strip()
-        if len(sent) < 20 or len(sent) > 280:
+        if len(sent) < 25 or len(sent) > 280:
             continue
         if not STATUS_TERMS.search(sent):
+            continue
+        if JUNK_SENTENCE_RE.search(sent):
             continue
         key = sent[:45].lower()
         if key in seen:
