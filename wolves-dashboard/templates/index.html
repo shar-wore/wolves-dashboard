@@ -775,7 +775,13 @@
           <span class="txn-email-age ${ageCls}">${ageLabel}</span>
         </div>
       </div>
-      ${emails.length ? `
+      ${(t.status_notes && t.status_notes.length) ? `
+      <div class="txn-activity">
+        ${t.status_notes.slice(0,3).map(n => `
+          <div class="txn-activity-item" style="grid-template-columns:1fr">
+            <span class="txn-activity-text" style="white-space:normal;line-height:1.4">¬∑ ${escHtml(n)}</span>
+          </div>`).join('')}
+      </div>` : emails.length ? `
       <div class="txn-activity">
         ${emails.slice(0,3).map(e => `
           <div class="txn-activity-item">
