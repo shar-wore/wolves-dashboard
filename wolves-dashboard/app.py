@@ -401,6 +401,7 @@ def update_transaction_stage():
 
 _import_running = threading.Lock()
 _scan_running = threading.Lock()
+_report_running = threading.Lock()
 
 
 def _run_script(script, lock):
@@ -414,6 +415,14 @@ def _run_script(script, lock):
         )
     finally:
         lock.release()
+
+
+@app.route('/trigger-report')
+def trigger_report():
+    if request.args.get('key') != os.environ.get('CRON_SECRET', ''):
+        return jsonify({'error': 'unauthorized'}), 401
+    threading.Thread(target=_run_script, args=('send_report.py', _report_running), daemon=True).start()
+    return jsonify({'status': 'started', 'script': 'send_report.py', 'time': datetime.now(EST).isoformat()})
 
 
 @app.route('/trigger-import')
