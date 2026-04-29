@@ -234,9 +234,10 @@
     .txn-email-age.recent { color: var(--green); }
     .txn-email-age.warm { color: var(--yellow); }
     .txn-email-age.old { color: var(--red); }
-    .txn-last-email { padding: 0.6rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); background: rgba(0,3,33,0.3); }
-    .txn-last-subject { font-size: 0.75rem; color: var(--text); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.2rem; }
-    .txn-last-sender { font-size: 0.67rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .txn-activity { padding: 0.6rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); background: rgba(0,3,33,0.3); display: flex; flex-direction: column; gap: 0.35rem; }
+    .txn-activity-item { display: grid; grid-template-columns: 46px 1fr; gap: 0.4rem; align-items: baseline; }
+    .txn-activity-date { font-size: 0.63rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+    .txn-activity-text { font-size: 0.73rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .txn-card-footer { padding: 0.65rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
     .txn-ghl-link { background: rgba(194,255,20,0.08); border: 1px solid rgba(194,255,20,0.2); color: var(--lime); border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.68rem; font-weight: 700; text-decoration: none; letter-spacing: 0.05em; transition: all 0.15s; }
     .txn-ghl-link:hover { background: var(--lime); color: #000; }
@@ -734,6 +735,21 @@
     return days === 0 ? 'Today' : days === 1 ? '1d ago' : `${days}d ago`;
   }
 
+  function cleanSubject(subject) {
+    return subject
+      .replace(/^(re|fwd?|fw):\s*/gi, '')
+      .replace(/\[external\]\s*/gi, '')
+      .replace(/\s*[/#]\s*\d{5,}-\w+/g, '')
+      .replace(/\s*:\s*[A-Z]{2}-\d{2}-\d+/g, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  }
+
+  function senderName(sender) {
+    const m = sender.match(/^([^<]+)</);
+    return m ? m[1].trim() : sender.split('@')[0];
+  }
+
   function buildTxnCard(t) {
     const ghlUrl = t.ghl_contact_id
       ? `https://app.gohighlevel.com/v2/location/xdxH9vtl3elSaTTxhhix/contacts/detail/${t.ghl_contact_id}`
@@ -759,10 +775,13 @@
           <span class="txn-email-age ${ageCls}">${ageLabel}</span>
         </div>
       </div>
-      ${t.last_email_subject ? `
-      <div class="txn-last-email">
-        <div class="txn-last-subject">${escHtml(t.last_email_subject)}</div>
-        <div class="txn-last-sender">${escHtml((t.recent_emails || [])[0]?.sender || '')}</div>
+      ${emails.length ? `
+      <div class="txn-activity">
+        ${emails.slice(0,3).map(e => `
+          <div class="txn-activity-item">
+            <span class="txn-activity-date">${escHtml(e.date_str.replace(/,\s*\d{4}/,''))}</span>
+            <span class="txn-activity-text" title="${escHtml(e.subject)}">${escHtml(cleanSubject(e.subject) || e.subject)} <span style="color:var(--muted);font-size:0.65rem">¬∑ ${escHtml(senderName(e.sender))}</span></span>
+          </div>`).join('')}
       </div>` : ''}
       <div class="txn-card-footer">
         ${ghlUrl ? `<a class="txn-ghl-link" href="${ghlUrl}" target="_blank">View in GHL</a>` : '<span class="txn-no-ghl">No GHL contact</span>'}
