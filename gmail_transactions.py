@@ -108,6 +108,37 @@ SIGNATURE_RE = re.compile(
     re.IGNORECASE
 )
 
+# Subjects that identify our own auto-generated report emails ‚Äî skip these entirely
+OWN_REPORT_RE = re.compile(
+    r'wore transactions|transaction tracker summary|transaction status report',
+    re.IGNORECASE
+)
+
+# Terms that indicate a sentence contains meaningful deal status
+STATUS_TERMS = re.compile(
+    r'\bpsa\b|purchase agreement|under contract|contract execut|'
+    r'\bctc\b|clear to close|closing disclosure|cd approved|'
+    r'apprais|wire transfer|wire received|funded|deed recorded|disburs|'
+    r'bank statement|bank account|voided check|'
+    r'waiting for|waiting on|pending|missing|need(?:ed)?\b|'
+    r'approved|received|signed|submitted|confirmed|scheduled|'
+    r'closing date|closed? on|closing on|'
+    r'expir|deadline|due date|must be|no later than|'
+    r'bc buyer|ab buyer|ab seller|ab contract|bc contract|'
+    r'lend(?:er|ing)|loan commit|underwriting|'
+    r'hud|alta|settlement statement|'
+    r'inspect(?:ion)?|final walkthrough|walk.?through',
+    re.IGNORECASE
+)
+
+DATE_IN_SENTENCE_RE = re.compile(
+    r'\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|'
+    r'jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)'
+    r'\.?\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{4})?\b|'
+    r'\b\d{1,2}/\d{1,2}/(?:\d{2}|\d{4})\b',
+    re.IGNORECASE
+)
+
 # Keywords that indicate the address belongs to a real estate transaction
 TRANSACTION_WORDS = re.compile(
     r'propert(?:y|ies)|purchas|clos(?:ing|ed|e\b)|for sale|listed|listing|sold\b|'
@@ -125,6 +156,36 @@ def strip_signature(text):
 
 def strip_pending_signature_section(text):
     return PENDING_SIG_SECTION_RE.sub('', text)
+
+
+def extract_status_notes(body, max_notes=4):
+    """Extract key deal-status sentences from an email body."""
+    sentences = re.split(r'(?<=[.!?])\s+|\r?\n', body)
+    scored = []
+    seen = set()
+    for sent in sentences:
+        sent = re.sub(r'^[-‚Ä¢*¬∑]\s*', '', sent.strip())
+        sent = re.sub(r'\s+', ' ', sent).strip()
+        if len(sent) < 20 or len(sent) > 280:
+            continue
+        if not STATUS_TERMS.search(sent):
+            continue
+        key = sent[:45].lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        score = 1
+        if DATE_IN_SENTENCE_RE.search(sent):
+            score += 3
+        if re.search(r'expir|deadline|due|must be|no later than', sent, re.IGNORECASE):
+            score += 2
+        if re.search(r'waiting|pending|missing|need', sent, re.IGNORECASE):
+            score += 1
+        if re.search(r'\bpsa\b|\bctc\b|clear to close|purchase agreement', sent, re.IGNORECASE):
+            score += 1
+        scored.append((score, sent[:200]))
+    scored.sort(key=lambda x: -x[0])
+    return [s for _, s in scored[:max_notes]]
 
 
 def is_transaction_address(combined, match_start, match_end, subject):
@@ -395,6 +456,10 @@ def run():
         if not details:
             continue
 
+        # Skip our own auto-generated report emails ‚Äî they contain no new information
+        if OWN_REPORT_RE.search(details.get('subject', '')):
+            continue
+
         body_clean = strip_pending_signature_section(strip_signature(details['body']))
         combined = details['subject'] + '\n' + body_clean
 
@@ -453,6 +518,15 @@ def run():
                        for e in recent):
                 recent.insert(0, entry)
                 txn['recent_emails'] = recent[:5]
+
+            # Extract meaningful status sentences and store them
+            new_notes = extract_status_notes(body_clean)
+            if new_notes:
+                existing_notes = txn.get('status_notes', [])
+                for note in new_notes:
+                    if not any(note[:40].lower() in n.lower() for n in existing_notes):
+                        existing_notes.insert(0, note)
+                txn['status_notes'] = existing_notes[:6]
 
             tasks = extract_tasks(details['body'])
             synced = txn.get('synced_tasks', [])
