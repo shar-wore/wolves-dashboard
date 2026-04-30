@@ -105,20 +105,10 @@ def txn_html(t, loc_id):
 def build_html(transactions, now_str):
     loc_id = os.environ.get('GHL_LOCATION_ID', '')
 
-    # Exclude Dead and inactive ‚Äî only show deals worth tracking
+    # Only show active deals that aren't closed or dead
     active = [t for t in transactions
               if t.get('active') is not False
-              and t.get('stage') not in ('Closed / Funded', 'Dead', None)
-              or t.get('stage') == 'Clear to Close']  # always include CTC even if edge case
-
-    # Deduplicate (the above logic can double-include CTC)
-    seen_addrs = set()
-    active_deduped = []
-    for t in active:
-        if t['address'] not in seen_addrs:
-            seen_addrs.add(t['address'])
-            active_deduped.append(t)
-    active = active_deduped
+              and t.get('stage') not in ('Closed / Funded', 'Dead', None)]
 
     closed = [t for t in transactions if t.get('stage') == 'Closed / Funded']
 
