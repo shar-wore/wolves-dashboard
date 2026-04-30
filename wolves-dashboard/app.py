@@ -433,6 +433,17 @@ def trigger_import():
     return jsonify({'status': 'started', 'script': 'import_contacts.py', 'time': datetime.now(EST).isoformat()})
 
 
+@app.route('/trigger-full-scan')
+def trigger_full_scan():
+    if request.args.get('key') != os.environ.get('CRON_SECRET', ''):
+        return jsonify({'error': 'unauthorized'}), 401
+    last_scanned = os.path.join(SCRIPTS_DIR, 'last_scanned.txt')
+    if os.path.exists(last_scanned):
+        os.remove(last_scanned)
+    threading.Thread(target=_run_script, args=('gmail_transactions.py', _scan_running), daemon=True).start()
+    return jsonify({'status': 'started', 'note': '30-day lookback', 'time': datetime.now(EST).isoformat()})
+
+
 @app.route('/trigger-scan')
 def trigger_scan():
     if request.args.get('key') != os.environ.get('CRON_SECRET', ''):
