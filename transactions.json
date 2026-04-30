@@ -154,12 +154,12 @@
       "street_name": "Tangelo",
       "street_type": "Ave",
       "address": "722 Tangelo Ave",
-      "stage": "File Open / In Process",
+      "stage": "Clear to Close",
       "ghl_contact_id": "DqD9s2RJ3Iw7GE2oHEJc",
       "label_id": "Label_8",
       "discovered_at": "2026-04-28T08:59:01.772426-04:00",
       "last_email_subject": "Re: Update--722 Tangelo Ave",
-      "last_email_date": "2026-04-29T18:43:09-04:00",
+      "last_email_date": "2026-04-29T19:45:39-04:00",
       "recent_emails": [
         {
           "subject": "Re: Update--722 Tangelo Ave",
@@ -181,14 +181,21 @@
         "confirm receipt of this email",
         "email postclose@eastcoasttitlefl",
         "email team@eastcoasttitlefl",
-        "confirm receipt of this email correspond"
+        "confirm receipt of this email correspond",
+        "provide the source of the $56k deposit f",
+        "provide a signed copy of the GC",
+        "provide a copy of the license",
+        "provide these documents",
+        "provide a signed copy of the GC contract"
       ],
       "active": true,
       "status_notes": [
-        "Have you received anything?",
-        ">>>>>> Please ensure all funds needed for cash to close and reserves are fully",
-        "This is what they still need:",
-        ">> The appraisal was due back today."
+        "You will need to get the last of those funds in place ASAP.",
+        ">>>> The appraisal was due back today.",
+        "> - Assets: There is a shortage of assets; we need to see additional funds.",
+        "We need to satisfy these items and then we should have the",
+        "Yeah, I didn\u2019t anticipate needing 56k the first lender only wanted 21k so",
+        ">>> The appraisal was due back today."
       ]
     },
     {
