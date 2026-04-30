@@ -189,14 +189,7 @@
         "provide a signed copy of the GC contract"
       ],
       "active": true,
-      "status_notes": [
-        "You will need to get the last of those funds in place ASAP.",
-        ">>>> The appraisal was due back today.",
-        "> - Assets: There is a shortage of assets; we need to see additional funds.",
-        "We need to satisfy these items and then we should have the",
-        "Yeah, I didn\u2019t anticipate needing 56k the first lender only wanted 21k so",
-        ">>> The appraisal was due back today."
-      ]
+      "status_notes": []
     },
     {
       "street_num": "4711",
@@ -246,14 +239,7 @@
         "send over final HUDs"
       ],
       "active": true,
-      "status_notes": [
-        "> Please send over final HUDs",
-        "> WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        "> VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
-        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
-        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
-        ">>> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED."
-      ]
+      "status_notes": []
     },
     {
       "street_num": "335",
@@ -375,9 +361,7 @@
         "provide LLC docs for Wolves of RE"
       ],
       "active": true,
-      "status_notes": [
-        "For signing of the buyer and seller docs will the signor come to our office or will they need a mobile notary ($225) ?"
-      ]
+      "status_notes": []
     },
     {
       "street_num": "1510",
@@ -426,11 +410,7 @@
         "forward it to me"
       ],
       "active": true,
-      "status_notes": [
-        "> *Subject:* Re: Intro to Lending 1510 Hurlbut St",
-        "> \u27a4 *Get Approved\u2013Apply Now* <https://derekcarmichael.co/loan-app/>",
-        "This is all we need to clear you to close, sir."
-      ]
+      "status_notes": []
     },
     {
       "street_num": "15815",
