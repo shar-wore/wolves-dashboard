@@ -191,8 +191,13 @@
       "label_id": "Label_9",
       "discovered_at": "2026-04-28T08:59:02.566923-04:00",
       "last_email_subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
-      "last_email_date": "2026-04-29T14:56:52-04:00",
+      "last_email_date": "2026-04-30T08:00:28-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+          "date_str": "Apr 30, 2026",
+          "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
         {
           "subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
           "date_str": "Apr 29, 2026",
@@ -219,10 +224,14 @@
         "send HUDs over in the meantime",
         "provide me with a time and location to m",
         "provide me with",
-        "confirm, thank you"
+        "confirm, thank you",
+        "send over final HUDs",
+        "send over final HUDs once they are avail"
       ],
       "active": true,
-      "status_notes": []
+      "status_notes": [
+        "Please send over final HUDs"
+      ]
     },
     {
       "street_num": "335",
