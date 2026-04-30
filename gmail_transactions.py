@@ -532,12 +532,7 @@ def run():
             if txn.get('label_id'):
                 apply_label(service, msg_ref['id'], txn['label_id'])
 
-            nearby = combined[max(0, match.start() - 600): min(len(combined), match.end() + 600)]
-            stage = detect_stage(nearby)
-            if stage and stage != 'Dead':
-                current_idx = STAGES.index(txn['stage']) if txn.get('stage') in STAGES else -1
-                if STAGES.index(stage) >= current_idx:
-                    txn['stage'] = stage
+            # Stages are set manually via the dashboard ‚Äî scanner never changes them
 
             if not txn['last_email_date'] or details['date'] > txn['last_email_date']:
                 txn['last_email_subject'] = details['subject']
