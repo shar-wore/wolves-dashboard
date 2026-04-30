@@ -284,7 +284,7 @@ def get_last_scanned():
     if os.path.exists(LAST_SCANNED_FILE):
         with open(LAST_SCANNED_FILE) as f:
             return int(f.read().strip())
-    return int((datetime.now() - timedelta(days=30)).timestamp())
+    return int((datetime.now() - timedelta(days=45)).timestamp())
 
 
 def save_last_scanned():
