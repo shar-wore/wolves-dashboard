@@ -253,6 +253,15 @@
     .txn-count { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
     .btn-dead { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); color: var(--red); border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.68rem; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; letter-spacing: 0.04em; transition: all 0.15s; }
     .btn-dead:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .txn-stage-btns { padding: 0.55rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); display: flex; flex-wrap: wrap; gap: 0.35rem; background: rgba(0,3,33,0.2); }
+    .stage-btn { padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.63rem; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid; transition: all 0.15s; opacity: 0.45; }
+    .stage-btn:hover { opacity: 1; }
+    .stage-btn.active { opacity: 1; }
+    .stage-btn.sb-contract { color: var(--blue); border-color: rgba(24,139,246,0.4); background: rgba(24,139,246,0.1); }
+    .stage-btn.sb-open { color: var(--gold); border-color: rgba(202,176,114,0.4); background: rgba(202,176,114,0.1); }
+    .stage-btn.sb-ctc { color: #000; border-color: var(--lime); background: var(--lime); }
+    .stage-btn.sb-funded { color: var(--green); border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.1); }
+    .stage-btn.sb-dead { color: var(--red); border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.08); }
     .txn-reactivate { display: flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.1rem; border-top: 1px solid rgba(30,37,96,0.5); background: rgba(248,113,113,0.04); }
     .txn-reactivate select { background: rgba(0,3,33,0.8); border: 1px solid var(--border); border-radius: 6px; padding: 0.3rem 0.5rem; color: var(--text); font-family: 'Montserrat', sans-serif; font-size: 0.72rem; outline: none; flex: 1; cursor: pointer; }
     .btn-reactivate { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); color: var(--green); border-radius: 6px; padding: 0.25rem 0.8rem; font-size: 0.68rem; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; letter-spacing: 0.04em; transition: all 0.15s; white-space: nowrap; }
@@ -789,21 +798,20 @@
       </div>`}
       <div class="txn-card-footer">
         ${ghlUrl ? `<a class="txn-ghl-link" href="${ghlUrl}" target="_blank">View in GHL</a>` : '<span class="txn-no-ghl">No GHL contact</span>'}
-        <div style="display:flex;gap:0.4rem;align-items:center">
-          ${emails.length ? `<button class="txn-emails-toggle" onclick="toggleEmails(this)">Emails (${emails.length})</button>` : ''}
-          ${t.stage !== 'Dead' ? `<button class="btn-dead" onclick="markDead('${escHtml(t.address)}')">Mark Dead</button>` : ''}
-        </div>
+        ${emails.length ? `<button class="txn-emails-toggle" onclick="toggleEmails(this)">Emails (${emails.length})</button>` : ''}
       </div>
-      ${t.stage === 'Dead' ? `
-      <div class="txn-reactivate">
-        <select id="reactivate-${escHtml(t.address).replace(/\s+/g,'-')}">
-          <option value="Buyer Under Contract">Buyer Under Contract</option>
-          <option value="File Open / In Process" selected>File Open / In Process</option>
-          <option value="Clear to Close">Clear to Close</option>
-          <option value="Closed / Funded">Closed / Funded</option>
-        </select>
-        <button class="btn-reactivate" onclick="reactivateDeal('${escHtml(t.address)}')">Reactivate</button>
-      </div>` : ''}
+      <div class="txn-stage-btns">
+        ${[
+          ['Buyer Under Contract','sb-contract','Contract'],
+          ['File Open / In Process','sb-open','File Open'],
+          ['Clear to Close','sb-ctc','CTC'],
+          ['Closed / Funded','sb-funded','Closed'],
+          ['Dead','sb-dead','Dead']
+        ].map(([stage, cls, label]) =>
+          `<button class="stage-btn ${cls}${t.stage === stage ? ' active' : ''}"
+            onclick="setStage('${escHtml(t.address)}','${stage}',this)">${label}</button>`
+        ).join('')}
+      </div>
       <div class="txn-emails-list">${emailsHtml}</div>
     </div>`;
   }
@@ -842,30 +850,30 @@
     renderTransactions();
   }
 
-  async function updateStage(address, stage) {
+  async function setStage(address, stage, btn) {
+    if (stage === 'Dead' && !confirm(`Mark "${address}" as Dead?`)) return;
     try {
       const res = await fetch('/api/transactions/update-stage', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({address, stage})
       });
       const data = await res.json();
-      if (data.success) await loadTransactions();
-      else alert('Could not update stage: ' + (data.error || 'unknown error'));
-    } catch(e) {
-      alert('Error updating stage.');
-    }
-  }
-
-  function markDead(address) {
-    if (!confirm(`Mark "${address}" as Dead?`)) return;
-    updateStage(address, 'Dead');
-  }
-
-  function reactivateDeal(address) {
-    const key = address.replace(/\s+/g, '-');
-    const sel = document.getElementById('reactivate-' + key);
-    if (sel) updateStage(address, sel.value);
+      if (data.success) {
+        // Update button states immediately without full reload
+        btn.closest('.txn-stage-btns').querySelectorAll('.stage-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // Update the stage pill on the card
+        const pill = btn.closest('.txn-card').querySelector('.stage-pill');
+        if (pill) {
+          pill.className = `stage-pill ${txnStageClass(stage)}`;
+          pill.textContent = stage;
+        }
+        // If filter is active, reload after a moment so the card disappears if needed
+        if (activeTxnFilter !== 'all') setTimeout(loadTransactions, 600);
+      } else {
+        alert('Could not update: ' + (data.error || 'unknown error'));
+      }
+    } catch(e) { alert('Error updating stage.'); }
   }
 
   function toggleEmails(btn) {
