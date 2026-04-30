@@ -118,16 +118,22 @@ OWN_REPORT_RE = re.compile(
 STATUS_TERMS = re.compile(
     r'\bpsa\b|purchase agreement|under contract|contract execut|'
     r'\bctc\b|clear to close|closing disclosure|cd approved|'
-    r'apprais|wire transfer|wire received|funded|deed recorded|disburs|'
+    r'apprais|wire received|funded|deed recorded|disburs|'
     r'bank statement|bank account|voided check|'
     r'waiting for|waiting on|pending|missing|need(?:ed)?\b|'
     r'approved|received|signed|submitted|confirmed|scheduled|'
-    r'closing date|closed? on|closing on|'
+    r'closing date|clos(?:ing|ed) on|'
     r'expir|deadline|due date|must be|no later than|'
     r'bc buyer|ab buyer|ab seller|ab contract|bc contract|'
     r'lend(?:er|ing)|loan commit|underwriting|'
-    r'hud|alta|settlement statement|'
-    r'inspect(?:ion)?|final walkthrough|walk.?through',
+    r'hud\b|alta\b|settlement statement|'
+    r'inspect(?:ion)?|final walkthrough|walk.?through|'
+    r'notary|title order|file open|escrow open|'
+    r'please (?:send|sign|provide|submit|return|confirm|review)|'
+    r'we need|can you (?:send|sign|provide|confirm)|'
+    r'doc(?:ument)?s?\b|signature|contingenc|survey|'
+    r'buyer.{0,20}ready|seller.{0,20}ready|'
+    r'clear(?:ed)? to fund|recording|disburse',
     re.IGNORECASE
 )
 
@@ -174,15 +180,27 @@ def strip_wire_fraud_blocks(text):
 JUNK_SENTENCE_RE = re.compile(
     r'wire fraud|verify.*wire|wire.*verify|criminals?|hackers?|cyber|phishing|'
     r'never send.*wire|wire.*never send|always verify|call.*verify wire|'
+    r'not responsible.*wire|wires? sent.*incorrect|incorrect.*bank account|'
+    r'funding instructions|any wires? sent|sent to an incorrect|'
+    r'we are not responsible|responsibility for any|'
     r'confidential|privileged|intended recipient|if you received this|'
-    r'unsubscribe|privacy policy|terms of service|'
-    r'this (?:e-?mail|message|email) (?:is|may be|contains|and any)|'
+    r'unsubscribe|privacy policy|terms of service|terms and conditions|'
+    r'this (?:e-?mail|message|email) (?:is|may be|contains|and any|was sent)|'
     r'disclaimer|do not rely on|electronic communication|'
     r'call your escrow officer immediately|'
-    r'caution:.*external|this is an external email|'
-    r'virus|malware|scanned by|spam',
+    r'caution:.*external|this is an external email|\[external\]|'
+    r'virus|malware|scanned by|spam|'
+    r'get approved|apply now|click here|loan.?app\b|'
+    r'https?://|www\.|\.com/|\.org/|'
+    r'forwarded message|original message|begin forward',
     re.IGNORECASE
 )
+
+QUOTED_LINE_RE = re.compile(r'^\s*>+\s*.*$', re.MULTILINE)
+
+
+def strip_quoted_text(text):
+    return QUOTED_LINE_RE.sub('', text)
 
 
 def extract_status_notes(body, max_notes=4):
@@ -489,9 +507,9 @@ def run():
         if OWN_REPORT_RE.search(details.get('subject', '')):
             continue
 
-        body_clean = strip_wire_fraud_blocks(
+        body_clean = strip_quoted_text(strip_wire_fraud_blocks(
             strip_pending_signature_section(strip_signature(details['body']))
-        )
+        ))
         combined = details['subject'] + '\n' + body_clean
 
         for match in ADDRESS_RE.finditer(combined):
@@ -549,8 +567,8 @@ def run():
                     recent.insert(0, entry)
             txn['recent_emails'] = recent[:5]
 
-            # Extract meaningful status sentences and store them
-            new_notes = extract_status_notes(body_clean)
+            # Only extract notes for active, non-dead transactions
+            new_notes = [] if txn.get('stage') == 'Dead' or txn.get('active') is False else extract_status_notes(body_clean)
             if new_notes:
                 existing_notes = txn.get('status_notes', [])
                 for note in new_notes:
