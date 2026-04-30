@@ -154,13 +154,18 @@
       "street_name": "Tangelo",
       "street_type": "Ave",
       "address": "722 Tangelo Ave",
-      "stage": "File Open / In Process",
+      "stage": "Clear to Close",
       "ghl_contact_id": "DqD9s2RJ3Iw7GE2oHEJc",
       "label_id": "Label_8",
       "discovered_at": "2026-04-28T08:59:01.772426-04:00",
-      "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-29T07:04:30-04:00",
+      "last_email_subject": "Re: Update--722 Tangelo Ave",
+      "last_email_date": "2026-04-29T19:45:39-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: Update--722 Tangelo Ave",
+          "date_str": "Apr 29, 2026",
+          "sender": "Khalipa Oldjohn <koldjohn@gmail.com>"
+        },
         {
           "subject": "Re: Update--722 Tangelo Ave",
           "date_str": "Apr 28, 2026",
@@ -176,10 +181,22 @@
         "confirm receipt of this email",
         "email postclose@eastcoasttitlefl",
         "email team@eastcoasttitlefl",
-        "confirm receipt of this email correspond"
+        "confirm receipt of this email correspond",
+        "provide the source of the $56k deposit f",
+        "provide a signed copy of the GC",
+        "provide a copy of the license",
+        "provide these documents",
+        "provide a signed copy of the GC contract"
       ],
       "active": true,
-      "status_notes": []
+      "status_notes": [
+        "You will need to get the last of those funds in place ASAP.",
+        ">>>> The appraisal was due back today.",
+        "> - Assets: There is a shortage of assets; we need to see additional funds.",
+        "We need to satisfy these items and then we should have the",
+        "Yeah, I didn\u2019t anticipate needing 56k the first lender only wanted 21k so",
+        ">>> The appraisal was due back today."
+      ]
     },
     {
       "street_num": "4711",
@@ -190,13 +207,23 @@
       "ghl_contact_id": "BfBEpQO6VhCAxMlejTv7",
       "label_id": "Label_9",
       "discovered_at": "2026-04-28T08:59:02.566923-04:00",
-      "last_email_subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
-      "last_email_date": "2026-04-30T08:00:28-04:00",
+      "last_email_subject": "RE: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+      "last_email_date": "2026-04-30T09:56:48-04:00",
       "recent_emails": [
+        {
+          "subject": "RE: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
+          "date_str": "Apr 30, 2026",
+          "sender": "Kelley Wood <KWood@bchhinc.com>"
+        },
         {
           "subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
           "date_str": "Apr 30, 2026",
           "sender": "Shar D <shar@wolvesofrealestate.org>"
+        },
+        {
+          "subject": "Automatic reply: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND,",
+          "date_str": "Apr 29, 2026",
+          "sender": "Kelley Wood <KWood@bchhinc.com>"
         },
         {
           "subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
@@ -207,16 +234,6 @@
           "subject": "File: 26196353-WOL3  4711 DENISON AVE, CLEVELAND, OH 44102",
           "date_str": "Apr 29, 2026",
           "sender": "Kelley Wood <KWood@bchhinc.com>"
-        },
-        {
-          "subject": "Re: File: 26196353-WOL3  4711 DENISON AVE, CLEVELAND, OH 44102",
-          "date_str": "Apr 29, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "RE: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
-          "date_str": "Apr 29, 2026",
-          "sender": "Kelley Wood <KWood@bchhinc.com>"
         }
       ],
       "synced_tasks": [
@@ -225,12 +242,17 @@
         "provide me with a time and location to m",
         "provide me with",
         "confirm, thank you",
-        "send over final HUDs",
-        "send over final HUDs once they are avail"
+        "send over final HUDs once they are avail",
+        "send over final HUDs"
       ],
       "active": true,
       "status_notes": [
-        "Please send over final HUDs"
+        "> Please send over final HUDs",
+        "> WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        "> VERIFY ANY FUNDING INSTRUCTIONS RECEIVED.",
+        "WE ARE NOT RESPONSIBLE FOR ANY WIRES SENT BY YOU TO AN INCORRECT BANK ACCOUNT.",
+        "IF YOU HAVE RECEIVED THIS E-MAIL IN ERROR, PLEASE NOTIFY THE SENDER AND DELETE THIS COMMUNICATION FROM YOUR COMPUTER IMMEDIATELY.",
+        ">>> INTERNET, TO VERIFY ANY FUNDING INSTRUCTIONS RECEIVED."
       ]
     },
     {
@@ -269,22 +291,6 @@
       "status_notes": []
     },
     {
-      "street_num": "550",
-      "street_name": "SPAULDING",
-      "street_type": "ST",
-      "address": "550 SPAULDING ST",
-      "stage": "Dead",
-      "ghl_contact_id": "hq1H9xc5R6VTNPoJBKpD",
-      "label_id": "Label_11",
-      "discovered_at": "2026-04-28T08:59:04.556044-04:00",
-      "last_email_subject": "Transaction Tracker Summary",
-      "last_email_date": "2026-04-28T07:04:30-04:00",
-      "recent_emails": [],
-      "synced_tasks": [],
-      "active": false,
-      "status_notes": []
-    },
-    {
       "street_num": "2517",
       "street_name": "MCDOUGALL",
       "street_type": "ST",
@@ -316,8 +322,13 @@
       "label_id": "Label_15",
       "discovered_at": "2026-04-28T08:59:13.591489-04:00",
       "last_email_subject": "Re: -External-Re: 2807 George Owen Rd",
-      "last_email_date": "2026-04-29T13:38:10-04:00",
+      "last_email_date": "2026-04-30T11:17:00-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: -External-Re: 2807 George Owen Rd",
+          "date_str": "Apr 30, 2026",
+          "sender": "Lexi Gamester <lexi.gamester@hankinpacklaw.com>"
+        },
         {
           "subject": "Re: -External-Re: 2807 George Owen Rd",
           "date_str": "Apr 29, 2026",
@@ -337,11 +348,6 @@
           "subject": "Re: [External] New File Request -- 2807 George Owen Rd",
           "date_str": "Apr 21, 2026",
           "sender": "Chris Lemay <chris@wolvesofrealestate.org>"
-        },
-        {
-          "subject": "Fwd: 2807 GEORGE OWEN RD FAYETTEVILLE NC 28306",
-          "date_str": "Apr 21, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
         }
       ],
       "synced_tasks": [
@@ -365,10 +371,13 @@
         "submit your",
         "send the comps and as is comps on a goog",
         "sign standard",
-        "sign standard closing documents"
+        "sign standard closing documents",
+        "provide LLC docs for Wolves of RE"
       ],
       "active": true,
-      "status_notes": []
+      "status_notes": [
+        "For signing of the buyer and seller docs will the signor come to our office or will they need a mobile notary ($225) ?"
+      ]
     },
     {
       "street_num": "1510",
@@ -379,9 +388,14 @@
       "ghl_contact_id": "wbu7kSv09aCV9oTF0UF7",
       "label_id": "Label_16",
       "discovered_at": "2026-04-28T08:59:14.647696-04:00",
-      "last_email_subject": "RE: Intro to Lending 1510 Hurlbut St",
-      "last_email_date": "2026-04-29T14:10:27-04:00",
+      "last_email_subject": "Re: Intro to Lending 1510 Hurlbut St",
+      "last_email_date": "2026-04-30T12:19:02-04:00",
       "recent_emails": [
+        {
+          "subject": "Re: Intro to Lending 1510 Hurlbut St",
+          "date_str": "Apr 30, 2026",
+          "sender": "Jennifer Evans <jenn@carmichaelintl.com>"
+        },
         {
           "subject": "RE: Intro to Lending 1510 Hurlbut St",
           "date_str": "Apr 29, 2026",
@@ -412,7 +426,11 @@
         "forward it to me"
       ],
       "active": true,
-      "status_notes": []
+      "status_notes": [
+        "> *Subject:* Re: Intro to Lending 1510 Hurlbut St",
+        "> \u27a4 *Get Approved\u2013Apply Now* <https://derekcarmichael.co/loan-app/>",
+        "This is all we need to clear you to close, sir."
+      ]
     },
     {
       "street_num": "15815",
@@ -438,32 +456,6 @@
         }
       ],
       "synced_tasks": [],
-      "active": true,
-      "status_notes": []
-    },
-    {
-      "street_num": "505",
-      "street_name": "Deltona",
-      "street_type": "Blvd",
-      "address": "505 Deltona Blvd",
-      "stage": "Closed / Funded",
-      "ghl_contact_id": null,
-      "label_id": "Label_23",
-      "discovered_at": "2026-04-29T14:03:34.272186-04:00",
-      "last_email_subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
-      "last_email_date": "2026-04-29T14:56:52-04:00",
-      "recent_emails": [
-        {
-          "subject": "Re: [External] Re: File: 26196353-WOL3 4711 DENISON AVE, CLEVELAND, OH 44102",
-          "date_str": "Apr 29, 2026",
-          "sender": "Shar D <shar@wolvesofrealestate.org>"
-        }
-      ],
-      "synced_tasks": [
-        "confirm, thank you",
-        "CALL YOUR ESCROW OFFICER IMMEDIATELY USI",
-        "send HUDs over in the meantime"
-      ],
       "active": true,
       "status_notes": []
     }
@@ -517,6 +509,18 @@
       "street_name": "E Main",
       "street_type": "Street",
       "address": "112 E Main Street"
+    },
+    {
+      "street_num": "550",
+      "street_name": "SPAULDING",
+      "street_type": "ST",
+      "address": "550 SPAULDING ST"
+    },
+    {
+      "street_num": "505",
+      "street_name": "Deltona",
+      "street_type": "Blvd",
+      "address": "505 Deltona Blvd"
     }
   ]
 }
