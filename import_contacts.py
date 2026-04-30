@@ -20,6 +20,7 @@ SHEET_GID = int(os.environ.get('SHEET_GID', '0'))
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LAST_ROW_FILE = os.path.join(BASE_DIR, 'last_row.txt')
+LAST_TS_FILE = os.path.join(BASE_DIR, 'last_timestamp.txt')
 EST = pytz.timezone('America/New_York')
 
 LEAD_PIPELINE_ID = '3g44Pv8hC5gMUTaX7q5a'
@@ -71,6 +72,30 @@ def get_last_row():
 def save_last_row(row_num):
     with open(LAST_ROW_FILE, 'w') as f:
         f.write(str(row_num))
+
+
+def parse_sheet_ts(ts_str):
+    ts_str = (ts_str or '').strip()
+    if not ts_str:
+        return None
+    for fmt in ('%m/%d/%Y %H:%M:%S', '%m/%d/%Y %H:%M'):
+        try:
+            return datetime.strptime(ts_str, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def get_last_timestamp():
+    if os.path.exists(LAST_TS_FILE):
+        with open(LAST_TS_FILE) as f:
+            return parse_sheet_ts(f.read().strip())
+    return None
+
+
+def save_last_timestamp(dt):
+    with open(LAST_TS_FILE, 'w') as f:
+        f.write(dt.strftime('%m/%d/%Y %H:%M:%S'))
 
 
 def search_contact_by_phone(phone_e164):
@@ -277,28 +302,41 @@ def run_import():
     sheet = get_sheet()
     all_rows = sheet.get_all_values()
 
-    last_row = get_last_row()
-    new_rows = all_rows[last_row:]
+    last_ts = get_last_timestamp()
 
-    if not new_rows:
+    # Find all rows with a timestamp newer than the last processed one
+    pending = []
+    for i, row in enumerate(all_rows):
+        if not any(cell.strip() for cell in row):
+            continue
+        ts = parse_sheet_ts(row[0] if row else '')
+        if not ts:
+            continue
+        if last_ts is None or ts > last_ts:
+            pending.append((ts, i + 1, row))
+
+    if not pending:
         print("No new rows found.")
         return
 
-    print(f"Found {len(new_rows)} new row(s) starting at sheet row {last_row + 1}.")
+    # Process in chronological order so latest timestamp is always the last saved
+    pending.sort(key=lambda x: x[0])
+    print(f"Found {len(pending)} new row(s).")
     imported = 0
+    latest_ts = last_ts
 
-    for i, row in enumerate(new_rows):
-        sheet_row_num = last_row + 1 + i
-        if not any(cell.strip() for cell in row):
-            continue
+    for ts, sheet_row_num, row in pending:
         try:
             import_row(row, sheet_row_num)
             imported += 1
+            latest_ts = ts
         except Exception as e:
             print(f"  Row {sheet_row_num}: Unexpected error ‚Äî {e}")
         time.sleep(0.4)
 
-    save_last_row(last_row + len(new_rows))
+    if latest_ts and latest_ts != last_ts:
+        save_last_timestamp(latest_ts)
+        save_last_row(max(x[1] for x in pending))
     print(f"Done. Processed {imported} contact(s).")
 
 
