@@ -158,6 +158,19 @@ def strip_pending_signature_section(text):
     return PENDING_SIG_SECTION_RE.sub('', text)
 
 
+WIRE_FRAUD_BLOCK_RE = re.compile(
+    r'(?:wire fraud|criminals? (?:are|target)|important(?:\s*warning)?:|'
+    r'warning:|caution:|notice:|always verify|never (?:send|wire|trust)|'
+    r'verify (?:all )?wire|real estate (?:wire|fraud)|'
+    r'\*+\s*wire|\*+\s*fraud).*',
+    re.IGNORECASE | re.DOTALL
+)
+
+
+def strip_wire_fraud_blocks(text):
+    return WIRE_FRAUD_BLOCK_RE.sub('', text)
+
+
 JUNK_SENTENCE_RE = re.compile(
     r'wire fraud|verify.*wire|wire.*verify|criminals?|hackers?|cyber|phishing|'
     r'never send.*wire|wire.*never send|always verify|call.*verify wire|'
@@ -476,7 +489,9 @@ def run():
         if OWN_REPORT_RE.search(details.get('subject', '')):
             continue
 
-        body_clean = strip_pending_signature_section(strip_signature(details['body']))
+        body_clean = strip_wire_fraud_blocks(
+            strip_pending_signature_section(strip_signature(details['body']))
+        )
         combined = details['subject'] + '\n' + body_clean
 
         for match in ADDRESS_RE.finditer(combined):
@@ -517,7 +532,8 @@ def run():
             if txn.get('label_id'):
                 apply_label(service, msg_ref['id'], txn['label_id'])
 
-            stage = detect_stage(combined)
+            nearby = combined[max(0, match.start() - 600): min(len(combined), match.end() + 600)]
+            stage = detect_stage(nearby)
             if stage and stage != 'Dead':
                 current_idx = STAGES.index(txn['stage']) if txn.get('stage') in STAGES else -1
                 if STAGES.index(stage) >= current_idx:
