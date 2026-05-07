@@ -4,7 +4,7 @@
     "rootDirectory": "wolves-dashboard"
   },
   "deploy": {
-    "startCommand": "gunicorn app:app --bind 0.0.0.0:$PORT",
+    "startCommand": "gunicorn --chdir wolves-dashboard app:app --bind 0.0.0.0:$PORT",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
