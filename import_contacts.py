@@ -145,6 +145,18 @@ def import_row(row, sheet_row_num):
 
     if existing_id:
         ts_label = timestamp.strip() if timestamp.strip() else 'unknown time'
+        # Check if we already noted this exact submission ‚Äî prevents spam on re-processing
+        existing_notes_r = requests.get(
+            f'https://services.leadconnectorhq.com/contacts/{existing_id}/notes',
+            headers=ghl_headers()
+        )
+        already_noted = any(
+            ts_label in n.get('body', '')
+            for n in existing_notes_r.json().get('notes', [])
+        )
+        if already_noted:
+            print(f"  Row {sheet_row_num}: Duplicate (already noted) ‚Äî {owner_name}")
+            return
         lines = [f"‚ö†Ô∏è Duplicate sheet submission [{ts_label}] ‚Äî row {sheet_row_num}"]
         if convo_notes and convo_notes.strip():
             lines.append(f"\nüìã Conversation Note [{ts_label}]\n\n{convo_notes.strip()}")
