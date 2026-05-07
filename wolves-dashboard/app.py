@@ -21,8 +21,8 @@ _app_dir = os.path.dirname(os.path.abspath(__file__))
 _parent_dir = os.path.dirname(_app_dir)
 SCRIPTS_DIR = _app_dir if os.path.exists(os.path.join(_app_dir, 'gmail_transactions.py')) else _parent_dir
 
-GHL_API_KEY = os.environ['GHL_API_KEY']
-GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID']
+GHL_API_KEY = os.environ['GHL_API_KEY'].strip()
+GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID'].strip()
 GHL_DEFAULT_USER_ID = 'fXfZmYEWPTgTPt26WUfJ'
 EST = pytz.timezone('America/New_York')
 
