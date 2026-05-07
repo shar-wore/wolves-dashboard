@@ -145,27 +145,34 @@ def import_row(row, sheet_row_num):
 
     if existing_id:
         ts_label = timestamp.strip() if timestamp.strip() else 'unknown time'
-        # Check if we already noted this exact submission ‚Äî prevents spam on re-processing
         existing_notes_r = requests.get(
             f'https://services.leadconnectorhq.com/contacts/{existing_id}/notes',
             headers=ghl_headers()
         )
-        already_noted = any(
-            ts_label in n.get('body', '')
-            for n in existing_notes_r.json().get('notes', [])
-        )
-        if already_noted:
-            print(f"  Row {sheet_row_num}: Duplicate (already noted) ‚Äî {owner_name}")
-            return
-        lines = [f"‚ö†Ô∏è Duplicate sheet submission [{ts_label}] ‚Äî row {sheet_row_num}"]
+        existing_bodies = [n.get('body', '') for n in existing_notes_r.json().get('notes', [])]
+
+        # Always add convo note if it isn't already there
         if convo_notes and convo_notes.strip():
-            lines.append(f"\nüìã Conversation Note [{ts_label}]\n\n{convo_notes.strip()}")
-        requests.post(
-            f'https://services.leadconnectorhq.com/contacts/{existing_id}/notes',
-            headers=ghl_headers(),
-            json={'body': '\n'.join(lines), 'userId': GHL_DEFAULT_USER_ID},
-        )
-        print(f"  Row {sheet_row_num}: Duplicate ‚Äî note added to existing contact {existing_id} ‚Äî {owner_name}")
+            if not any(convo_notes[:30] in b for b in existing_bodies):
+                requests.post(
+                    f'https://services.leadconnectorhq.com/contacts/{existing_id}/notes',
+                    headers=ghl_headers(),
+                    json={'body': f"üìã Conversation Note [{ts_label}]\n\n{convo_notes.strip()}",
+                          'userId': GHL_DEFAULT_USER_ID},
+                )
+                print(f"  Row {sheet_row_num}: Convo note added ‚Äî {owner_name}")
+
+        # Add duplicate submission note only if not already recorded
+        if not any(ts_label in b for b in existing_bodies):
+            requests.post(
+                f'https://services.leadconnectorhq.com/contacts/{existing_id}/notes',
+                headers=ghl_headers(),
+                json={'body': f"‚ö†Ô∏è Duplicate sheet submission [{ts_label}] ‚Äî row {sheet_row_num}",
+                      'userId': GHL_DEFAULT_USER_ID},
+            )
+            print(f"  Row {sheet_row_num}: Duplicate ‚Äî note added to {existing_id} ‚Äî {owner_name}")
+        else:
+            print(f"  Row {sheet_row_num}: Duplicate (already noted) ‚Äî {owner_name}")
         return
 
     name_parts = owner_name.strip().rsplit(' ', 1) if owner_name.strip() else ['Unknown', '']
