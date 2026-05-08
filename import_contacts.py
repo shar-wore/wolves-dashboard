@@ -13,8 +13,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 load_dotenv()
 
-GHL_API_KEY = os.environ['GHL_API_KEY']
-GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID']
+GHL_API_KEY = os.environ['GHL_API_KEY'].strip()
+GHL_LOCATION_ID = os.environ['GHL_LOCATION_ID'].strip()
 SHEET_ID = os.environ['SHEET_ID']
 SHEET_GID = int(os.environ.get('SHEET_GID', '0'))
 
