@@ -20,8 +20,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TRANSACTIONS_FILE = os.path.join(BASE_DIR, 'transactions.json')
 LAST_SCANNED_FILE = os.path.join(BASE_DIR, 'last_scanned.txt')
 
-GHL_API_KEY = os.environ.get('GHL_API_KEY', '')
-GHL_LOCATION_ID = os.environ.get('GHL_LOCATION_ID', '')
+GHL_API_KEY = os.environ.get('GHL_API_KEY', '').strip()
+GHL_LOCATION_ID = os.environ.get('GHL_LOCATION_ID', '').strip()
 GHL_DEFAULT_USER_ID = 'fXfZmYEWPTgTPt26WUfJ'
 
 SCOPES = [
